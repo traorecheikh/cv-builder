@@ -14,7 +14,10 @@ const navItems = [
   { name: 'Expérience', href: '#experience' },
   { name: 'Éducation', href: '#education' },
   { name: 'Compétences', href: '#skills' },
+  { name: 'Certifications', href: '#certifications' },
+  { name: 'Enseignement', href: '#enseignement' },
   { name: 'Projets', href: '#projects' },
+  { name: 'Contact', href: '#contact' },
 ]
 
 const handleCVDownload = async () => {
@@ -47,14 +50,11 @@ const handleCVDownload = async () => {
 <template>
   <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/80 backdrop-blur-md border-b border-bg-tertiary shadow-soft">
     <ScrollProgress />
-    <div class="max-w-6xl mx-auto px-lg md:px-2xl">
+    <div class="w-full px-lg md:px-2xl">
       <div class="flex items-center justify-between h-20">
         <!-- Logo -->
         <a href="#" class="flex items-center gap-md no-underline">
-          <div class="w-10 h-10 bg-primary-blue rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold">C</span>
-          </div>
-          <span class="hidden sm:inline font-bold text-lg text-text-primary">CT</span>
+          <span class="font-bold text-lg text-text-primary">{{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }}</span>
         </a>
 
         <!-- Desktop Menu -->

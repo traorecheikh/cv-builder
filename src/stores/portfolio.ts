@@ -24,6 +24,25 @@ export interface Education {
   highlights?: string[]
 }
 
+export interface Certification {
+  id: string
+  name: string
+  issuer: string
+  issueDate: string
+  expiryDate?: string
+  credentialId?: string
+  credentialUrl?: string
+}
+
+export interface Teaching {
+  id: string
+  institution: string
+  position: string
+  courses: string[]
+  startDate: string
+  endDate?: string
+}
+
 export interface Project {
   id: string
   name: string
@@ -191,6 +210,72 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     { language: 'Arabe', comprehension: 'B1', speaking: 'B1', writing: 'A1' },
   ])
 
+  const certifications = ref<Certification[]>([
+    {
+      id: '1',
+      name: 'AWS Certified Solutions Architect',
+      issuer: 'Amazon Web Services',
+      issueDate: '2024',
+      credentialUrl: '#',
+    },
+    {
+      id: '2',
+      name: 'AWS Certified Cloud Practitioner',
+      issuer: 'Amazon Web Services',
+      issueDate: '2023',
+      credentialUrl: '#',
+    },
+    {
+      id: '3',
+      name: 'Microsoft Azure Fundamentals (AZ-900)',
+      issuer: 'Microsoft',
+      issueDate: '2024',
+      credentialUrl: '#',
+    },
+    {
+      id: '4',
+      name: 'LPIC-1 Linux Professional Institute Certification',
+      issuer: 'Linux Professional Institute',
+      issueDate: '2024',
+      credentialUrl: '#',
+    },
+  ])
+
+  const teaching = ref<Teaching[]>([
+    {
+      id: '1',
+      institution: 'Efrei Paris',
+      position: 'Professeur de DevOps/Cloud',
+      courses: [
+        'Sécurité dans le cloud Azure',
+        'Gestion de Parc Informatique Azure',
+        'DevSecOps',
+        'Sécurité dans le cloud AWS',
+        'AWS Cloud Practitioner',
+      ],
+      startDate: '2023',
+    },
+    {
+      id: '2',
+      institution: 'The NumFactory',
+      position: 'Professeur de DevOps/Cloud',
+      courses: [
+        'Administrateur Azure',
+        'Windows Serveur',
+      ],
+      startDate: '2023',
+    },
+    {
+      id: '3',
+      institution: 'CPE Lyon et CESI Le Mans',
+      position: 'Professeur de DevOps/Cloud',
+      courses: [
+        'Sécurité dans le cloud AWS',
+      ],
+      startDate: '2023',
+    },
+  ])
+
   return {
     personalInfo,
     experiences,
@@ -198,5 +283,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     projects,
     skills,
     languages,
+    certifications,
+    teaching,
   }
 })

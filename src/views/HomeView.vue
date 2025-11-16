@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePortfolioStore } from '../stores/portfolio'
 import { useImageLoad } from '../composables/useImageLoad'
-import { ArrowRight, Code2, Lock, Brain, Trello, Calendar, MapPin, ExternalLink, Github, Star, Trophy, Award } from 'lucide-vue-next'
+import { ArrowRight, Code2, Lock, Brain, Trello, Calendar, MapPin, ExternalLink, Github, Star, Trophy, Award, BookOpen as BookOpenIcon, Mail, Home, Briefcase, Wrench, GraduationCap, Heart, Cloud, Zap, Server, Rocket, Building, Check } from 'lucide-vue-next'
 import SocialLinks from '../components/ui/SocialLinks.vue'
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.vue'
 import SkillBar from '../components/ui/SkillBar.vue'
@@ -38,7 +38,7 @@ const skillCategories: SkillCategory[] = [
   },
 ]
 
-const topSkills = [
+const topCompétences = [
   { name: 'SpringBoot', level: 90 },
   { name: 'Docker', level: 85 },
   { name: 'Node.js', level: 88 },
@@ -47,13 +47,13 @@ const topSkills = [
   { name: 'PostgreSQL', level: 80 },
 ]
 
-const featuredProjects = ['1']
+const featuredProjets = ['1']
 </script>
 
 <template>
   <div class="bg-bg-primary">
     <!-- Hero Section -->
-    <section class="relative max-w-6xl mx-auto px-lg md:px-2xl py-20 md:py-32 overflow-hidden">
+    <section id="hero" class="relative max-w-6xl mx-auto px-lg md:px-2xl pt-12 pb-12 md:pb-20 overflow-hidden">
       <!-- Background decoration -->
       <div class="absolute inset-0 bg-gradient-to-br from-bg-tertiary/20 via-bg-primary to-bg-primary opacity-50 -z-10"></div>
       <div class="absolute top-20 right-10 w-72 h-72 bg-accent-gold/5 rounded-full blur-3xl -z-10"></div>
@@ -167,12 +167,14 @@ const featuredProjects = ['1']
             :key="exp.id"
             class="relative"
           >
+            <!-- Timeline line -->
             <div
               v-if="index !== portfolioStore.experiences.length - 1"
-              class="absolute left-6 top-24 w-1 h-24 bg-primary-blue"
+              class="absolute left-[1.375rem] top-24 w-1 h-24 bg-gradient-to-b from-primary-blue via-primary-blue to-primary-blue/30"
             ></div>
-            <div class="absolute left-0 top-8 w-12 h-12 bg-primary-blue rounded-full flex items-center justify-center border-4 border-white">
-              <span class="text-white text-lg">{{ index + 1 }}</span>
+            <!-- Timeline circle -->
+            <div class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+              <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
             </div>
 
             <div class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card">
@@ -250,19 +252,19 @@ const featuredProjects = ['1']
           >
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
               <div>
-                <div class="flex items-center gap-sm mb-sm">
+                <div class="flex items-center gap-sm mb-md">
                   <Trophy
                     v-if="index === 0"
-                    class="w-5 h-5 text-primary-orange"
+                    class="w-6 h-6 text-primary-orange"
                   />
-                  <span class="text-sm font-semibold text-primary-blue uppercase tracking-wide">
+                  <h3 class="text-2xl font-bold text-text-primary">
                     {{ edu.degree }}
-                  </span>
+                  </h3>
                 </div>
-                <h3 class="text-2xl font-bold text-text-primary">
+                <p class="text-sm font-semibold text-primary-blue uppercase tracking-wide mb-sm">
                   {{ edu.institution }}
-                </h3>
-                <p class="text-text-secondary mt-sm">
+                </p>
+                <p class="text-text-secondary">
                   {{ edu.field }}
                 </p>
               </div>
@@ -345,7 +347,7 @@ const featuredProjects = ['1']
         <h2 class="text-2xl font-bold text-text-primary mb-2xl">Compétences Principales</h2>
         <div class="grid md:grid-cols-2 gap-2xl bg-bg-secondary p-2xl rounded-xl border-2 border-bg-tertiary shadow-card">
           <SkillBar
-            v-for="skill in topSkills"
+            v-for="skill in topCompétences"
             :key="skill.name"
             :skill="skill"
           />
@@ -396,7 +398,7 @@ const featuredProjects = ['1']
               <p class="text-white/80 mt-sm">Années d'Exp.</p>
             </div>
             <div>
-              <p class="text-4xl font-bold">✓</p>
+              <Check class="w-10 h-10 text-white/80 mb-sm" />
               <p class="text-white/80 mt-sm">Prêt pour de nouveaux défis</p>
             </div>
           </div>
@@ -424,7 +426,7 @@ const featuredProjects = ['1']
             class="group relative bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue hover:shadow-card transition-all duration-300 hover:-translate-y-1"
           >
             <div
-              v-if="featuredProjects.includes(project.id)"
+              v-if="featuredProjets.includes(project.id)"
               class="absolute top-4 right-4 z-10 flex items-center gap-sm px-lg py-sm bg-primary-orange text-white rounded-full text-xs font-semibold"
             >
               <Star class="w-4 h-4 fill-current" />
@@ -511,20 +513,327 @@ const featuredProjects = ['1']
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="max-w-6xl mx-auto px-lg md:px-2xl py-20 md:py-24">
-      <div class="bg-bg-secondary rounded-xl p-2xl md:p-3xl text-text-primary text-center border border-bg-tertiary">
-        <h2 class="text-3xl md:text-4xl font-bold mb-lg text-text-primary">Intéressé par une collaboration?</h2>
-        <p class="text-text-secondary mb-2xl max-w-2xl mx-auto">
-          N'hésitez pas à me contacter pour discuter de vos projets ou opportunités.
+    <!-- CERTIFICATIONS SECTION -->
+    <section id="certifications" class="bg-bg-primary">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+          Certifications
+          <span class="text-primary-orange">Professionnelles</span>
+        </h1>
+        <p class="text-lg text-text-secondary max-w-2xl">
+          Certifications reconnues internationalement validant mon expertise technique.
         </p>
-        <a
-          :href="`mailto:${portfolioStore.personalInfo.email}`"
-          class="inline-block px-2xl py-lg bg-primary-orange text-white font-semibold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105"
-        >
-          Envoyer un Email
-        </a>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
+        <div class="grid md:grid-cols-2 gap-lg">
+          <div
+            v-for="cert in portfolioStore.certifications"
+            :key="cert.id"
+            class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card hover:-translate-y-1"
+          >
+            <div class="flex items-start gap-lg mb-lg">
+              <Trophy class="w-6 h-6 text-primary-orange flex-shrink-0 mt-sm" />
+              <div class="flex-1">
+                <h3 class="text-lg font-bold text-text-primary">{{ cert.name }}</h3>
+                <p class="text-primary-blue font-semibold mt-sm">{{ cert.issuer }}</p>
+              </div>
+            </div>
+            <p class="text-sm text-text-secondary">
+              <span class="font-semibold">Obtenu :</span> {{ cert.issueDate }}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- ENSEIGNEMENT SECTION -->
+    <section id="enseignement" class="bg-bg-primary">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+          Enseignement
+          <span class="text-primary-orange">& Formation</span>
+        </h1>
+        <p class="text-lg text-text-secondary max-w-2xl">
+          Partage de expertise à travers l'enseignement dans des institutions reconnues.
+        </p>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
+        <div class="space-y-lg">
+          <div
+            v-for="teach in portfolioStore.teaching"
+            :key="teach.id"
+            class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-orange transition-all duration-300 hover:shadow-card"
+          >
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
+              <div class="flex items-start gap-lg flex-1">
+                <BookOpenIcon class="w-6 h-6 text-primary-blue flex-shrink-0 mt-sm" />
+                <div class="flex-1">
+                  <h3 class="text-2xl font-bold text-text-primary">{{ teach.institution }}</h3>
+                  <p class="text-primary-orange font-semibold mt-sm">{{ teach.position }}</p>
+                </div>
+              </div>
+              <span class="text-sm text-text-secondary font-medium whitespace-nowrap">Depuis {{ teach.startDate }}</span>
+            </div>
+
+            <div>
+              <p class="text-sm font-semibold text-text-primary mb-md">Cours enseignés :</p>
+              <ul class="space-y-sm">
+                <li v-for="course in teach.courses" :key="course" class="flex gap-md text-text-secondary text-sm">
+                  <span class="text-primary-blue font-bold flex-shrink-0">→</span>
+                  <span>{{ course }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-bg-primary py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-16">
+          Contactez
+          <span class="text-primary-orange">Moi</span>
+        </h1>
+
+        <div class="grid md:grid-cols-2 gap-2xl">
+          <!-- Left: Contact Info -->
+          <div class="space-y-lg">
+            <!-- Nom -->
+            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all">
+              <div class="flex items-center gap-lg mb-md">
+                <div class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Briefcase class="w-6 h-6 text-primary-blue" />
+                </div>
+                <div>
+                  <p class="text-sm text-text-tertiary font-semibold uppercase">Nom</p>
+                  <p class="text-lg font-bold text-text-primary">{{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Position -->
+            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-orange transition-all">
+              <div class="flex items-center gap-lg mb-md">
+                <div class="w-12 h-12 bg-primary-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Trophy class="w-6 h-6 text-primary-orange" />
+                </div>
+                <div>
+                  <p class="text-sm text-text-tertiary font-semibold uppercase">Poste</p>
+                  <p class="text-lg font-bold text-text-primary">{{ portfolioStore.personalInfo.title }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Company -->
+            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all">
+              <div class="flex items-center gap-lg mb-md">
+                <div class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Building class="w-6 h-6 text-primary-blue" />
+                </div>
+                <div>
+                  <p class="text-sm text-text-tertiary font-semibold uppercase">Entreprise actuelle</p>
+                  <p class="text-lg font-bold text-text-primary">Lo IT Consulting</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all">
+              <div class="flex items-center gap-lg mb-md">
+                <div class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin class="w-6 h-6 text-primary-blue" />
+                </div>
+                <div>
+                  <p class="text-sm text-text-tertiary font-semibold uppercase">Adresse</p>
+                  <p class="text-lg font-bold text-text-primary">{{ portfolioStore.personalInfo.location }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-orange transition-all">
+              <div class="flex items-center gap-lg mb-md">
+                <div class="w-12 h-12 bg-primary-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail class="w-6 h-6 text-primary-orange" />
+                </div>
+                <div>
+                  <p class="text-sm text-text-tertiary font-semibold uppercase">Email</p>
+                  <a :href="`mailto:${portfolioStore.personalInfo.email}`" class="text-lg font-bold text-primary-blue hover:text-primary-orange no-underline">
+                    {{ portfolioStore.personalInfo.email }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <div class="bg-bg-secondary rounded-xl p-2xl md:p-3xl border-2 border-bg-tertiary">
+            <h3 class="text-2xl font-bold text-text-primary mb-2xl">Envoyez-moi un message</h3>
+
+            <form class="space-y-lg" @submit.prevent="">
+              <!-- Name -->
+              <div>
+                <label class="block text-sm font-semibold text-text-primary mb-md">Nom</label>
+                <input
+                  type="text"
+                  placeholder="Votre nom"
+                  class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all"
+                />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="block text-sm font-semibold text-text-primary mb-md">Email</label>
+                <input
+                  type="email"
+                  placeholder="Votre email"
+                  class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all"
+                />
+              </div>
+
+              <!-- Subject -->
+              <div>
+                <label class="block text-sm font-semibold text-text-primary mb-md">Sujet</label>
+                <input
+                  type="text"
+                  placeholder="Sujet de votre message"
+                  class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all"
+                />
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label class="block text-sm font-semibold text-text-primary mb-md">Message</label>
+                <textarea
+                  placeholder="Votre message"
+                  rows="5"
+                  class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full px-2xl py-lg bg-primary-orange text-white font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-card"
+              >
+                Envoyer
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t-4 border-primary-orange bg-bg-primary py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl">
+        <!-- Main Footer Content -->
+        <div class="grid md:grid-cols-3 gap-2xl mb-2xl pb-2xl border-b border-bg-tertiary">
+          <!-- Column 1: About -->
+          <div>
+            <h3 class="text-xl font-bold text-primary-orange mb-lg">À propos</h3>
+            <p class="text-text-secondary leading-relaxed mb-lg">
+              {{ portfolioStore.personalInfo.bio }}
+            </p>
+            <div class="space-y-sm text-sm text-text-secondary">
+              <div class="flex items-center gap-sm">
+                <Mail class="w-4 h-4 text-primary-orange flex-shrink-0" />
+                <a :href="`mailto:${portfolioStore.personalInfo.email}`" class="hover:text-primary-blue no-underline">
+                  {{ portfolioStore.personalInfo.email }}
+                </a>
+              </div>
+              <div class="flex items-center gap-sm">
+                <MapPin class="w-4 h-4 text-primary-orange flex-shrink-0" />
+                <span>{{ portfolioStore.personalInfo.location }}</span>
+              </div>
+              <div class="flex items-center gap-sm">
+                <Building class="w-4 h-4 text-primary-orange flex-shrink-0" />
+                <span>Lo IT Consulting</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div>
+            <h3 class="text-xl font-bold text-primary-orange mb-lg">Liens rapides</h3>
+            <nav class="space-y-md">
+              <a href="#hero" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <Home class="w-4 h-4 flex-shrink-0" />
+                <span>Accueil</span>
+              </a>
+              <a href="#experience" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <Briefcase class="w-4 h-4 flex-shrink-0" />
+                <span>Expériences</span>
+              </a>
+              <a href="#skills" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <Wrench class="w-4 h-4 flex-shrink-0" />
+                <span>Compétences</span>
+              </a>
+              <a href="#education" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <GraduationCap class="w-4 h-4 flex-shrink-0" />
+                <span>Formations</span>
+              </a>
+              <a href="#certifications" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <Trophy class="w-4 h-4 flex-shrink-0" />
+                <span>Certifications</span>
+              </a>
+              <a href="#enseignement" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <BookOpenIcon class="w-4 h-4 flex-shrink-0" />
+                <span>Enseignement</span>
+              </a>
+              <a href="#contact" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
+                <Mail class="w-4 h-4 flex-shrink-0" />
+                <span>Contact</span>
+              </a>
+            </nav>
+          </div>
+
+          <!-- Column 3: Follow & Certifications -->
+          <div>
+            <div class="mb-2xl">
+              <h3 class="text-xl font-bold text-primary-orange mb-lg">Me suivre</h3>
+              <SocialLinks />
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold text-primary-orange mb-lg">Certifications</h3>
+              <div class="grid grid-cols-2 gap-md">
+                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
+                  <Cloud class="w-6 h-6 mx-auto mb-sm text-primary-blue" />
+                  <p class="text-xs font-semibold text-text-primary">AWS</p>
+                </div>
+                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
+                  <Zap class="w-6 h-6 mx-auto mb-sm text-primary-orange" />
+                  <p class="text-xs font-semibold text-text-primary">Azure</p>
+                </div>
+                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
+                  <Server class="w-6 h-6 mx-auto mb-sm text-primary-blue" />
+                  <p class="text-xs font-semibold text-text-primary">Linux</p>
+                </div>
+                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
+                  <Rocket class="w-6 h-6 mx-auto mb-sm text-primary-orange" />
+                  <p class="text-xs font-semibold text-text-primary">DevOps</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom: Copyright -->
+        <div class="pt-2xl text-center space-y-md">
+          <p class="text-text-secondary text-sm flex items-center justify-center gap-sm">
+            Développé par <span class="font-bold text-primary-orange">Lo IT Consulting</span>
+            <Heart class="w-4 h-4 text-primary-orange fill-primary-orange" />
+          </p>
+          <p class="text-text-tertiary text-xs">
+            © 2025 {{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }} - Tous droits réservés
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
