@@ -409,11 +409,11 @@ const skillCategories: SkillCategory[] = [
 
             <!-- Skills container -->
             <div class="p-2xl">
-              <div class="flex flex-wrap gap-md">
+              <div class="flex flex-wrap gap-sm">
                 <span
                   v-for="skill in category.skills"
                   :key="skill"
-                  class="px-md py-sm bg-bg-primary rounded-lg text-sm font-semibold text-text-primary border border-bg-tertiary hover:border-primary-blue hover:text-primary-blue transition-all duration-200 cursor-default"
+                  class="inline-flex px-lg py-md bg-bg-tertiary rounded-full text-xs font-semibold text-text-primary border border-bg-tertiary hover:bg-bg-secondary hover:border-primary-blue hover:text-primary-blue hover:shadow-soft hover:scale-105 transition-all duration-200 cursor-default"
                 >
                   {{ skill }}
                 </span>
@@ -421,8 +421,8 @@ const skillCategories: SkillCategory[] = [
 
               <!-- Skill count indicator -->
               <div class="mt-lg pt-lg border-t border-bg-tertiary">
-                <p class="text-xs text-text-tertiary font-semibold uppercase tracking-wide">
-                  {{ category.skills.length }} compétences
+                <p class="text-xs text-text-tertiary font-semibold uppercase tracking-widest">
+                  <span class="text-primary-blue font-bold">{{ category.skills.length }}</span> compétences
                 </p>
               </div>
             </div>

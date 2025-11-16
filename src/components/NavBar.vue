@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { Menu, X, Download, Moon, Sun } from 'lucide-vue-next'
 import { usePortfolioStore } from '../stores/portfolio'
-import { generateMindblowingCV } from '../utils/cvGenerator'
 import { useTheme } from '../composables/useTheme'
 import ScrollProgress from './ui/ScrollProgress.vue'
 
@@ -23,24 +22,26 @@ const navItems = [
 
 const handleCVDownload = async () => {
   if (isGenerating.value) return
-  
+
   isGenerating.value = true
   menuOpen.value = false
-  
+
   try {
-    const pdf = await generateMindblowingCV(
-      portfolioStore.personalInfo,
-      portfolioStore.experiences,
-      portfolioStore.education,
-      portfolioStore.projects,
-      portfolioStore.skills,
-      portfolioStore.languages
-    )
-    
-    pdf.save(`${portfolioStore.personalInfo.firstName}_${portfolioStore.personalInfo.lastName}_CV_2025.pdf`)
+    const response = await fetch('/cv.pdf')
+    if (!response.ok) throw new Error('CV file not found')
+
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${portfolioStore.personalInfo.firstName}_${portfolioStore.personalInfo.lastName}_CV.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
   } catch (error) {
-    console.error('Error generating CV:', error)
-    alert('Erreur lors de la génération du CV')
+    console.error('Error downloading CV:', error)
+    alert('Erreur lors du téléchargement du CV')
   } finally {
     isGenerating.value = false
   }
