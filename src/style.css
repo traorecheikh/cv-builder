@@ -1,8 +1,8 @@
+@import url('https://rsms.me/inter/inter.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://rsms.me/inter/inter.css');
 
 * {
   @apply box-border;
@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  @apply bg-white text-accent-dark-gray;
+  background-color: #111827;
+  color: #F1F5F9;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   @apply antialiased;
 }
@@ -56,7 +57,7 @@ button, [role="button"] {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #1a202c;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -65,7 +66,7 @@ button, [role="button"] {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d5a8f;
+  background: #2D8FDB;
 }
 
 /* Scroll Animations */

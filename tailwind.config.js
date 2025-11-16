@@ -7,15 +7,29 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Dark mode backgrounds (following spec)
+        'primary': '#111827',
+        'secondary': '#1f2937',
+        'tertiary': '#2d3748',
+        // Enterprise colors from AGENT.md
         'primary-blue': '#1171B8',
         'primary-orange': '#E64922',
-        'secondary-white': '#FFFFFF',
-        'secondary-black': '#000000',
-        'accent-light-blue': '#E8F1F8',
-        'accent-dark-gray': '#2C3E50',
-        'accent-light-gray': '#F5F7FA',
-        'accent-green': '#27AE60',
-        'accent-text-secondary': '#7F8C8D',
+        'secondary-white': '#F1F5F9',
+        'secondary-black': '#111827',
+        // Dark mode text
+        'text-primary': '#F1F5F9',
+        'text-secondary': '#D1D5DB',
+        'text-tertiary': '#9CA3AF',
+        // Support colors (dark mode versions)
+        'accent-light-blue': '#1E3A5F',
+        'accent-dark-gray': '#F1F5F9',
+        'accent-light-gray': '#374151',
+        'accent-green': '#10B981',
+        'accent-text-secondary': '#D1D5DB',
+        // Background mapping
+        'bg-primary': '#111827',
+        'bg-secondary': '#1f2937',
+        'bg-tertiary': '#2d3748',
       },
       fontFamily: {
         sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
@@ -34,6 +48,12 @@ export default {
       boxShadow: {
         'soft': '0 2px 4px rgba(0, 0, 0, 0.1)',
         'card': '0 4px 6px rgba(0, 0, 0, 0.07)',
+      },
+      scale: {
+        '98': '0.98',
+      },
+      animation: {
+        'spin': 'spin 1s linear infinite',
       },
     },
   },

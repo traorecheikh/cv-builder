@@ -12,7 +12,7 @@ export const generateMindblowingCV = async (
   const pdf = new jsPDF('p', 'mm', 'a4')
   const pageWidth = pdf.internal.pageSize.getWidth()
   const pageHeight = pdf.internal.pageSize.getHeight()
-  
+
   // Load profile image
   let profileImg: string | null = null
   try {
@@ -27,302 +27,343 @@ export const generateMindblowingCV = async (
     console.error('Failed to load profile image:', error)
   }
 
-  // === PAGE LAYOUT ===
-  // White background
-  pdf.setFillColor(255, 255, 255)
-  pdf.rect(0, 0, pageWidth, pageHeight, 'F')
+  // === COLOR SCHEME ===
+  const primaryBlue = { r: 17, g: 113, b: 184 }
+  const accentOrange = { r: 230, g: 73, b: 34 }
+  const darkText = { r: 40, g: 40, b: 40 }
+  const greyText = { r: 100, g: 100, b: 100 }
+  const lightGrey = { r: 240, g: 240, b: 240 }
 
-  // === HEADER - Full width with photo ===
-  let y = 25
-  
-  // Profile photo on left
+  // === PAGE LAYOUT - SIDEBAR + CONTENT ===
+  const sidebarWidth = 70
+  let contentX = sidebarWidth + 12
+  let contentWidth = pageWidth - contentX - 12
+
+  // SIDEBAR BACKGROUND
+  pdf.setFillColor(lightGrey.r, lightGrey.g, lightGrey.b)
+  pdf.rect(0, 0, sidebarWidth, pageHeight, 'F')
+
+  // SIDEBAR - TOP SECTION
+  let sideY = 15
+
+  // Profile photo in sidebar
   if (profileImg) {
     try {
-      // Rounded square photo
-      pdf.addImage(profileImg, 'PNG', 20, 15, 35, 35, undefined, 'FAST')
-      
-      // Blue border around photo
-      pdf.setDrawColor(17, 113, 184)
-      pdf.setLineWidth(1)
-      pdf.rect(20, 15, 35, 35)
+      pdf.addImage(profileImg, 'PNG', (sidebarWidth - 40) / 2, sideY, 40, 40, undefined, 'FAST')
+      sideY += 45
     } catch (e) {
       console.error('Error adding image:', e)
     }
+  } else {
+    sideY += 45
   }
 
-  // Name and title next to photo
-  const nameX = 60
-  pdf.setTextColor(44, 62, 80)
+  // Name in sidebar
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(10)
+  pdf.setFont('helvetica', 'bold')
+  const nameSplit = pdf.splitTextToSize(`${personalInfo.firstName}\n${personalInfo.lastName}`, sidebarWidth - 6)
+  pdf.text(nameSplit, 3, sideY)
+  sideY += 12
+
+  // Title in sidebar
+  pdf.setTextColor(accentOrange.r, accentOrange.g, accentOrange.b)
+  pdf.setFontSize(7)
+  pdf.setFont('helvetica', 'bold')
+  const titleSplit = pdf.splitTextToSize(personalInfo.title, sidebarWidth - 6)
+  pdf.text(titleSplit, 3, sideY)
+  sideY += 10
+
+  // CONTACT SECTION
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(8)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('CONTACT', 5, sideY)
+  sideY += 5
+
+  pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+  pdf.setFontSize(6.5)
+  pdf.setFont('helvetica', 'normal')
+  pdf.text(personalInfo.email, 5, sideY)
+  sideY += 3
+  pdf.text(personalInfo.phone, 5, sideY)
+  sideY += 3
+  pdf.text(personalInfo.location, 5, sideY)
+  sideY += 8
+
+  // SKILLS SECTION IN SIDEBAR
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(8)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('COMPÉTENCES', 5, sideY)
+  sideY += 5
+
+  pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+  pdf.setFontSize(6.5)
+  pdf.setFont('helvetica', 'normal')
+  const topSkills = [
+    ...skills.applicativeDevelopment.slice(0, 5),
+    ...skills.securityCloud.slice(0, 3),
+  ]
+  topSkills.forEach((skill) => {
+    // Skill with bullet
+    pdf.setFillColor(accentOrange.r, accentOrange.g, accentOrange.b)
+    pdf.circle(7, sideY - 0.8, 0.8, 'F')
+    pdf.text(skill, 9, sideY)
+    sideY += 3.5
+  })
+
+  sideY += 3
+
+  // LANGUAGES SECTION IN SIDEBAR
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(8)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('LANGUES', 5, sideY)
+  sideY += 5
+
+  pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+  pdf.setFontSize(6.5)
+  pdf.setFont('helvetica', 'normal')
+  languages.forEach((lang) => {
+    pdf.text(`${lang.language}`, 5, sideY)
+    sideY += 2.5
+
+    // Language level bar
+    pdf.setFillColor(220, 220, 220)
+    pdf.rect(5, sideY, 30, 2, 'F')
+
+    // Proficiency level visualization
+    let profLevel = 0
+    if (lang.speaking.includes('Fluent') || lang.speaking.includes('Courant')) profLevel = 28
+    else if (lang.speaking.includes('Advanced') || lang.speaking.includes('Avancé')) profLevel = 22
+    else if (lang.speaking.includes('Intermediate') || lang.speaking.includes('Intermédiaire')) profLevel = 16
+
+    if (profLevel > 0) {
+      pdf.setFillColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+      pdf.rect(5, sideY, profLevel, 2, 'F')
+    }
+
+    sideY += 4.5
+  })
+
+  // === MAIN CONTENT AREA ===
+  let y = 15
+
+  // HEADER - Name and Title
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
   pdf.setFontSize(28)
   pdf.setFont('helvetica', 'bold')
-  pdf.text(`${personalInfo.firstName} ${personalInfo.lastName}`, nameX, 25)
-  
-  // Title with orange color
-  pdf.setTextColor(230, 73, 34)
-  pdf.setFontSize(14)
-  pdf.setFont('helvetica', 'normal')
-  pdf.text(personalInfo.title, nameX, 35)
-  
-  // Contact info icons style
-  y = 42
-  pdf.setFontSize(9)
-  pdf.setTextColor(100, 100, 100)
-  pdf.setFont('helvetica', 'normal')
-  
-  // Email
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('✉', nameX, y)
-  pdf.setTextColor(100, 100, 100)
-  pdf.text(personalInfo.email, nameX + 5, y)
-  
-  // Phone
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('☎', nameX + 80, y)
-  pdf.setTextColor(100, 100, 100)
-  pdf.text(personalInfo.phone, nameX + 85, y)
-  
-  y += 5
-  // Location
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('⌖', nameX, y)
-  pdf.setTextColor(100, 100, 100)
-  pdf.text(personalInfo.location, nameX + 5, y)
-  
-  y = 60
+  pdf.text(`${personalInfo.firstName}`, contentX, y)
 
-  // Horizontal separator line
-  pdf.setDrawColor(230, 73, 34)
-  pdf.setLineWidth(0.8)
-  pdf.line(20, y, pageWidth - 20, y)
-  
+  pdf.setTextColor(accentOrange.r, accentOrange.g, accentOrange.b)
+  pdf.setFontSize(28)
+  pdf.text(`${personalInfo.lastName}`, contentX + 50, y)
+
   y += 10
 
-  // === TWO COLUMN LAYOUT ===
-  const leftColX = 20
-  const leftColWidth = 55
-  const rightColX = 80
-  const rightColWidth = pageWidth - rightColX - 20
-
-  // LEFT COLUMN
-  let leftY = y
-
-  // PROFILE
-  pdf.setFontSize(11)
-  pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('PROFIL', leftColX, leftY)
-  leftY += 2
-  
-  pdf.setLineWidth(0.5)
-  pdf.line(leftColX, leftY, leftColX + 20, leftY)
-  leftY += 5
-  
-  pdf.setFontSize(8)
+  pdf.setTextColor(accentOrange.r, accentOrange.g, accentOrange.b)
+  pdf.setFontSize(13)
   pdf.setFont('helvetica', 'normal')
-  pdf.setTextColor(60, 60, 60)
-  const bioLines = pdf.splitTextToSize(personalInfo.bio, leftColWidth)
-  pdf.text(bioLines, leftColX, leftY)
-  leftY += bioLines.length * 3.5 + 8
+  pdf.text(personalInfo.title, contentX, y)
 
-  // COMPETENCES
-  pdf.setFontSize(11)
+  y += 8
+
+  // Decorative line
+  pdf.setDrawColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setLineWidth(1)
+  pdf.line(contentX, y, contentX + contentWidth, y)
+  y += 6
+
+  // PROFESSIONAL SUMMARY
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(10)
   pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('COMPETENCES', leftColX, leftY)
-  leftY += 2
-  
-  pdf.setLineWidth(0.5)
-  pdf.line(leftColX, leftY, leftColX + 30, leftY)
-  leftY += 5
-  
-  pdf.setFontSize(8)
+  pdf.text('PROFIL PROFESSIONNEL', contentX, y)
+  y += 4
+
+  pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+  pdf.setFontSize(8.5)
   pdf.setFont('helvetica', 'normal')
-  pdf.setTextColor(60, 60, 60)
-  
-  skills.applicativeDevelopment.slice(0, 15).forEach((skill: string) => {
-    pdf.setFillColor(230, 73, 34)
-    pdf.circle(leftColX + 1.5, leftY - 1, 0.8, 'F')
-    pdf.text(skill, leftColX + 4, leftY)
-    leftY += 3.5
-  })
-  
-  leftY += 5
+  const bioLines = pdf.splitTextToSize(personalInfo.bio, contentWidth)
+  pdf.text(bioLines, contentX, y)
+  y += bioLines.length * 3.5 + 6
 
-  // LANGUES
-  pdf.setFontSize(11)
+  // EXPERIENCE SECTION
+  if (y > pageHeight - 50) {
+    pdf.addPage()
+    y = 20
+  }
+
+  y += 3
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(10)
   pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('LANGUES', leftColX, leftY)
-  leftY += 2
-  
-  pdf.setLineWidth(0.5)
-  pdf.line(leftColX, leftY, leftColX + 20, leftY)
-  leftY += 5
-  
-  pdf.setFontSize(8)
-  pdf.setFont('helvetica', 'normal')
-  pdf.setTextColor(60, 60, 60)
-  
-  languages.forEach((lang) => {
-    pdf.setFont('helvetica', 'bold')
-    pdf.text(`${lang.language}: ${lang.speaking}`, leftColX, leftY)
-    leftY += 4
-  })
-
-  // RIGHT COLUMN
-  let rightY = y
-
-  // EXPERIENCE
-  pdf.setFontSize(11)
-  pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('EXPERIENCE PROFESSIONNELLE', rightColX, rightY)
-  rightY += 2
-  
-  pdf.setDrawColor(17, 113, 184)
-  pdf.setLineWidth(0.5)
-  pdf.line(rightColX, rightY, rightColX + 60, rightY)
-  rightY += 6
+  pdf.text('EXPÉRIENCE PROFESSIONNELLE', contentX, y)
+  y += 5
 
   experiences.forEach((exp) => {
-    if (rightY > pageHeight - 30) {
+    if (y > pageHeight - 25) {
       pdf.addPage()
-      rightY = 20
+      y = 20
     }
-    
+
     // Timeline dot
-    pdf.setFillColor(230, 73, 34)
-    pdf.circle(rightColX - 3, rightY - 1.5, 2, 'F')
-    
-    // Role
-    pdf.setFontSize(10)
+    pdf.setFillColor(accentOrange.r, accentOrange.g, accentOrange.b)
+    pdf.circle(contentX - 3, y - 0.5, 2.5, 'F')
+
+    // Job title
+    pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+    pdf.setFontSize(9.5)
     pdf.setFont('helvetica', 'bold')
-    pdf.setTextColor(44, 62, 80)
-    pdf.text(exp.role, rightColX, rightY)
-    rightY += 5
-    
-    // Company and dates
-    pdf.setFontSize(9)
-    pdf.setFont('helvetica', 'bold')
-    pdf.setTextColor(17, 113, 184)
-    pdf.text(exp.company, rightColX, rightY)
-    
+    pdf.text(exp.role, contentX + 2, y)
+    y += 3.5
+
+    // Company with date on right
+    pdf.setTextColor(greyText.r, greyText.g, greyText.b)
+    pdf.setFontSize(8)
     pdf.setFont('helvetica', 'normal')
-    pdf.setTextColor(120, 120, 120)
+    pdf.text(exp.company, contentX + 2, y)
+    pdf.setTextColor(150, 150, 150)
+    pdf.setFontSize(7.5)
+    pdf.text(`${exp.startDate} - ${exp.endDate}`, contentX + 70, y)
+    y += 3
+
+    // Location
+    pdf.setFontSize(7.5)
+    pdf.text(exp.location, contentX + 2, y)
+    y += 4
+
+    // Description bullets
+    pdf.setTextColor(70, 70, 70)
     pdf.setFontSize(8)
-    pdf.text(`${exp.startDate} - ${exp.endDate}`, rightColX + 50, rightY)
-    rightY += 5
-    
-    // Description
-    pdf.setFontSize(8)
-    pdf.setTextColor(60, 60, 60)
     exp.description.forEach((desc) => {
-      pdf.setFillColor(17, 113, 184)
-      pdf.circle(rightColX + 1, rightY - 1, 0.5, 'F')
-      const lines = pdf.splitTextToSize(desc, rightColWidth - 5)
-      pdf.text(lines, rightColX + 3, rightY)
-      rightY += lines.length * 3.5 + 0.5
+      const lines = pdf.splitTextToSize(`▪ ${desc}`, contentWidth - 5)
+      pdf.text(lines, contentX + 2, y)
+      y += lines.length * 3
     })
-    rightY += 5
+    y += 2
   })
 
-  rightY += 3
-
-  // FORMATION
-  if (rightY > pageHeight - 60) {
+  // EDUCATION SECTION
+  if (y > pageHeight - 50) {
     pdf.addPage()
-    rightY = 20
+    y = 20
   }
-  
-  pdf.setFontSize(11)
+
+  y += 3
+  pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+  pdf.setFontSize(10)
   pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('FORMATION', rightColX, rightY)
-  rightY += 2
-  
-  pdf.setDrawColor(17, 113, 184)
-  pdf.setLineWidth(0.5)
-  pdf.line(rightColX, rightY, rightColX + 30, rightY)
-  rightY += 6
-  
+  pdf.text('FORMATION', contentX, y)
+  y += 5
+
   education.forEach((edu) => {
-    pdf.setFillColor(230, 73, 34)
-    pdf.circle(rightColX - 3, rightY - 1.5, 2, 'F')
-    
-    pdf.setFontSize(10)
+    if (y > pageHeight - 25) {
+      pdf.addPage()
+      y = 20
+    }
+
+    // Timeline dot
+    pdf.setFillColor(accentOrange.r, accentOrange.g, accentOrange.b)
+    pdf.circle(contentX - 3, y - 0.5, 2.5, 'F')
+
+    // Degree
+    pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+    pdf.setFontSize(9.5)
     pdf.setFont('helvetica', 'bold')
-    pdf.setTextColor(44, 62, 80)
-    pdf.text(edu.degree, rightColX, rightY)
-    rightY += 5
-    
-    pdf.setFontSize(9)
-    pdf.setFont('helvetica', 'normal')
-    pdf.setTextColor(60, 60, 60)
-    pdf.text(edu.institution, rightColX, rightY)
-    rightY += 4
-    
+    pdf.text(edu.degree, contentX + 2, y)
+    y += 3.5
+
+    // Institution with date on right
+    pdf.setTextColor(greyText.r, greyText.g, greyText.b)
     pdf.setFontSize(8)
-    pdf.setTextColor(120, 120, 120)
-    pdf.text(`${edu.startDate} - ${edu.endDate}`, rightColX, rightY)
-    rightY += 7
+    pdf.setFont('helvetica', 'normal')
+    pdf.text(edu.institution, contentX + 2, y)
+    pdf.setTextColor(150, 150, 150)
+    pdf.setFontSize(7.5)
+    pdf.text(`${edu.startDate} - ${edu.endDate}`, contentX + 70, y)
+    y += 3
+
+    // Field
+    pdf.setTextColor(greyText.r, greyText.g, greyText.b)
+    pdf.setFontSize(7.5)
+    pdf.text(edu.field || '', contentX + 2, y)
+    y += 3.5
+
+    // Highlights with custom bullets
+    if (edu.highlights && edu.highlights.length > 0) {
+      pdf.setTextColor(70, 70, 70)
+      pdf.setFontSize(8)
+      edu.highlights.forEach((h) => {
+        const lines = pdf.splitTextToSize(`▪ ${h}`, contentWidth - 5)
+        pdf.text(lines, contentX + 2, y)
+        y += lines.length * 3
+      })
+    }
+    y += 1
   })
 
-  rightY += 3
+  // PROJECTS SECTION (if available)
+  if (projects.length > 0) {
+    if (y > pageHeight - 50) {
+      pdf.addPage()
+      y = 20
+    }
 
-  // PROJETS
-  if (rightY > pageHeight - 50) {
-    pdf.addPage()
-    rightY = 20
-  }
-  
-  pdf.setFontSize(11)
-  pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('PROJETS CLES', rightColX, rightY)
-  rightY += 2
-  
-  pdf.setDrawColor(17, 113, 184)
-  pdf.setLineWidth(0.5)
-  pdf.line(rightColX, rightY, rightColX + 30, rightY)
-  rightY += 6
-  
-  projects.slice(0, 2).forEach((project) => {
-    pdf.setFillColor(230, 73, 34)
-    pdf.circle(rightColX - 3, rightY - 1.5, 2, 'F')
-    
+    y += 3
+    pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
     pdf.setFontSize(10)
     pdf.setFont('helvetica', 'bold')
-    pdf.setTextColor(44, 62, 80)
-    pdf.text(project.name, rightColX, rightY)
-    rightY += 5
-    
-    pdf.setFontSize(8)
-    pdf.setFont('helvetica', 'normal')
-    pdf.setTextColor(60, 60, 60)
-    const projDesc = pdf.splitTextToSize(project.description, rightColWidth)
-    pdf.text(projDesc, rightColX, rightY)
-    rightY += projDesc.length * 3.5 + 3
-    
-    // Tech badges
-    pdf.setFontSize(7)
-    let badgeX = rightColX
-    project.technologies.slice(0, 6).forEach((tech) => {
-      const w = pdf.getTextWidth(tech) + 3
-      pdf.setFillColor(240, 240, 240)
-      pdf.roundedRect(badgeX, rightY - 3, w, 4, 0.5, 0.5, 'F')
-      pdf.setTextColor(100, 100, 100)
-      pdf.text(tech, badgeX + 1.5, rightY)
-      badgeX += w + 2
+    pdf.text('PROJETS CLÉS', contentX, y)
+    y += 5
+
+    projects.slice(0, 2).forEach((project) => {
+      if (y > pageHeight - 25) {
+        pdf.addPage()
+        y = 20
+      }
+
+      // Timeline dot
+      pdf.setFillColor(accentOrange.r, accentOrange.g, accentOrange.b)
+      pdf.circle(contentX - 3, y - 0.5, 2.5, 'F')
+
+      // Project name
+      pdf.setTextColor(darkText.r, darkText.g, darkText.b)
+      pdf.setFontSize(9.5)
+      pdf.setFont('helvetica', 'bold')
+      pdf.text(project.name, contentX + 2, y)
+      y += 3.5
+
+      // Description
+      pdf.setTextColor(70, 70, 70)
+      pdf.setFontSize(8)
+      pdf.setFont('helvetica', 'normal')
+      const projLines = pdf.splitTextToSize(project.description, contentWidth - 5)
+      pdf.text(projLines, contentX + 2, y)
+      y += projLines.length * 3 + 2
+
+      // Technologies as badges
+      pdf.setFontSize(6.5)
+      let badgeX = contentX + 2
+      project.technologies.slice(0, 5).forEach((tech) => {
+        const w = pdf.getTextWidth(tech) + 3
+        pdf.setFillColor(220, 220, 220)
+        pdf.rect(badgeX, y - 2.5, w, 3.5, 'F')
+        pdf.setTextColor(primaryBlue.r, primaryBlue.g, primaryBlue.b)
+        pdf.text(tech, badgeX + 1.5, y)
+        badgeX += w + 2
+      })
+      y += 4
     })
-    rightY += 8
-  })
+  }
 
   // Footer
   pdf.setFontSize(7)
   pdf.setTextColor(150, 150, 150)
   pdf.setFont('helvetica', 'italic')
   const date = new Date().toLocaleDateString('fr-FR')
-  pdf.text(`CV genere le ${date}`, rightColX, pageHeight - 10)
+  pdf.text(`CV généré le ${date}`, contentX, pageHeight - 10)
 
   return pdf
 }

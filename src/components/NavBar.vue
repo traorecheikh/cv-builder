@@ -1,26 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
 import { Menu, X, Download } from 'lucide-vue-next'
 import { usePortfolioStore } from '../stores/portfolio'
 import { generateMindblowingCV } from '../utils/cvGenerator'
 import ScrollProgress from './ui/ScrollProgress.vue'
 
-const router = useRouter()
-const route = useRoute()
 const menuOpen = ref(false)
 const isGenerating = ref(false)
 const portfolioStore = usePortfolioStore()
 
 const navItems = [
-  { name: 'Accueil', path: '/' },
-  { name: 'Expérience', path: '/experience' },
-  { name: 'Éducation', path: '/education' },
-  { name: 'Compétences', path: '/skills' },
-  { name: 'Projets', path: '/projects' },
+  { name: 'Accueil', href: '/#' },
+  { name: 'Expérience', href: '#experience' },
+  { name: 'Éducation', href: '#education' },
+  { name: 'Compétences', href: '#skills' },
+  { name: 'Projets', href: '#projects' },
 ]
-
-const isActive = (path: string) => route.path === path
 
 const handleCVDownload = async () => {
   if (isGenerating.value) return
@@ -47,40 +42,34 @@ const handleCVDownload = async () => {
   }
 }
 
-const handleNavClick = (path: string) => {
-  menuOpen.value = false
-  router.push(path)
-}
 </script>
 
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-accent-light-gray shadow-soft">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/80 backdrop-blur-md border-b border-bg-tertiary shadow-soft">
     <ScrollProgress />
     <div class="max-w-6xl mx-auto px-lg md:px-2xl">
       <div class="flex items-center justify-between h-20">
         <!-- Logo -->
-        <router-link to="/" class="flex items-center gap-md no-underline">
+        <a href="#" class="flex items-center gap-md no-underline">
           <div class="w-10 h-10 bg-primary-blue rounded-lg flex items-center justify-center">
             <span class="text-white font-bold">C</span>
           </div>
-          <span class="hidden sm:inline font-bold text-lg text-accent-dark-gray">CT</span>
-        </router-link>
+          <span class="hidden sm:inline font-bold text-lg text-text-primary">CT</span>
+        </a>
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-2xl">
-          <router-link
+          <a
             v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
+            :key="item.name"
+            :href="item.href"
             :class="[
-              'px-lg py-sm rounded-lg transition-all duration-300 no-underline font-medium text-sm',
-              isActive(item.path)
-                ? 'text-primary-blue bg-accent-light-blue'
-                : 'text-accent-dark-gray hover:text-primary-blue hover:bg-accent-light-blue',
+              'px-lg py-sm rounded-lg transition-all duration-300 no-underline font-medium text-sm hover:text-primary-blue hover:bg-bg-tertiary/50',
+              'text-text-secondary'
             ]"
           >
             {{ item.name }}
-          </router-link>
+          </a>
         </div>
 
         <!-- CTA Button & Mobile Menu Toggle -->
@@ -88,7 +77,7 @@ const handleNavClick = (path: string) => {
           <button
             @click="handleCVDownload"
             :disabled="isGenerating"
-            class="hidden sm:flex items-center gap-sm px-xl py-sm bg-primary-orange text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-soft hover:shadow-card disabled:opacity-50 disabled:cursor-not-allowed"
+            class="hidden sm:flex items-center gap-sm px-xl py-sm bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-soft hover:shadow-card disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Download class="w-4 h-4" :class="{ 'animate-bounce': isGenerating }" />
             <span>{{ isGenerating ? 'Génération...' : 'Mon CV' }}</span>
@@ -97,7 +86,7 @@ const handleNavClick = (path: string) => {
           <!-- Mobile Menu Button -->
           <button
             @click="menuOpen = !menuOpen"
-            class="md:hidden p-sm text-accent-dark-gray hover:bg-accent-light-gray rounded-lg transition-colors duration-300"
+            class="md:hidden p-sm text-text-secondary hover:bg-bg-tertiary rounded-lg transition-colors duration-300"
             aria-label="Toggle menu"
           >
             <Menu v-if="!menuOpen" class="w-6 h-6" />
@@ -110,26 +99,23 @@ const handleNavClick = (path: string) => {
       <transition name="slide">
         <div
           v-if="menuOpen"
-          class="md:hidden pb-lg border-t border-accent-light-gray space-y-sm"
+          class="md:hidden pb-lg border-t border-bg-tertiary space-y-sm"
         >
-          <router-link
+          <a
             v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
+            :key="item.name"
+            :href="item.href"
             :class="[
-              'block px-lg py-md rounded-lg transition-all duration-300 no-underline font-medium',
-              isActive(item.path)
-                ? 'text-primary-blue bg-accent-light-blue'
-                : 'text-accent-dark-gray hover:text-primary-blue hover:bg-accent-light-gray',
+              'block px-lg py-md rounded-lg transition-all duration-300 no-underline font-medium text-text-secondary hover:text-primary-blue hover:bg-bg-tertiary/50',
             ]"
             @click="menuOpen = false"
           >
             {{ item.name }}
-          </router-link>
+          </a>
           <button
             @click="handleCVDownload"
             :disabled="isGenerating"
-            class="w-full flex items-center justify-center gap-sm px-lg py-md bg-primary-orange text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 disabled:opacity-50"
+            class="w-full flex items-center justify-center gap-sm px-lg py-md bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 disabled:opacity-50"
           >
             <Download class="w-4 h-4" :class="{ 'animate-bounce': isGenerating }" />
             {{ isGenerating ? 'Génération...' : 'Télécharger Mon CV' }}

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { usePortfolioStore } from '../stores/portfolio'
-import { X } from 'lucide-vue-next'
+import { useToast } from '../composables/useToast'
+import { X, Sparkles, FileText, Shield, Palette } from 'lucide-vue-next'
 import { jsPDF } from 'jspdf'
 
 const emit = defineEmits<{
@@ -9,279 +10,377 @@ const emit = defineEmits<{
 }>()
 
 const portfolioStore = usePortfolioStore()
+const { success, error } = useToast()
 const selectedTemplate = ref<'modern' | 'classic' | 'ats' | 'creative'>('modern')
 const isGenerating = ref(false)
 
 const templates = [
-  { id: 'modern', name: 'Moderne', description: 'Design contemporain avec couleurs de marque' },
-  { id: 'classic', name: 'Classique', description: 'Design traditionnel et professionnel' },
-  { id: 'ats', name: 'ATS', description: 'Optimisé pour les systèmes de candidature' },
-  { id: 'creative', name: 'Créatif', description: 'Avec sidebar et icônes' },
+  { id: 'modern', name: 'Moderne', description: 'Design contemporain avec couleurs de marque', icon: Sparkles },
+  { id: 'classic', name: 'Classique', description: 'Design traditionnel et professionnel', icon: FileText },
+  { id: 'ats', name: 'ATS', description: 'Optimisé pour les systèmes de candidature', icon: Shield },
+  { id: 'creative', name: 'Créatif', description: 'Avec sidebar et icônes', icon: Palette },
 ]
 
 const generateModernCV = (pdf: jsPDF) => {
   const pageWidth = pdf.internal.pageSize.getWidth()
-  let y = 0
+  const pageHeight = pdf.internal.pageSize.getHeight()
+  const margin = 18
+  const contentWidth = pageWidth - margin * 2
+  let y = margin
 
-  // Blue header bar
-  pdf.setFillColor(17, 113, 184)
-  pdf.rect(0, 0, pageWidth, 60, 'F')
-  
-  // Name and title in white
-  pdf.setTextColor(255, 255, 255)
-  pdf.setFontSize(28)
+  // Professional header with name and title
+  pdf.setTextColor(17, 113, 184) // Blue
+  pdf.setFontSize(32)
   pdf.setFont('helvetica', 'bold')
-  pdf.text(`${portfolioStore.personalInfo.firstName} ${portfolioStore.personalInfo.lastName}`, 20, 25)
-  
+  pdf.text(`${portfolioStore.personalInfo.firstName} ${portfolioStore.personalInfo.lastName}`, margin, y)
+  y += 10
+
+  pdf.setTextColor(230, 73, 34) // Orange for subtitle
   pdf.setFontSize(14)
   pdf.setFont('helvetica', 'normal')
-  pdf.text(portfolioStore.personalInfo.title, 20, 35)
-  
-  // Contact info in header
-  pdf.setFontSize(9)
-  pdf.text(`${portfolioStore.personalInfo.email} • ${portfolioStore.personalInfo.phone} • ${portfolioStore.personalInfo.location}`, 20, 45)
-  
-  // Reset to black for body
-  pdf.setTextColor(0, 0, 0)
-  y = 75
+  pdf.text(portfolioStore.personalInfo.title, margin, y)
+  y += 8
 
-  // Profile section
-  pdf.setFontSize(12)
-  pdf.setFont('helvetica', 'bold')
+  // Contact info in a clean format
+  pdf.setTextColor(100, 100, 100)
+  pdf.setFontSize(9)
+  const contactInfo = `${portfolioStore.personalInfo.email} | ${portfolioStore.personalInfo.phone} | ${portfolioStore.personalInfo.location}`
+  pdf.text(contactInfo, margin, y)
+  y += 12
+
+  // Divider line
+  pdf.setDrawColor(17, 113, 184)
+  pdf.setLineWidth(0.5)
+  pdf.line(margin, y, pageWidth - margin, y)
+  y += 8
+
+  // Professional Summary
   pdf.setTextColor(17, 113, 184)
-  pdf.text('PROFIL', 20, y)
-  y += 7
-  
-  pdf.setTextColor(0, 0, 0)
-  pdf.setFontSize(10)
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('PROFIL PROFESSIONNEL', margin, y)
+  y += 6
+
+  pdf.setTextColor(40, 40, 40)
+  pdf.setFontSize(9)
   pdf.setFont('helvetica', 'normal')
-  const bioLines = pdf.splitTextToSize(portfolioStore.personalInfo.bio, pageWidth - 40)
-  pdf.text(bioLines, 20, y)
-  y += bioLines.length * 5 + 10
+  const bioLines = pdf.splitTextToSize(portfolioStore.personalInfo.bio, contentWidth)
+  pdf.text(bioLines, margin, y)
+  y += bioLines.length * 4 + 8
 
   // Experience section
-  pdf.setFontSize(12)
-  pdf.setFont('helvetica', 'bold')
   pdf.setTextColor(17, 113, 184)
-  pdf.text('EXPÉRIENCE PROFESSIONNELLE', 20, y)
-  y += 8
-  
-  portfolioStore.experiences.forEach((exp, index) => {
-    if (y > 260) {
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('EXPÉRIENCE PROFESSIONNELLE', margin, y)
+  y += 7
+
+  portfolioStore.experiences.forEach((exp) => {
+    if (y > pageHeight - 30) {
       pdf.addPage()
-      y = 20
+      y = margin
     }
-    
-    pdf.setTextColor(0, 0, 0)
-    pdf.setFontSize(11)
-    pdf.setFont('helvetica', 'bold')
-    pdf.text(exp.role, 20, y)
-    y += 5
-    
+
+    // Job title in bold
+    pdf.setTextColor(40, 40, 40)
     pdf.setFontSize(10)
-    pdf.setFont('helvetica', 'normal')
-    pdf.text(`${exp.company} • ${exp.location}`, 20, y)
+    pdf.setFont('helvetica', 'bold')
+    pdf.text(exp.role, margin, y)
     y += 4
-    
-    pdf.setFontSize(9)
+
+    // Company and location
     pdf.setTextColor(100, 100, 100)
-    pdf.text(`${exp.startDate} - ${exp.endDate}`, 20, y)
-    y += 6
-    
-    pdf.setTextColor(0, 0, 0)
+    pdf.setFontSize(9)
+    pdf.setFont('helvetica', 'normal')
+    pdf.text(`${exp.company} • ${exp.location}`, margin, y)
+    y += 3
+
+    // Dates
+    pdf.setFontSize(8)
+    pdf.text(`${exp.startDate} - ${exp.endDate}`, margin, y)
+    y += 5
+
+    // Description bullets
+    pdf.setTextColor(60, 60, 60)
     pdf.setFontSize(9)
     exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`• ${desc}`, pageWidth - 45)
-      pdf.text(lines, 25, y)
-      y += lines.length * 4
+      const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 5)
+      pdf.text(lines, margin + 3, y)
+      y += lines.length * 3.5
     })
-    y += 5
+    y += 4
   })
 
   // Education section
-  if (y > 240) {
+  if (y > 230) {
     pdf.addPage()
-    y = 20
+    y = margin
   }
-  
-  pdf.setFontSize(12)
-  pdf.setFont('helvetica', 'bold')
+
+  y += 4
   pdf.setTextColor(17, 113, 184)
-  pdf.text('FORMATION', 20, y)
-  y += 8
-  
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('FORMATION', margin, y)
+  y += 7
+
   portfolioStore.education.forEach((edu) => {
-    pdf.setTextColor(0, 0, 0)
-    pdf.setFontSize(11)
-    pdf.setFont('helvetica', 'bold')
-    pdf.text(edu.degree, 20, y)
-    y += 5
-    
+    if (y > pageHeight - 30) {
+      pdf.addPage()
+      y = margin
+    }
+
+    // Degree name in bold
+    pdf.setTextColor(40, 40, 40)
     pdf.setFontSize(10)
-    pdf.setFont('helvetica', 'normal')
-    pdf.text(`${edu.institution} • ${edu.location}`, 20, y)
+    pdf.setFont('helvetica', 'bold')
+    pdf.text(edu.degree, margin, y)
     y += 4
-    
-    pdf.setFontSize(9)
+
+    // Institution and location
     pdf.setTextColor(100, 100, 100)
-    pdf.text(`${edu.startDate} - ${edu.endDate}`, 20, y)
-    y += 6
-    
-    if (edu.highlights) {
-      pdf.setTextColor(0, 0, 0)
-      edu.highlights.forEach((h) => {
-        pdf.text(`• ${h}`, 25, y)
-        y += 4
+    pdf.setFontSize(9)
+    pdf.setFont('helvetica', 'normal')
+    pdf.text(`${edu.institution} • ${edu.location}`, margin, y)
+    y += 3
+
+    // Dates
+    pdf.setFontSize(8)
+    pdf.text(`${edu.startDate} - ${edu.endDate}`, margin, y)
+    y += 5
+
+    // Highlights if available
+    if (edu.highlights && edu.highlights.length > 0) {
+      pdf.setTextColor(60, 60, 60)
+      pdf.setFontSize(9)
+      edu.highlights.forEach((highlight) => {
+        const lines = pdf.splitTextToSize(`• ${highlight}`, contentWidth - 5)
+        pdf.text(lines, margin + 3, y)
+        y += lines.length * 3.5
       })
     }
     y += 4
   })
 
   // Skills section
-  if (y > 220) {
+  if (y > 230) {
     pdf.addPage()
-    y = 20
+    y = margin
   }
-  
-  pdf.setFontSize(12)
-  pdf.setFont('helvetica', 'bold')
-  pdf.setTextColor(17, 113, 184)
-  pdf.text('COMPÉTENCES', 20, y)
-  y += 8
-  
-  pdf.setTextColor(0, 0, 0)
-  pdf.setFontSize(9)
-  pdf.setFont('helvetica', 'normal')
-  const skillsText = portfolioStore.skills.applicativeDevelopment.slice(0, 15).join(' • ')
-  const skillLines = pdf.splitTextToSize(skillsText, pageWidth - 40)
-  pdf.text(skillLines, 20, y)
-  y += skillLines.length * 4 + 5
 
-  // Languages
-  pdf.setFontSize(12)
-  pdf.setFont('helvetica', 'bold')
+  y += 4
   pdf.setTextColor(17, 113, 184)
-  pdf.text('LANGUES', 20, y)
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('COMPÉTENCES PRINCIPALES', margin, y)
   y += 7
-  
-  pdf.setTextColor(0, 0, 0)
+
+  // Group skills by category for better presentation
+  const skillCategories = [
+    { name: 'Développement', skills: portfolioStore.skills.applicativeDevelopment },
+    { name: 'Cloud & Sécurité', skills: portfolioStore.skills.securityCloud },
+    { name: 'IA & ML', skills: portfolioStore.skills.aiML },
+  ]
+
+  skillCategories.forEach((category) => {
+    if (y > pageHeight - 40) {
+      pdf.addPage()
+      y = margin
+    }
+
+    pdf.setTextColor(40, 40, 40)
+    pdf.setFontSize(9)
+    pdf.setFont('helvetica', 'bold')
+    pdf.text(category.name + ':', margin, y)
+    y += 4
+
+    pdf.setTextColor(60, 60, 60)
+    pdf.setFontSize(8.5)
+    pdf.setFont('helvetica', 'normal')
+    const skillsText = category.skills.slice(0, 10).join(', ')
+    const skillLines = pdf.splitTextToSize(skillsText, contentWidth)
+    pdf.text(skillLines, margin + 3, y)
+    y += skillLines.length * 3.5 + 3
+  })
+
+  // Languages section
+  if (y > 230) {
+    pdf.addPage()
+    y = margin
+  }
+
+  y += 4
+  pdf.setTextColor(17, 113, 184)
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('LANGUES', margin, y)
+  y += 7
+
+  pdf.setTextColor(40, 40, 40)
   pdf.setFontSize(9)
   pdf.setFont('helvetica', 'normal')
+
   portfolioStore.languages.forEach((lang) => {
-    pdf.text(`${lang.language}: ${lang.speaking}`, 20, y)
-    y += 4
+    const proficiency = `${lang.speaking} (Compréhension: ${lang.comprehension}, Écrit: ${lang.writing})`
+    const langText = `${lang.language} — ${proficiency}`
+    const lines = pdf.splitTextToSize(langText, contentWidth - 5)
+    pdf.text(lines, margin, y)
+    y += lines.length * 3.5 + 2
   })
 }
 
 const generateClassicCV = (pdf: jsPDF) => {
   const pageWidth = pdf.internal.pageSize.getWidth()
-  let y = 30
+  const pageHeight = pdf.internal.pageSize.getHeight()
+  const margin = 18
+  const contentWidth = pageWidth - margin * 2
+  let y = 20
 
-  // Header - centered
-  pdf.setFontSize(24)
+  // Professional header - left aligned
+  pdf.setTextColor(17, 113, 184) // Blue
+  pdf.setFontSize(28)
   pdf.setFont('helvetica', 'bold')
-  const name = `${portfolioStore.personalInfo.firstName} ${portfolioStore.personalInfo.lastName}`
-  pdf.text(name, pageWidth / 2, y, { align: 'center' })
-  y += 8
+  pdf.text(`${portfolioStore.personalInfo.firstName} ${portfolioStore.personalInfo.lastName}`, margin, y)
+  y += 9
 
+  pdf.setTextColor(40, 40, 40)
   pdf.setFontSize(12)
   pdf.setFont('helvetica', 'normal')
-  pdf.text(portfolioStore.personalInfo.title, pageWidth / 2, y, { align: 'center' })
-  y += 8
+  pdf.text(portfolioStore.personalInfo.title, margin, y)
+  y += 7
 
-  pdf.setFontSize(9)
-  pdf.text(`${portfolioStore.personalInfo.email} | ${portfolioStore.personalInfo.phone} | ${portfolioStore.personalInfo.location}`, pageWidth / 2, y, { align: 'center' })
-  y += 15
-
-  // Horizontal line
-  pdf.setDrawColor(0, 0, 0)
-  pdf.line(20, y, pageWidth - 20, y)
+  // Contact info
+  pdf.setTextColor(100, 100, 100)
+  pdf.setFontSize(8.5)
+  const contactInfo = `${portfolioStore.personalInfo.email} | ${portfolioStore.personalInfo.phone} | ${portfolioStore.personalInfo.location}`
+  pdf.text(contactInfo, margin, y)
   y += 10
 
-  // Profile
-  pdf.setFontSize(11)
-  pdf.setFont('helvetica', 'bold')
-  pdf.text('PROFIL PROFESSIONNEL', 20, y)
-  y += 7
-  
-  pdf.setFontSize(10)
-  pdf.setFont('helvetica', 'normal')
-  const bioLines = pdf.splitTextToSize(portfolioStore.personalInfo.bio, pageWidth - 40)
-  pdf.text(bioLines, 20, y)
-  y += bioLines.length * 5 + 10
+  // Divider line
+  pdf.setDrawColor(17, 113, 184)
+  pdf.setLineWidth(0.3)
+  pdf.line(margin, y, pageWidth - margin, y)
+  y += 9
 
-  // Experience
+  // Professional Summary
+  pdf.setTextColor(17, 113, 184)
   pdf.setFontSize(11)
   pdf.setFont('helvetica', 'bold')
-  pdf.text('EXPÉRIENCE PROFESSIONNELLE', 20, y)
-  y += 7
-  
-  portfolioStore.experiences.forEach((exp) => {
-    if (y > 260) {
-      pdf.addPage()
-      y = 20
-    }
-    
-    pdf.setFontSize(10)
-    pdf.setFont('helvetica', 'bold')
-    pdf.text(exp.role, 20, y)
-    
-    pdf.setFont('helvetica', 'normal')
-    pdf.text(`${exp.startDate} - ${exp.endDate}`, pageWidth - 60, y, { align: 'right' })
-    y += 5
-    
-    pdf.text(`${exp.company}, ${exp.location}`, 20, y)
-    y += 6
-    
-    pdf.setFontSize(9)
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`• ${desc}`, pageWidth - 45)
-      pdf.text(lines, 25, y)
-      y += lines.length * 4
-    })
-    y += 5
-  })
+  pdf.text('PROFIL PROFESSIONNEL', margin, y)
+  y += 6
 
-  // Education
-  if (y > 240) {
-    pdf.addPage()
-    y = 20
-  }
-  
-  pdf.setFontSize(11)
-  pdf.setFont('helvetica', 'bold')
-  pdf.text('FORMATION', 20, y)
-  y += 7
-  
-  portfolioStore.education.forEach((edu) => {
-    pdf.setFontSize(10)
-    pdf.setFont('helvetica', 'bold')
-    pdf.text(edu.degree, 20, y)
-    
-    pdf.setFont('helvetica', 'normal')
-    pdf.text(`${edu.startDate} - ${edu.endDate}`, pageWidth - 60, y, { align: 'right' })
-    y += 5
-    
-    pdf.text(`${edu.institution}, ${edu.location}`, 20, y)
-    y += 8
-  })
-
-  // Skills
-  if (y > 220) {
-    pdf.addPage()
-    y = 20
-  }
-  
-  pdf.setFontSize(11)
-  pdf.setFont('helvetica', 'bold')
-  pdf.text('COMPÉTENCES', 20, y)
-  y += 7
-  
+  pdf.setTextColor(40, 40, 40)
   pdf.setFontSize(9)
   pdf.setFont('helvetica', 'normal')
-  const skillsText = portfolioStore.skills.applicativeDevelopment.slice(0, 15).join(', ')
-  const skillLines = pdf.splitTextToSize(skillsText, pageWidth - 40)
-  pdf.text(skillLines, 20, y)
+  const bioLines = pdf.splitTextToSize(portfolioStore.personalInfo.bio, contentWidth)
+  pdf.text(bioLines, margin, y)
+  y += bioLines.length * 4 + 8
+
+  // Experience section
+  pdf.setTextColor(17, 113, 184)
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('EXPÉRIENCE PROFESSIONNELLE', margin, y)
+  y += 7
+
+  portfolioStore.experiences.forEach((exp) => {
+    if (y > pageHeight - 30) {
+      pdf.addPage()
+      y = margin
+    }
+
+    pdf.setTextColor(40, 40, 40)
+    pdf.setFontSize(10)
+    pdf.setFont('helvetica', 'bold')
+    pdf.text(exp.role, margin, y)
+    y += 4
+
+    pdf.setTextColor(100, 100, 100)
+    pdf.setFontSize(9)
+    pdf.setFont('helvetica', 'normal')
+    pdf.text(`${exp.company} • ${exp.location}`, margin, y)
+    y += 3
+
+    pdf.setFontSize(8)
+    pdf.text(`${exp.startDate} - ${exp.endDate}`, margin, y)
+    y += 5
+
+    pdf.setTextColor(60, 60, 60)
+    pdf.setFontSize(9)
+    exp.description.forEach((desc) => {
+      const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 5)
+      pdf.text(lines, margin + 3, y)
+      y += lines.length * 3.5
+    })
+    y += 4
+  })
+
+  // Education section
+  if (y > 230) {
+    pdf.addPage()
+    y = margin
+  }
+
+  y += 4
+  pdf.setTextColor(17, 113, 184)
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('FORMATION', margin, y)
+  y += 7
+
+  portfolioStore.education.forEach((edu) => {
+    if (y > pageHeight - 30) {
+      pdf.addPage()
+      y = margin
+    }
+
+    pdf.setTextColor(40, 40, 40)
+    pdf.setFontSize(10)
+    pdf.setFont('helvetica', 'bold')
+    pdf.text(edu.degree, margin, y)
+    y += 4
+
+    pdf.setTextColor(100, 100, 100)
+    pdf.setFontSize(9)
+    pdf.setFont('helvetica', 'normal')
+    pdf.text(`${edu.institution} • ${edu.location}`, margin, y)
+    y += 3
+
+    pdf.setFontSize(8)
+    pdf.text(`${edu.startDate} - ${edu.endDate}`, margin, y)
+    y += 5
+
+    if (edu.highlights && edu.highlights.length > 0) {
+      pdf.setTextColor(60, 60, 60)
+      pdf.setFontSize(9)
+      edu.highlights.forEach((highlight) => {
+        const lines = pdf.splitTextToSize(`• ${highlight}`, contentWidth - 5)
+        pdf.text(lines, margin + 3, y)
+        y += lines.length * 3.5
+      })
+    }
+    y += 4
+  })
+
+  // Skills section
+  if (y > 230) {
+    pdf.addPage()
+    y = margin
+  }
+
+  y += 4
+  pdf.setTextColor(17, 113, 184)
+  pdf.setFontSize(11)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('COMPÉTENCES', margin, y)
+  y += 7
+
+  pdf.setTextColor(60, 60, 60)
+  pdf.setFontSize(8.5)
+  pdf.setFont('helvetica', 'normal')
+  const skillsText = portfolioStore.skills.applicativeDevelopment.slice(0, 12).join(', ')
+  const skillLines = pdf.splitTextToSize(skillsText, contentWidth)
+  pdf.text(skillLines, margin, y)
 }
 
 const generateATSCV = (pdf: jsPDF) => {
@@ -401,166 +500,202 @@ const generateATSCV = (pdf: jsPDF) => {
 
 const generateCreativeCV = (pdf: jsPDF) => {
   const pageWidth = pdf.internal.pageSize.getWidth()
-  const sidebarWidth = 65
-  
-  // Sidebar - colored background
-  pdf.setFillColor(44, 62, 80)
+  const pageHeight = pdf.internal.pageSize.getHeight()
+  const sidebarWidth = 70
+
+  // Sidebar - professional color
+  pdf.setFillColor(17, 113, 184) // Enterprise Blue
   pdf.rect(0, 0, sidebarWidth, 297, 'F')
-  
+
   // Profile section in sidebar
-  let sideY = 20
-  
-  // Initials circle
-  pdf.setFillColor(230, 73, 34)
-  pdf.circle(sidebarWidth / 2, sideY + 10, 12, 'F')
-  
+  let sideY = 18
+
+  // Initials circle - Orange accent
+  pdf.setFillColor(230, 73, 34) // Enterprise Orange
+  pdf.circle(sidebarWidth / 2, sideY + 12, 14, 'F')
+
   pdf.setTextColor(255, 255, 255)
-  pdf.setFontSize(16)
+  pdf.setFontSize(18)
   pdf.setFont('helvetica', 'bold')
   const initials = `${portfolioStore.personalInfo.firstName.charAt(0)}${portfolioStore.personalInfo.lastName.charAt(0)}`
-  pdf.text(initials, sidebarWidth / 2, sideY + 14, { align: 'center' })
-  
-  sideY += 35
+  pdf.text(initials, sidebarWidth / 2, sideY + 16, { align: 'center' })
+
+  sideY += 40
 
   // Contact in sidebar
+  pdf.setTextColor(255, 255, 255)
   pdf.setFontSize(8)
   pdf.setFont('helvetica', 'bold')
-  pdf.text('CONTACT', 10, sideY)
-  sideY += 6
-  
-  pdf.setFontSize(7)
-  pdf.setFont('helvetica', 'normal')
-  const emailLines = pdf.splitTextToSize(portfolioStore.personalInfo.email, sidebarWidth - 15)
-  pdf.text(emailLines, 10, sideY)
-  sideY += emailLines.length * 3 + 4
-  
-  const phoneLines = pdf.splitTextToSize(portfolioStore.personalInfo.phone, sidebarWidth - 15)
-  pdf.text(phoneLines, 10, sideY)
-  sideY += phoneLines.length * 3 + 4
-  
-  const locLines = pdf.splitTextToSize(portfolioStore.personalInfo.location, sidebarWidth - 15)
-  pdf.text(locLines, 10, sideY)
-  sideY += locLines.length * 3 + 10
-
-  // Skills in sidebar
-  pdf.setFontSize(8)
-  pdf.setFont('helvetica', 'bold')
-  pdf.text('COMPÉTENCES', 10, sideY)
-  sideY += 6
-  
-  pdf.setFontSize(7)
-  pdf.setFont('helvetica', 'normal')
-  portfolioStore.skills.applicativeDevelopment.slice(0, 10).forEach((skill) => {
-    const skillLines = pdf.splitTextToSize(skill, sidebarWidth - 15)
-    pdf.text(skillLines, 10, sideY)
-    sideY += skillLines.length * 3 + 1
-  })
-  
+  pdf.text('CONTACT', 8, sideY)
   sideY += 5
 
-  // Languages in sidebar
+  pdf.setFontSize(6.5)
+  pdf.setFont('helvetica', 'normal')
+  pdf.setTextColor(220, 230, 240)
+  const emailLines = pdf.splitTextToSize(portfolioStore.personalInfo.email, sidebarWidth - 14)
+  pdf.text(emailLines, 8, sideY)
+  sideY += emailLines.length * 2.8 + 3
+
+  const phoneLines = pdf.splitTextToSize(portfolioStore.personalInfo.phone, sidebarWidth - 14)
+  pdf.text(phoneLines, 8, sideY)
+  sideY += phoneLines.length * 2.8 + 3
+
+  const locLines = pdf.splitTextToSize(portfolioStore.personalInfo.location, sidebarWidth - 14)
+  pdf.text(locLines, 8, sideY)
+  sideY += locLines.length * 2.8 + 10
+
+  // Skills in sidebar
+  pdf.setTextColor(255, 255, 255)
   pdf.setFontSize(8)
   pdf.setFont('helvetica', 'bold')
-  pdf.text('LANGUES', 10, sideY)
-  sideY += 6
-  
-  pdf.setFontSize(7)
+  pdf.text('COMPÉTENCES', 8, sideY)
+  sideY += 5
+
+  pdf.setFontSize(6.5)
   pdf.setFont('helvetica', 'normal')
+  pdf.setTextColor(220, 230, 240)
+  portfolioStore.skills.applicativeDevelopment.slice(0, 12).forEach((skill) => {
+    const skillLines = pdf.splitTextToSize(`• ${skill}`, sidebarWidth - 14)
+    pdf.text(skillLines, 8, sideY)
+    sideY += skillLines.length * 2.8 + 0.5
+  })
+
+  sideY += 3
+
+  // Languages in sidebar
+  pdf.setTextColor(255, 255, 255)
+  pdf.setFontSize(8)
+  pdf.setFont('helvetica', 'bold')
+  pdf.text('LANGUES', 8, sideY)
+  sideY += 5
+
+  pdf.setFontSize(6.5)
+  pdf.setFont('helvetica', 'normal')
+  pdf.setTextColor(220, 230, 240)
   portfolioStore.languages.forEach((lang) => {
-    pdf.text(lang.language, 10, sideY)
-    sideY += 3
-    pdf.text(lang.speaking, 10, sideY)
-    sideY += 5
+    const langLines = pdf.splitTextToSize(`${lang.language}: ${lang.speaking}`, sidebarWidth - 14)
+    pdf.text(langLines, 8, sideY)
+    sideY += langLines.length * 2.8 + 1.5
   })
 
   // Main content area
-  pdf.setTextColor(0, 0, 0)
-  let y = 25
-  const leftMargin = sidebarWidth + 15
+  pdf.setTextColor(40, 40, 40)
+  let y = 20
+  const leftMargin = sidebarWidth + 12
+  const contentWidth = pageWidth - leftMargin - 10
 
   // Name and title
-  pdf.setFontSize(22)
+  pdf.setFontSize(24)
   pdf.setFont('helvetica', 'bold')
+  pdf.setTextColor(17, 113, 184) // Blue
   pdf.text(`${portfolioStore.personalInfo.firstName} ${portfolioStore.personalInfo.lastName}`, leftMargin, y)
-  y += 8
+  y += 9
 
-  pdf.setFontSize(11)
+  pdf.setFontSize(12)
   pdf.setFont('helvetica', 'normal')
-  pdf.setTextColor(230, 73, 34)
+  pdf.setTextColor(230, 73, 34) // Orange
   pdf.text(portfolioStore.personalInfo.title, leftMargin, y)
-  y += 12
+  y += 10
 
   // Profile
-  pdf.setTextColor(0, 0, 0)
+  pdf.setTextColor(17, 113, 184)
   pdf.setFontSize(10)
   pdf.setFont('helvetica', 'bold')
-  pdf.text('PROFIL', leftMargin, y)
-  y += 6
-  
-  pdf.setFontSize(9)
+  pdf.text('PROFIL PROFESSIONNEL', leftMargin, y)
+  y += 5
+
+  pdf.setTextColor(60, 60, 60)
+  pdf.setFontSize(8.5)
   pdf.setFont('helvetica', 'normal')
-  const bioLines = pdf.splitTextToSize(portfolioStore.personalInfo.bio, pageWidth - leftMargin - 15)
+  const bioLines = pdf.splitTextToSize(portfolioStore.personalInfo.bio, contentWidth)
   pdf.text(bioLines, leftMargin, y)
-  y += bioLines.length * 4 + 10
+  y += bioLines.length * 3.5 + 8
 
   // Experience
+  pdf.setTextColor(17, 113, 184)
   pdf.setFontSize(10)
   pdf.setFont('helvetica', 'bold')
-  pdf.text('EXPÉRIENCE', leftMargin, y)
-  y += 6
-  
+  pdf.text('EXPÉRIENCE PROFESSIONNELLE', leftMargin, y)
+  y += 5
+
   portfolioStore.experiences.forEach((exp) => {
-    if (y > 260) {
+    if (y > pageHeight - 20) {
       pdf.addPage()
-      
+
       // Redraw sidebar on new page
-      pdf.setFillColor(44, 62, 80)
+      pdf.setFillColor(17, 113, 184)
       pdf.rect(0, 0, sidebarWidth, 297, 'F')
-      
+
       y = 20
-      pdf.setTextColor(0, 0, 0)
     }
-    
+
+    pdf.setTextColor(40, 40, 40)
     pdf.setFontSize(9)
     pdf.setFont('helvetica', 'bold')
     pdf.text(exp.role, leftMargin, y)
     y += 4
-    
-    pdf.setFont('helvetica', 'normal')
-    pdf.text(`${exp.company} | ${exp.startDate} - ${exp.endDate}`, leftMargin, y)
-    y += 5
-    
+
+    pdf.setTextColor(100, 100, 100)
     pdf.setFontSize(8)
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`• ${desc}`, pageWidth - leftMargin - 15)
-      pdf.text(lines, leftMargin + 3, y)
-      y += lines.length * 3.5
-    })
+    pdf.setFont('helvetica', 'normal')
+    pdf.text(`${exp.company} • ${exp.location} | ${exp.startDate} - ${exp.endDate}`, leftMargin, y)
     y += 4
+
+    pdf.setTextColor(60, 60, 60)
+    pdf.setFontSize(8.5)
+    exp.description.forEach((desc) => {
+      const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 3)
+      pdf.text(lines, leftMargin + 2, y)
+      y += lines.length * 3.2
+    })
+    y += 3
   })
 
   // Education
-  if (y > 240) {
+  if (y > pageHeight - 30) {
     pdf.addPage()
-    pdf.setFillColor(44, 62, 80)
+    pdf.setFillColor(17, 113, 184)
     pdf.rect(0, 0, sidebarWidth, 297, 'F')
     y = 20
   }
-  
+
+  y += 2
+  pdf.setTextColor(17, 113, 184)
   pdf.setFontSize(10)
   pdf.setFont('helvetica', 'bold')
   pdf.text('FORMATION', leftMargin, y)
-  y += 6
-  
+  y += 5
+
   portfolioStore.education.forEach((edu) => {
+    if (y > pageHeight - 20) {
+      pdf.addPage()
+      pdf.setFillColor(17, 113, 184)
+      pdf.rect(0, 0, sidebarWidth, 297, 'F')
+      y = 20
+    }
+
+    pdf.setTextColor(40, 40, 40)
     pdf.setFontSize(9)
     pdf.setFont('helvetica', 'bold')
     pdf.text(edu.degree, leftMargin, y)
     y += 4
-    
+
+    pdf.setTextColor(100, 100, 100)
+    pdf.setFontSize(8)
     pdf.setFont('helvetica', 'normal')
-    pdf.text(`${edu.institution} | ${edu.startDate} - ${edu.endDate}`, leftMargin, y)
-    y += 6
+    pdf.text(`${edu.institution} • ${edu.location} | ${edu.startDate} - ${edu.endDate}`, leftMargin, y)
+    y += 4
+
+    if (edu.highlights && edu.highlights.length > 0) {
+      pdf.setTextColor(60, 60, 60)
+      pdf.setFontSize(8.5)
+      edu.highlights.forEach((highlight) => {
+        const lines = pdf.splitTextToSize(`• ${highlight}`, contentWidth - 3)
+        pdf.text(lines, leftMargin + 2, y)
+        y += lines.length * 3.2
+      })
+    }
+    y += 2
   })
 }
 
@@ -568,7 +703,7 @@ const generatePDF = () => {
   isGenerating.value = true
   try {
     const pdf = new jsPDF('p', 'mm', 'a4')
-    
+
     switch (selectedTemplate.value) {
       case 'modern':
         generateModernCV(pdf)
@@ -585,10 +720,11 @@ const generatePDF = () => {
     }
 
     pdf.save(`${portfolioStore.personalInfo.firstName}_${portfolioStore.personalInfo.lastName}_CV_${selectedTemplate.value}.pdf`)
+    success('CV téléchargé avec succès!')
     emit('close')
-  } catch (error) {
-    console.error('Erreur lors de la génération du PDF:', error)
-    alert('Erreur: ' + (error as Error).message)
+  } catch (err) {
+    console.error('Erreur lors de la génération du PDF:', err)
+    error('Erreur: ' + (err as Error).message)
   } finally {
     isGenerating.value = false
   }
@@ -598,28 +734,28 @@ const generatePDF = () => {
 <template>
   <div class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-lg" @click="emit('close')">
     <div
-      class="bg-white rounded-xl shadow-card max-w-2xl w-full max-h-96 overflow-y-auto"
+      class="bg-bg-secondary rounded-xl shadow-card max-w-2xl w-full max-h-96 overflow-y-auto border border-bg-tertiary"
       @click.stop
     >
       <!-- Header -->
-      <div class="sticky top-0 bg-white border-b border-accent-light-gray px-2xl py-lg flex items-center justify-between z-10">
-        <h2 class="text-2xl font-bold text-accent-dark-gray">Télécharger Mon CV</h2>
+      <div class="sticky top-0 bg-bg-secondary border-b border-bg-tertiary px-2xl py-lg flex items-center justify-between z-10">
+        <h2 class="text-2xl font-bold text-text-primary">Télécharger Mon CV</h2>
         <button
           @click="emit('close')"
-          class="p-sm hover:bg-accent-light-gray rounded-lg transition-colors duration-300"
+          class="p-sm hover:bg-bg-tertiary rounded-lg transition-colors duration-300"
         >
-          <X class="w-6 h-6 text-accent-dark-gray" />
+          <X class="w-6 h-6 text-text-secondary" />
         </button>
       </div>
 
       <!-- Templates Grid -->
       <div class="p-2xl">
-        <p class="text-accent-text-secondary mb-lg">Choisissez un style de CV professionnel :</p>
+        <p class="text-text-secondary mb-2xl text-sm font-medium">Choisissez un style de CV professionnel :</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-lg mb-2xl">
           <label
             v-for="template in templates"
             :key="template.id"
-            class="cursor-pointer"
+            class="cursor-pointer group"
           >
             <input
               type="radio"
@@ -629,14 +765,28 @@ const generatePDF = () => {
             />
             <div
               :class="[
-                'p-lg border-2 rounded-lg transition-all duration-300',
+                'p-lg border-2 rounded-lg transition-all duration-300 hover:shadow-soft',
                 selectedTemplate === template.id
-                  ? 'border-primary-blue bg-accent-light-blue'
-                  : 'border-accent-light-gray hover:border-primary-blue',
+                  ? 'border-primary-blue bg-bg-tertiary shadow-soft'
+                  : 'border-bg-tertiary hover:border-primary-blue/50',
               ]"
             >
-              <h3 class="font-semibold text-accent-dark-gray mb-sm">{{ template.name }}</h3>
-              <p class="text-sm text-accent-text-secondary">{{ template.description }}</p>
+              <div class="flex items-start gap-md mb-md">
+                <div
+                  :class="[
+                    'w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300',
+                    selectedTemplate === template.id
+                      ? 'bg-primary-blue text-white'
+                      : 'bg-bg-tertiary text-primary-blue group-hover:bg-primary-blue/10',
+                  ]"
+                >
+                  <component :is="template.icon" class="w-5 h-5" />
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-text-primary mb-xs">{{ template.name }}</h3>
+                  <p class="text-xs text-text-tertiary leading-relaxed">{{ template.description }}</p>
+                </div>
+              </div>
             </div>
           </label>
         </div>
@@ -645,8 +795,14 @@ const generatePDF = () => {
         <button
           @click="generatePDF"
           :disabled="isGenerating"
-          class="w-full py-lg bg-primary-orange text-white font-semibold rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-soft hover:shadow-card"
+          class="w-full py-lg bg-primary-orange text-white font-semibold rounded-lg hover:opacity-90 active:scale-98 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-soft hover:shadow-card disabled:hover:shadow-soft flex items-center justify-center gap-md"
         >
+          <span v-if="isGenerating" class="inline-block animate-spin">
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </span>
           {{ isGenerating ? 'Génération en cours...' : 'Télécharger le CV' }}
         </button>
       </div>

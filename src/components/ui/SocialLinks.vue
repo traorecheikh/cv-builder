@@ -37,12 +37,12 @@ const socialLinks = [
       :href="link.url"
       target="_blank"
       rel="noopener noreferrer"
-      class="w-12 h-12 rounded-lg bg-white border-2 border-accent-light-gray hover:border-primary-blue flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-card group"
+      class="w-12 h-12 rounded-lg bg-bg-tertiary border-2 border-bg-tertiary hover:border-primary-blue flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-card group"
       :aria-label="link.name"
     >
       <component
         :is="link.icon"
-        class="w-5 h-5 text-accent-dark-gray group-hover:text-primary-blue transition-colors"
+        class="w-5 h-5 text-text-primary group-hover:text-primary-blue transition-colors"
       />
     </a>
   </div>
