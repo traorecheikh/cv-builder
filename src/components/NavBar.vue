@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Menu, X, Download } from 'lucide-vue-next'
+import { Menu, X, Download, Moon, Sun } from 'lucide-vue-next'
 import { usePortfolioStore } from '../stores/portfolio'
 import { generateMindblowingCV } from '../utils/cvGenerator'
+import { useTheme } from '../composables/useTheme'
 import ScrollProgress from './ui/ScrollProgress.vue'
 
 const menuOpen = ref(false)
 const isGenerating = ref(false)
 const portfolioStore = usePortfolioStore()
+const { isDark, toggleTheme } = useTheme()
 
 const navItems = [
   { name: 'Accueil', href: '/#' },
@@ -47,13 +49,13 @@ const handleCVDownload = async () => {
 </script>
 
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/80 backdrop-blur-md border-b border-bg-tertiary shadow-soft">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/95 dark:bg-bg-secondary/80 backdrop-blur-md border-b border-border-color shadow-soft transition-colors duration-300">
     <ScrollProgress />
     <div class="w-full px-lg md:px-2xl">
       <div class="flex items-center justify-between h-20">
         <!-- Logo -->
         <a href="#" class="flex items-center gap-md no-underline">
-          <span class="font-bold text-lg text-text-primary">{{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }}</span>
+          <span class="font-bold text-lg text-text-primary transition-colors duration-300">{{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }}</span>
         </a>
 
         <!-- Desktop Menu -->
@@ -73,6 +75,17 @@ const handleCVDownload = async () => {
 
         <!-- CTA Button & Mobile Menu Toggle -->
         <div class="flex items-center gap-md">
+          <!-- Theme Toggle -->
+          <button
+            @click="toggleTheme"
+            class="p-sm text-text-secondary hover:bg-bg-tertiary rounded-lg transition-all duration-300 hover:text-primary-blue"
+            aria-label="Toggle theme"
+            title="Basculer le thème"
+          >
+            <Moon v-if="isDark" class="w-5 h-5" />
+            <Sun v-else class="w-5 h-5" />
+          </button>
+
           <button
             @click="handleCVDownload"
             :disabled="isGenerating"

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -7,29 +8,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Dark mode backgrounds (following spec)
-        'primary': '#111827',
-        'secondary': '#1f2937',
-        'tertiary': '#2d3748',
-        // Enterprise colors from AGENT.md
+        // Enterprise brand colors (stay consistent)
         'primary-blue': '#1171B8',
         'primary-orange': '#E64922',
-        'secondary-white': '#F1F5F9',
-        'secondary-black': '#111827',
-        // Dark mode text
-        'text-primary': '#F1F5F9',
-        'text-secondary': '#D1D5DB',
-        'text-tertiary': '#9CA3AF',
-        // Support colors (dark mode versions)
+        // Dynamic colors using CSS variables
+        'bg-primary': 'var(--bg-primary)',
+        'bg-secondary': 'var(--bg-secondary)',
+        'bg-tertiary': 'var(--bg-tertiary)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-tertiary': 'var(--text-tertiary)',
+        'border-color': 'var(--border-color)',
+        // Support colors
         'accent-light-blue': '#1E3A5F',
         'accent-dark-gray': '#F1F5F9',
         'accent-light-gray': '#374151',
         'accent-green': '#10B981',
         'accent-text-secondary': '#D1D5DB',
-        // Background mapping
-        'bg-primary': '#111827',
-        'bg-secondary': '#1f2937',
-        'bg-tertiary': '#2d3748',
+        // Legacy names for compatibility
+        'primary': 'var(--bg-primary)',
+        'secondary': 'var(--bg-secondary)',
+        'tertiary': 'var(--bg-tertiary)',
+        'secondary-white': '#F1F5F9',
+        'secondary-black': '#111827',
       },
       fontFamily: {
         sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
