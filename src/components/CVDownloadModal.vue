@@ -103,11 +103,20 @@ const generateModernCV = (pdf: jsPDF) => {
     // Description bullets
     pdf.setTextColor(60, 60, 60)
     pdf.setFontSize(9)
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 5)
-      pdf.text(lines, margin + 3, y)
-      y += lines.length * 3.5
-    })
+    if (exp.description) {
+      exp.description.forEach((desc) => {
+        const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 5)
+        pdf.text(lines, margin + 3, y)
+        y += lines.length * 3.5
+      })
+    }
+    if (exp.missions) {
+      exp.missions.forEach((mission) => {
+        const lines = pdf.splitTextToSize(`→ ${mission}`, contentWidth - 5)
+        pdf.text(lines, margin + 3, y)
+        y += lines.length * 3.5
+      })
+    }
     y += 4
   })
 
@@ -307,11 +316,20 @@ const generateClassicCV = (pdf: jsPDF) => {
 
     pdf.setTextColor(60, 60, 60)
     pdf.setFontSize(9)
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 5)
-      pdf.text(lines, margin + 3, y)
-      y += lines.length * 3.5
-    })
+    if (exp.description) {
+      exp.description.forEach((desc) => {
+        const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 5)
+        pdf.text(lines, margin + 3, y)
+        y += lines.length * 3.5
+      })
+    }
+    if (exp.missions) {
+      exp.missions.forEach((mission) => {
+        const lines = pdf.splitTextToSize(`→ ${mission}`, contentWidth - 5)
+        pdf.text(lines, margin + 3, y)
+        y += lines.length * 3.5
+      })
+    }
     y += 4
   })
 
@@ -442,12 +460,21 @@ const generateATSCV = (pdf: jsPDF) => {
     pdf.setFontSize(9)
     pdf.text(`${exp.startDate} - ${exp.endDate} | ${exp.location}`, 20, y)
     y += 5
-    
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`- ${desc}`, pageWidth - 45)
-      pdf.text(lines, 25, y)
-      y += lines.length * 4 + 1
-    })
+
+    if (exp.description) {
+      exp.description.forEach((desc) => {
+        const lines = pdf.splitTextToSize(`- ${desc}`, pageWidth - 45)
+        pdf.text(lines, 25, y)
+        y += lines.length * 4 + 1
+      })
+    }
+    if (exp.missions) {
+      exp.missions.forEach((mission) => {
+        const lines = pdf.splitTextToSize(`- ${mission}`, pageWidth - 45)
+        pdf.text(lines, 25, y)
+        y += lines.length * 4 + 1
+      })
+    }
     y += 4
   })
 
@@ -643,11 +670,20 @@ const generateCreativeCV = (pdf: jsPDF) => {
 
     pdf.setTextColor(60, 60, 60)
     pdf.setFontSize(8.5)
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 3)
-      pdf.text(lines, leftMargin + 2, y)
-      y += lines.length * 3.2
-    })
+    if (exp.description) {
+      exp.description.forEach((desc) => {
+        const lines = pdf.splitTextToSize(`• ${desc}`, contentWidth - 3)
+        pdf.text(lines, leftMargin + 2, y)
+        y += lines.length * 3.2
+      })
+    }
+    if (exp.missions) {
+      exp.missions.forEach((mission) => {
+        const lines = pdf.splitTextToSize(`• ${mission}`, contentWidth - 3)
+        pdf.text(lines, leftMargin + 2, y)
+        y += lines.length * 3.2
+      })
+    }
     y += 3
   })
 

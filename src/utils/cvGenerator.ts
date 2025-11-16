@@ -237,11 +237,20 @@ export const generateMindblowingCV = async (
     // Description bullets
     pdf.setTextColor(70, 70, 70)
     pdf.setFontSize(8)
-    exp.description.forEach((desc) => {
-      const lines = pdf.splitTextToSize(`▪ ${desc}`, contentWidth - 5)
-      pdf.text(lines, contentX + 2, y)
-      y += lines.length * 3
-    })
+    if (exp.description) {
+      exp.description.forEach((desc) => {
+        const lines = pdf.splitTextToSize(`▪ ${desc}`, contentWidth - 5)
+        pdf.text(lines, contentX + 2, y)
+        y += lines.length * 3
+      })
+    }
+    if (exp.missions) {
+      exp.missions.forEach((mission) => {
+        const lines = pdf.splitTextToSize(`→ ${mission}`, contentWidth - 5)
+        pdf.text(lines, contentX + 2, y)
+        y += lines.length * 3
+      })
+    }
     y += 2
   })
 

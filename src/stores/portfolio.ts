@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+export interface TechStack {
+  [category: string]: string[]
+}
+
 export interface Experience {
   id: string
   company: string
@@ -9,7 +13,11 @@ export interface Experience {
   startDate: string
   endDate: string
   current?: boolean
-  description: string[]
+  client?: string
+  projectDescription?: string
+  missions?: string[]
+  technicalStack?: TechStack
+  description?: string[]
   website?: string
 }
 
@@ -68,8 +76,9 @@ export interface PersonalInfo {
 
 export const usePortfolioStore = defineStore('portfolio', () => {
   const personalInfo = ref<PersonalInfo>({
-    firstName: 'Cheikh',
-    lastName: 'Traore',
+    firstName: 'Cheikh Tidian' +
+      'e',
+    lastName: 'Traoré',
     title: 'Développeur Backend & DevOps',
     email: 'atidiane741@gmail.com',
     phone: '(+221) 781706184',
@@ -89,11 +98,19 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       startDate: '11/2025',
       endDate: 'Présent',
       current: true,
-      description: [
+      client: 'LIC',
+      projectDescription: 'Création et lancement de la première plateforme web de la startup avec architecture modulaire',
+      missions: [
         'Contribution directe à la création et au lancement de la première plateforme web de la startup.',
         'Développement de prototypes et initiation de projets SaaS pour structurer l\'offre technologique.',
         'Participation à la conception d\'une architecture modulaire et évolutive pour les futurs services numériques.',
       ],
+      technicalStack: {
+        'Frontend': ['Vue.js', 'TypeScript'],
+        'Backend': ['Node.js', 'Express'],
+        'Bases de données': ['PostgreSQL', 'MongoDB'],
+        'Outils': ['Docker', 'Git', 'GitHub'],
+      },
       website: 'https://lic.sn',
     },
     {
@@ -101,14 +118,22 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       company: 'G&G Professional Services',
       role: 'Consultant Informatique & Analyste SOC',
       location: 'Pikine Ouest, Sénégal',
-      startDate: '21/07/2025',
+      startDate: '07/2025',
       endDate: 'Présent',
       current: true,
-      description: [
+      client: 'Clients divers - PME/PMI',
+      projectDescription: 'Solutions Odoo et infrastructure informatique sécurisée',
+      missions: [
         'Développement et personnalisation de solutions Odoo adaptées aux besoins métiers des clients.',
         'Supervision de l\'infrastructure informatique et optimisation des outils Microsoft 365.',
         'Implémentation de mesures de sécurité avancées, incluant l\'authentification multifacteur et la surveillance des systèmes.',
       ],
+      technicalStack: {
+        'ERP': ['Odoo'],
+        'Cloud': ['Microsoft 365', 'Azure'],
+        'Sécurité': ['Microsoft Entra', 'MFA'],
+        'Monitoring': ['Windows Defender', 'Event Viewer'],
+      },
       website: 'https://gandgcorp.com',
     },
     {
@@ -116,15 +141,24 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       company: 'Teksi Inc',
       role: 'Développeur Backend & DevOps Junior',
       location: 'Montreal, Canada',
-      startDate: '12/04/2025',
+      startDate: '04/2025',
       endDate: 'Présent',
       current: true,
-      description: [
+      client: 'Clients SaaS - Fintech',
+      projectDescription: 'Architecture microservices avec CI/CD automatisé et déploiement cloud',
+      missions: [
         'Intégration et maintenance de pipelines CI/CD avec Docker.',
         'Développement et maintenance des services backend en SpringBoot.',
         'Participation active à des sprints Agile (Scrum/Kanban) et coordination d\'équipe à distance via Jira, Confluence et Microsoft Teams.',
         'Contribution à l\'optimisation des performances et à la fiabilité des services backend pour le déploiement cloud.',
       ],
+      technicalStack: {
+        'Backend': ['SpringBoot', 'Java', 'REST API'],
+        'DevOps': ['Docker', 'Kubernetes', 'Jenkins', 'GitLab CI'],
+        'Cloud': ['AWS', 'DigitalOcean'],
+        'Bases de données': ['PostgreSQL', 'Redis'],
+        'Méthodologie': ['Scrum', 'Agile'],
+      },
       website: 'https://teksi.ca',
     },
   ])

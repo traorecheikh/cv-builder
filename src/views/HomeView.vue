@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { usePortfolioStore } from '../stores/portfolio'
 import { useImageLoad } from '../composables/useImageLoad'
-import { ArrowRight, Code2, Lock, Brain, Trello, Calendar, MapPin, ExternalLink, Github, Star, Trophy, Award, BookOpen as BookOpenIcon, Mail, Home, Briefcase, Wrench, GraduationCap, Heart, Cloud, Zap, Server, Rocket, Building, Check } from 'lucide-vue-next'
+import { ArrowRight, Code2, Lock, Trello, Calendar, MapPin, ExternalLink, Trophy, Award, BookOpen as BookOpenIcon, Mail, Home, Briefcase, Wrench, GraduationCap, Heart, Cloud, Zap, Server, Rocket, Building } from 'lucide-vue-next'
 import SocialLinks from '../components/ui/SocialLinks.vue'
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.vue'
-import SkillBar from '../components/ui/SkillBar.vue'
 
 const portfolioStore = usePortfolioStore()
 const { isLoaded, hasError, handleLoad, handleError } = useImageLoad()
@@ -12,42 +11,48 @@ const { isLoaded, hasError, handleLoad, handleError } = useImageLoad()
 interface SkillCategory {
   title: string
   icon: typeof Code2
+  color: string
   skills: string[]
 }
 
 const skillCategories: SkillCategory[] = [
   {
-    title: 'Développement Applicatif',
+    title: 'Backend',
+    icon: Rocket,
+    color: 'from-primary-blue to-blue-600',
+    skills: ['SpringBoot', 'Quarkus', 'Node.js', 'Flask', 'FastApi', 'Jakarta', 'CDI'],
+  },
+  {
+    title: 'Frontend',
     icon: Code2,
-    skills: portfolioStore.skills.applicativeDevelopment,
+    color: 'from-primary-orange to-orange-600',
+    skills: ['Vue', 'Angular', 'JavaScript', 'TypeScript'],
   },
   {
-    title: 'Sécurité & Cloud',
-    icon: Lock,
-    skills: portfolioStore.skills.securityCloud,
+    title: 'DevOps & Cloud',
+    icon: Cloud,
+    color: 'from-cyan-500 to-cyan-600',
+    skills: ['Docker', 'Terraform', 'Kubernetes', 'Jenkins', 'CI/CD', 'DigitalOcean', 'Azure', 'AWS'],
   },
   {
-    title: 'Intelligence Artificielle & ML',
-    icon: Brain,
-    skills: portfolioStore.skills.aiML,
-  },
-  {
-    title: 'Méthodologies & Gestion',
+    title: 'Databases',
     icon: Trello,
-    skills: portfolioStore.skills.methodology,
+    color: 'from-purple-500 to-purple-600',
+    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Cassandra', 'DynamoDB'],
+  },
+  {
+    title: 'Security & Monitoring',
+    icon: Lock,
+    color: 'from-red-500 to-red-600',
+    skills: ['Microsoft Entra', 'Prometheus', 'Grafana', 'ELK', 'Nmap', 'Wireshark', 'System Hardening', 'SSO'],
+  },
+  {
+    title: 'Tools & Methodology',
+    icon: Wrench,
+    color: 'from-yellow-500 to-yellow-600',
+    skills: ['Jira', 'Confluence', 'Microsoft Teams', 'Scrum', 'Kanban', 'Trello', 'Slack'],
   },
 ]
-
-const topCompétences = [
-  { name: 'SpringBoot', level: 90 },
-  { name: 'Docker', level: 85 },
-  { name: 'Node.js', level: 88 },
-  { name: 'Vue.js', level: 85 },
-  { name: 'Azure', level: 75 },
-  { name: 'PostgreSQL', level: 80 },
-]
-
-const featuredProjets = ['1']
 </script>
 
 <template>
@@ -177,54 +182,87 @@ const featuredProjets = ['1']
               <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
             </div>
 
-            <div class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card">
-              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
-                <div>
-                  <h3 class="text-2xl font-bold text-text-primary">{{ exp.role }}</h3>
-                  <div class="flex items-center gap-md mt-sm">
-                    <a
-                      v-if="exp.website"
-                      :href="exp.website"
-                      target="_blank"
-                      rel="noopener"
-                      class="text-primary-blue font-semibold hover:underline text-lg"
-                    >
-                      {{ exp.company }}
-                      <ExternalLink class="inline w-4 h-4 ml-sm" />
-                    </a>
-                    <span v-else class="text-primary-blue font-semibold text-lg">{{ exp.company }}</span>
+            <div class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue transition-all duration-300 hover:shadow-card">
+              <!-- Header with gradient -->
+              <div class="bg-gradient-to-r from-primary-blue to-primary-blue/80 p-2xl">
+                <h3 class="text-2xl font-bold text-white mb-sm">{{ exp.role }}</h3>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-md">
+                  <a
+                    v-if="exp.website"
+                    :href="exp.website"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-white font-semibold hover:text-white/80 transition-colors no-underline flex items-center gap-sm"
+                  >
+                    {{ exp.company }}
+                    <ExternalLink class="w-4 h-4" />
+                  </a>
+                  <span v-else class="text-white font-semibold">{{ exp.company }}</span>
+                  <span
+                    v-if="exp.current"
+                    class="px-lg py-sm bg-white/20 text-white font-semibold rounded-full text-xs w-fit"
+                  >
+                    En cours
+                  </span>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-2xl space-y-lg">
+                <!-- Dates and location -->
+                <div class="flex flex-col sm:flex-row gap-2xl text-text-secondary text-sm">
+                  <div class="flex items-center gap-sm">
+                    <Calendar class="w-4 h-4 text-primary-blue flex-shrink-0" />
+                    <span>{{ exp.startDate }} - {{ exp.endDate }}</span>
+                  </div>
+                  <div class="flex items-center gap-sm">
+                    <MapPin class="w-4 h-4 text-primary-blue flex-shrink-0" />
+                    <span>{{ exp.location }}</span>
                   </div>
                 </div>
 
-                <div
-                  v-if="exp.current"
-                  class="px-xl py-sm bg-accent-green/10 text-accent-green font-semibold rounded-full text-sm self-start md:self-auto"
-                >
-                  En cours
+                <!-- Client -->
+                <div v-if="exp.client" class="border-t border-bg-tertiary pt-lg">
+                  <p class="text-xs font-bold text-primary-orange uppercase tracking-wide mb-sm">Client</p>
+                  <p class="text-text-primary font-semibold">{{ exp.client }}</p>
+                </div>
+
+                <!-- Project description -->
+                <div v-if="exp.projectDescription" class="border-t border-bg-tertiary pt-lg">
+                  <p class="text-sm font-bold text-text-primary mb-md">Descriptif Projet</p>
+                  <p class="text-text-secondary leading-relaxed">{{ exp.projectDescription }}</p>
+                </div>
+
+                <!-- Missions -->
+                <div v-if="exp.missions && exp.missions.length" class="border-t border-bg-tertiary pt-lg">
+                  <p class="text-sm font-bold text-text-primary mb-md">Missions</p>
+                  <ul class="space-y-sm">
+                    <li v-for="(mission, idx) in exp.missions" :key="idx" class="flex gap-md text-text-secondary text-sm leading-relaxed">
+                      <span class="text-primary-blue font-bold mt-0.5 flex-shrink-0">→</span>
+                      <span>{{ mission }}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Technical stack -->
+                <div v-if="exp.technicalStack" class="border-t border-bg-tertiary pt-lg">
+                  <p class="text-sm font-bold text-text-primary mb-lg">Environnement Technique</p>
+                  <div class="space-y-md">
+                    <div v-for="(techs, category) in exp.technicalStack" :key="category">
+                      <p class="text-xs font-bold text-primary-orange uppercase tracking-wide mb-sm">{{ category }}</p>
+                      <div class="flex flex-wrap gap-sm">
+                        <span
+                          v-for="tech in techs"
+                          :key="tech"
+                          class="px-md py-sm bg-bg-primary rounded text-xs font-semibold text-text-primary border border-bg-tertiary hover:border-primary-blue hover:text-primary-blue transition-all"
+                        >
+                          {{ tech }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div class="flex flex-col sm:flex-row gap-2xl mb-lg text-text-secondary text-sm">
-                <div class="flex items-center gap-sm">
-                  <Calendar class="w-4 h-4 text-primary-blue" />
-                  {{ exp.startDate }} - {{ exp.endDate }}
-                </div>
-                <div class="flex items-center gap-sm">
-                  <MapPin class="w-4 h-4 text-primary-blue" />
-                  {{ exp.location }}
-                </div>
-              </div>
-
-              <ul class="space-y-sm">
-                <li
-                  v-for="(desc, idx) in exp.description"
-                  :key="idx"
-                  class="flex gap-md text-text-secondary leading-relaxed"
-                >
-                  <span class="text-primary-orange font-bold mt-sm flex-shrink-0">•</span>
-                  <span>{{ desc }}</span>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -248,7 +286,19 @@ const featuredProjets = ['1']
           <div
             v-for="(edu, index) in portfolioStore.education"
             :key="edu.id"
-            class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card"
+            class="relative"
+          >
+            <!-- Timeline line -->
+            <div
+              v-if="index !== portfolioStore.education.length - 1"
+              class="absolute left-[1.375rem] top-24 w-1 h-24 bg-gradient-to-b from-primary-orange via-primary-orange to-primary-orange/30"
+            ></div>
+            <!-- Timeline circle -->
+            <div class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+              <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
+            </div>
+
+            <div class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card"
           >
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
               <div>
@@ -290,6 +340,7 @@ const featuredProjets = ['1']
                 <Award class="w-5 h-5 text-primary-orange mt-sm flex-shrink-0" />
                 <span class="text-text-secondary">{{ highlight }}</span>
               </div>
+            </div>
             </div>
           </div>
         </div>
@@ -339,179 +390,49 @@ const featuredProjets = ['1']
           <span class="text-primary-orange">Techniques</span>
         </h1>
         <p class="text-lg text-text-secondary max-w-2xl">
-          Plus de 40 technologies et outils maîtrisés, couvrant le développement, DevOps, sécurité et IA.
+          Expertise couvrant 6 domaines clés pour délivrer des solutions robustes et scalables.
         </p>
       </div>
 
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-12">
-        <h2 class="text-2xl font-bold text-text-primary mb-2xl">Compétences Principales</h2>
-        <div class="grid md:grid-cols-2 gap-2xl bg-bg-secondary p-2xl rounded-xl border-2 border-bg-tertiary shadow-card">
-          <SkillBar
-            v-for="skill in topCompétences"
-            :key="skill.name"
-            :skill="skill"
-          />
-        </div>
-      </div>
-
       <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
-        <div class="grid md:grid-cols-2 gap-2xl">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-lg">
           <div
             v-for="category in skillCategories"
             :key="category.title"
-            class="bg-accent-light-gray rounded-xl p-2xl hover:shadow-card transition-all duration-300 border border-bg-tertiary hover:border-primary-blue"
+            class="relative group bg-bg-secondary rounded-xl overflow-hidden border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
-            <div class="flex items-center gap-lg mb-lg">
-              <component :is="category.icon" class="w-8 h-8 text-primary-blue" />
-              <h3 class="text-2xl font-bold text-text-primary">{{ category.title }}</h3>
+            <!-- Gradient header -->
+            <div :class="`bg-gradient-to-r ${category.color} p-lg flex items-center gap-md`">
+              <component :is="category.icon" class="w-6 h-6 text-white flex-shrink-0" />
+              <h3 class="text-xl font-bold text-white">{{ category.title }}</h3>
             </div>
 
-            <div class="flex flex-wrap gap-md">
-              <span
-                v-for="skill in category.skills"
-                :key="skill"
-                class="px-lg py-sm bg-bg-secondary rounded-full text-sm font-semibold text-text-primary border-2 border-primary-blue/30 hover:border-primary-blue hover:bg-bg-tertiary transition-all duration-300"
-              >
-                {{ skill }}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-24 bg-primary-blue rounded-xl p-2xl md:p-3xl text-white">
-          <h2 class="text-3xl font-bold mb-2xl">Résumé des Compétences</h2>
-          <div class="grid md:grid-cols-4 gap-2xl">
-            <div>
-              <p class="text-4xl font-bold">{{ skillCategories.length }}</p>
-              <p class="text-white/80 mt-sm">Catégories</p>
-            </div>
-            <div>
-              <p class="text-4xl font-bold">
-                {{
-                  skillCategories.reduce((sum, cat) => sum + cat.skills.length, 0)
-                }}
-              </p>
-              <p class="text-white/80 mt-sm">Technologies</p>
-            </div>
-            <div>
-              <p class="text-4xl font-bold">10+</p>
-              <p class="text-white/80 mt-sm">Années d'Exp.</p>
-            </div>
-            <div>
-              <Check class="w-10 h-10 text-white/80 mb-sm" />
-              <p class="text-white/80 mt-sm">Prêt pour de nouveaux défis</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS SECTION -->
-    <section id="projects" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
-          Projets
-          <span class="text-primary-orange">Réalisés</span>
-        </h1>
-        <p class="text-lg text-text-secondary max-w-2xl">
-          Des projets d'envergure en startup et en entreprise, showcasing expertise et innovation.
-        </p>
-      </div>
-
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
-        <div class="space-y-2xl">
-          <div
-            v-for="(project, index) in portfolioStore.projects"
-            :key="project.id"
-            class="group relative bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue hover:shadow-card transition-all duration-300 hover:-translate-y-1"
-          >
-            <div
-              v-if="featuredProjets.includes(project.id)"
-              class="absolute top-4 right-4 z-10 flex items-center gap-sm px-lg py-sm bg-primary-orange text-white rounded-full text-xs font-semibold"
-            >
-              <Star class="w-4 h-4 fill-current" />
-              Projet Vedette
-            </div>
-
-            <div class="w-full h-48 bg-bg-tertiary flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
-              <div class="text-6xl font-bold text-primary-blue/20">
-                {{ project.name.charAt(0) }}
-              </div>
-              <div class="absolute inset-0 bg-bg-secondary/50"></div>
-            </div>
-
-            <div class="p-2xl border-b-2 border-bg-tertiary">
-              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-lg">
-                <div>
-                  <span class="text-sm text-primary-blue font-semibold uppercase tracking-wide">
-                    Projet #{{ index + 1 }}
-                  </span>
-                  <h3 class="text-2xl md:text-3xl font-bold text-text-primary mt-sm group-hover:text-primary-blue transition-colors">
-                    {{ project.name }}
-                  </h3>
-                </div>
-                <div class="text-sm text-text-secondary font-medium">
-                  {{ project.startDate }} - {{ project.endDate }}
-                </div>
-              </div>
-            </div>
-
+            <!-- Skills container -->
             <div class="p-2xl">
-              <p class="text-text-secondary leading-relaxed mb-lg">
-                {{ project.description }}
-              </p>
-
-              <div class="mb-lg">
-                <p class="text-sm font-semibold text-text-primary mb-sm">Stack technologique :</p>
-                <div class="flex flex-wrap gap-sm">
-                  <span
-                    v-for="tech in project.technologies"
-                    :key="tech"
-                    class="px-md py-sm bg-primary-blue/10 text-primary-blue rounded-full text-sm font-medium border border-primary-blue/30 hover:border-primary-blue hover:bg-primary-blue/20 transition-all duration-300"
-                  >
-                    {{ tech }}
-                  </span>
-                </div>
-              </div>
-
-              <div class="pt-lg border-t border-bg-tertiary">
-                <a
-                  v-if="project.link !== '#'"
-                  :href="project.link"
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-flex items-center gap-sm text-primary-blue font-semibold hover:text-primary-orange transition-colors duration-300 no-underline"
+              <div class="flex flex-wrap gap-md">
+                <span
+                  v-for="skill in category.skills"
+                  :key="skill"
+                  class="px-md py-sm bg-bg-primary rounded-lg text-sm font-semibold text-text-primary border border-bg-tertiary hover:border-primary-blue hover:text-primary-blue transition-all duration-200 cursor-default"
                 >
-                  <Github class="w-5 h-5" />
-                  Voir le Code
-                  <ExternalLink class="w-4 h-4" />
-                </a>
-                <span v-else class="inline-flex items-center gap-sm text-text-secondary">
-                  <span class="text-sm">Code privé</span>
+                  {{ skill }}
                 </span>
               </div>
+
+              <!-- Skill count indicator -->
+              <div class="mt-lg pt-lg border-t border-bg-tertiary">
+                <p class="text-xs text-text-tertiary font-semibold uppercase tracking-wide">
+                  {{ category.skills.length }} compétences
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="mt-24 bg-primary-orange rounded-xl p-2xl md:p-3xl text-white text-center">
-          <h2 class="text-3xl font-bold mb-lg">Plus de projets sur GitHub</h2>
-          <p class="text-white/90 mb-2xl max-w-2xl mx-auto">
-            Consultez mon profil GitHub pour découvrir d'autres projets et contributions open-source.
-          </p>
-          <a
-            href="https://github.com/traorecheikh"
-            target="_blank"
-            rel="noopener"
-            class="inline-flex items-center gap-sm px-2xl py-lg bg-bg-secondary text-primary-orange font-semibold rounded-lg hover:bg-opacity-90 transition-all duration-300"
-          >
-            <Github class="w-5 h-5" />
-            Visiter mon GitHub
-            <ExternalLink class="w-4 h-4" />
-          </a>
+        <!-- Summary Stats -->
         </div>
-      </div>
     </section>
+
 
     <!-- CERTIFICATIONS SECTION -->
     <section id="certifications" class="bg-bg-primary">
