@@ -19,37 +19,37 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Backend',
     icon: Rocket,
-    color: 'from-primary-blue to-blue-600',
+    color: 'border-primary-blue',
     skills: ['SpringBoot', 'Quarkus', 'Node.js', 'Flask', 'FastApi', 'Jakarta', 'CDI'],
   },
   {
     title: 'Frontend',
     icon: Code2,
-    color: 'from-primary-orange to-orange-600',
+    color: 'border-primary-orange',
     skills: ['Vue', 'Angular', 'JavaScript', 'TypeScript'],
   },
   {
     title: 'DevOps & Cloud',
     icon: Cloud,
-    color: 'from-cyan-500 to-cyan-600',
+    color: 'border-cyan-500',
     skills: ['Docker', 'Terraform', 'Kubernetes', 'Jenkins', 'CI/CD', 'DigitalOcean', 'Azure', 'AWS'],
   },
   {
     title: 'Databases',
     icon: Trello,
-    color: 'from-purple-500 to-purple-600',
+    color: 'border-purple-500',
     skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Cassandra', 'DynamoDB'],
   },
   {
     title: 'Security & Monitoring',
     icon: Lock,
-    color: 'from-red-500 to-red-600',
+    color: 'border-red-500',
     skills: ['Microsoft Entra', 'Prometheus', 'Grafana', 'ELK', 'Nmap', 'Wireshark', 'System Hardening', 'SSO'],
   },
   {
     title: 'Tools & Methodology',
     icon: Wrench,
-    color: 'from-yellow-500 to-yellow-600',
+    color: 'border-yellow-500',
     skills: ['Jira', 'Confluence', 'Microsoft Teams', 'Scrum', 'Kanban', 'Trello', 'Slack'],
   },
 ]
@@ -175,7 +175,7 @@ const skillCategories: SkillCategory[] = [
             <!-- Timeline line -->
             <div
               v-if="index !== portfolioStore.experiences.length - 1"
-              class="absolute left-[1.375rem] top-24 w-1 h-24 bg-gradient-to-b from-primary-blue via-primary-blue to-primary-blue/30"
+              class="absolute left-[1.375rem] top-20 w-1.5 h-48 bg-gradient-to-b from-primary-blue via-primary-blue via-40% to-primary-blue/10 shadow-lg"
             ></div>
             <!-- Timeline circle -->
             <div class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
@@ -291,7 +291,7 @@ const skillCategories: SkillCategory[] = [
             <!-- Timeline line -->
             <div
               v-if="index !== portfolioStore.education.length - 1"
-              class="absolute left-[1.375rem] top-24 w-1 h-24 bg-gradient-to-b from-primary-orange via-primary-orange to-primary-orange/30"
+              class="absolute left-[1.375rem] top-20 w-1.5 h-48 bg-gradient-to-b from-primary-orange via-primary-orange via-40% to-primary-orange/10 shadow-lg"
             ></div>
             <!-- Timeline circle -->
             <div class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
@@ -401,10 +401,10 @@ const skillCategories: SkillCategory[] = [
             :key="category.title"
             class="relative group bg-bg-secondary rounded-xl overflow-hidden border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
-            <!-- Gradient header -->
-            <div :class="`bg-gradient-to-r ${category.color} p-lg flex items-center gap-md`">
-              <component :is="category.icon" class="w-6 h-6 text-white flex-shrink-0" />
-              <h3 class="text-xl font-bold text-white">{{ category.title }}</h3>
+            <!-- Header with colored left border -->
+            <div :class="`bg-bg-tertiary border-l-4 ${category.color} p-lg flex items-center gap-md`">
+              <component :is="category.icon" class="w-6 h-6 text-text-primary flex-shrink-0" />
+              <h3 class="text-lg font-bold text-text-primary">{{ category.title }}</h3>
             </div>
 
             <!-- Skills container -->

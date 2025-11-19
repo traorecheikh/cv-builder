@@ -76,8 +76,7 @@ export interface PersonalInfo {
 
 export const usePortfolioStore = defineStore('portfolio', () => {
   const personalInfo = ref<PersonalInfo>({
-    firstName: 'Cheikh Tidian' +
-      'e',
+    firstName: 'Cheikh Tidiane',
     lastName: 'Traoré',
     title: 'Développeur Backend & DevOps',
     email: 'atidiane741@gmail.com',
@@ -88,6 +87,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     birthDate: '02/10/2001',
     nationality: 'Mauritanienne',
   })
+
 
   const experiences = ref<Experience[]>([
     {
