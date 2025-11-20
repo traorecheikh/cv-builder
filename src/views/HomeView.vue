@@ -237,12 +237,12 @@ const skillCategories: SkillCategory[] = [
 
     <!-- EXPERIENCE SECTION -->
     <section id="experience" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Expérience
           <span class="text-primary-orange">Professionnelle</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl">
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
           Un parcours diversifié dans le développement backend, DevOps et l'intégration logicielle.
         </p>
       </div>
@@ -362,12 +362,12 @@ const skillCategories: SkillCategory[] = [
 
     <!-- EDUCATION SECTION -->
     <section id="education" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Formation
           <span class="text-primary-orange">Académique</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl">
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
           Licence en Génie Logiciel et formation scientifique solide.
         </p>
       </div>
@@ -429,7 +429,7 @@ const skillCategories: SkillCategory[] = [
         </div>
 
         <!-- Languages Section -->
-        <div class="mt-24">
+        <div class="mt-24 text-center md:text-left">
           <h2 class="text-3xl font-bold text-text-primary mb-2xl">
             Compétences
             <span class="text-primary-orange">Linguistiques</span>
@@ -467,12 +467,12 @@ const skillCategories: SkillCategory[] = [
 
     <!-- SKILLS SECTION -->
     <section id="skills" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Compétences
           <span class="text-primary-orange">Techniques</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl">
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
           Expertise couvrant 6 domaines clés pour délivrer des solutions robustes et scalables.
         </p>
       </div>
@@ -521,12 +521,12 @@ const skillCategories: SkillCategory[] = [
 
     <!-- CERTIFICATIONS SECTION -->
     <section id="certifications" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Certifications
           <span class="text-primary-orange">Professionnelles</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl">
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
           Certifications reconnues internationalement validant mon expertise technique.
         </p>
       </div>
@@ -555,12 +555,12 @@ const skillCategories: SkillCategory[] = [
 
     <!-- ENSEIGNEMENT SECTION -->
     <section id="enseignement" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Enseignement
           <span class="text-primary-orange">& Formation</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl">
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
           Partage de expertise à travers l'enseignement dans des institutions reconnues.
         </p>
       </div>
