@@ -250,24 +250,20 @@ const skillCategories: SkillCategory[] = [
       <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
         <div class="space-y-lg">
           <div v-for="(exp, index) in portfolioStore.experiences" :key="exp.id" class="relative">
-            <!-- Timeline line -->
             <div
-              v-if="index !== portfolioStore.experiences.length - 1"
-              class="absolute left-[1.375rem] top-20 w-1.5 h-48 bg-gradient-to-b from-primary-blue via-primary-blue via-40% to-primary-blue/10 shadow-lg"
-            ></div>
-            <!-- Timeline circle -->
-            <div
-              class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+              class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue transition-all duration-300 hover:shadow-card"
             >
-              <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
-            </div>
-
-            <div
-              class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue transition-all duration-300 hover:shadow-card"
-            >
-              <!-- Header with gradient -->
+              <!-- Header with gradient and inline number badge -->
               <div class="bg-gradient-to-r from-primary-blue to-primary-blue/80 p-2xl">
-                <h3 class="text-2xl font-bold text-white mb-sm">{{ exp.role }}</h3>
+                <div class="flex items-center gap-lg mb-sm">
+                  <!-- Number badge inline -->
+                  <div
+                    class="w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-full flex items-center justify-center shadow-lg flex-shrink-0"
+                  >
+                    <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white">{{ exp.role }}</h3>
+                </div>
                 <div class="flex flex-col sm:flex-row sm:items-center gap-md">
                   <a
                     v-if="exp.website"
@@ -379,28 +375,24 @@ const skillCategories: SkillCategory[] = [
       <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
         <div class="space-y-lg">
           <div v-for="(edu, index) in portfolioStore.education" :key="edu.id" class="relative">
-            <!-- Timeline line -->
             <div
-              v-if="index !== portfolioStore.education.length - 1"
-              class="absolute left-[1.375rem] top-20 w-1.5 h-48 bg-gradient-to-b from-primary-orange via-primary-orange via-40% to-primary-orange/10 shadow-lg"
-            ></div>
-            <!-- Timeline circle -->
-            <div
-              class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-            >
-              <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
-            </div>
-
-            <div
-              class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card"
+              class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card"
             >
               <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
-                <div>
-                  <div class="flex items-center gap-sm mb-md">
-                    <Trophy v-if="index === 0" class="w-6 h-6 text-primary-orange" />
-                    <h3 class="text-2xl font-bold text-text-primary">
-                      {{ edu.degree }}
-                    </h3>
+                <div class="flex-1">
+                  <div class="flex items-center gap-lg mb-md">
+                    <!-- Number badge inline -->
+                    <div
+                      class="w-10 h-10 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-full flex items-center justify-center shadow-lg flex-shrink-0"
+                    >
+                      <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
+                    </div>
+                    <div class="flex items-center gap-sm">
+                      <Trophy v-if="index === 0" class="w-6 h-6 text-primary-orange" />
+                      <h3 class="text-2xl font-bold text-text-primary">
+                        {{ edu.degree }}
+                      </h3>
+                    </div>
                   </div>
                   <p class="text-sm font-semibold text-primary-blue uppercase tracking-wide mb-sm">
                     {{ edu.institution }}
