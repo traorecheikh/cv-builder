@@ -1,7 +1,29 @@
 <script setup lang="ts">
 import { usePortfolioStore } from '../stores/portfolio'
 import { useImageLoad } from '../composables/useImageLoad'
-import { ArrowRight, Code2, Lock, Trello, Calendar, MapPin, ExternalLink, Trophy, Award, BookOpen as BookOpenIcon, Mail, Home, Briefcase, Wrench, GraduationCap, Heart, Cloud, Zap, Server, Rocket, Building } from 'lucide-vue-next'
+import {
+  ArrowRight,
+  Code2,
+  Lock,
+  Trello,
+  Calendar,
+  MapPin,
+  ExternalLink,
+  Trophy,
+  Award,
+  BookOpen as BookOpenIcon,
+  Mail,
+  Home,
+  Briefcase,
+  Wrench,
+  GraduationCap,
+  Heart,
+  Cloud,
+  Zap,
+  Server,
+  Rocket,
+  Building,
+} from 'lucide-vue-next'
 import SocialLinks from '../components/ui/SocialLinks.vue'
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.vue'
 
@@ -32,7 +54,16 @@ const skillCategories: SkillCategory[] = [
     title: 'DevOps & Cloud',
     icon: Cloud,
     color: 'border-cyan-500',
-    skills: ['Docker', 'Terraform', 'Kubernetes', 'Jenkins', 'CI/CD', 'DigitalOcean', 'Azure', 'AWS'],
+    skills: [
+      'Docker',
+      'Terraform',
+      'Kubernetes',
+      'Jenkins',
+      'CI/CD',
+      'DigitalOcean',
+      'Azure',
+      'AWS',
+    ],
   },
   {
     title: 'Databases',
@@ -44,7 +75,16 @@ const skillCategories: SkillCategory[] = [
     title: 'Security & Monitoring',
     icon: Lock,
     color: 'border-red-500',
-    skills: ['Microsoft Entra', 'Prometheus', 'Grafana', 'ELK', 'Nmap', 'Wireshark', 'System Hardening', 'SSO'],
+    skills: [
+      'Microsoft Entra',
+      'Prometheus',
+      'Grafana',
+      'ELK',
+      'Nmap',
+      'Wireshark',
+      'System Hardening',
+      'SSO',
+    ],
   },
   {
     title: 'Tools & Methodology',
@@ -58,11 +98,20 @@ const skillCategories: SkillCategory[] = [
 <template>
   <div class="bg-bg-primary">
     <!-- Hero Section -->
-    <section id="hero" class="relative max-w-6xl mx-auto px-lg md:px-2xl pt-12 pb-12 md:pb-20 overflow-hidden">
+    <section
+      id="hero"
+      class="relative max-w-6xl mx-auto px-lg md:px-2xl pt-12 pb-12 md:pb-20 overflow-hidden"
+    >
       <!-- Background decoration -->
-      <div class="absolute inset-0 bg-gradient-to-br from-bg-tertiary/20 via-bg-primary to-bg-primary opacity-50 -z-10"></div>
-      <div class="absolute top-20 right-10 w-72 h-72 bg-accent-gold/5 rounded-full blur-3xl -z-10"></div>
-      <div class="absolute bottom-10 left-10 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl -z-10"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-bg-tertiary/20 via-bg-primary to-bg-primary opacity-50 -z-10"
+      ></div>
+      <div
+        class="absolute top-20 right-10 w-72 h-72 bg-accent-gold/5 rounded-full blur-3xl -z-10"
+      ></div>
+      <div
+        class="absolute bottom-10 left-10 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl -z-10"
+      ></div>
 
       <div class="grid md:grid-cols-2 gap-2xl items-center">
         <div class="space-y-lg order-2 md:order-1">
@@ -74,7 +123,9 @@ const skillCategories: SkillCategory[] = [
             </p>
             <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight">
               {{ portfolioStore.personalInfo.firstName }}
-              <span class="text-primary-orange block mt-sm">{{ portfolioStore.personalInfo.lastName }}</span>
+              <span class="text-primary-orange block mt-sm">{{
+                portfolioStore.personalInfo.lastName
+              }}</span>
             </h1>
           </div>
 
@@ -90,7 +141,9 @@ const skillCategories: SkillCategory[] = [
               class="inline-flex items-center justify-center gap-sm px-2xl py-lg bg-primary-orange text-white font-semibold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 group"
             >
               Voir Mon Parcours
-              <ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight
+                class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+              />
             </a>
             <a
               :href="`mailto:${portfolioStore.personalInfo.email}`"
@@ -106,10 +159,14 @@ const skillCategories: SkillCategory[] = [
           <!-- Profile Photo -->
           <div class="relative w-64 h-64 mx-auto md:w-80 md:h-80 group">
             <!-- Animated gradient border -->
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-blue to-primary-orange rounded-3xl p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-primary-blue to-primary-orange rounded-3xl p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+            ></div>
 
             <!-- Main card -->
-            <div class="relative w-full h-full rounded-3xl bg-bg-secondary shadow-card group-hover:shadow-lg overflow-hidden transition-all duration-300 hover:scale-105">
+            <div
+              class="relative w-full h-full rounded-3xl bg-bg-secondary shadow-card group-hover:shadow-lg overflow-hidden transition-all duration-300 hover:scale-105"
+            >
               <!-- Photo if loaded -->
               <img
                 v-if="!hasError"
@@ -127,12 +184,17 @@ const skillCategories: SkillCategory[] = [
                 class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange transition-opacity duration-300"
               >
                 <div class="text-center">
-                  <div class="inline-flex items-center justify-center w-32 h-32 bg-bg-secondary/20 rounded-full backdrop-blur-sm mb-lg">
+                  <div
+                    class="inline-flex items-center justify-center w-32 h-32 bg-bg-secondary/20 rounded-full backdrop-blur-sm mb-lg"
+                  >
                     <span class="text-5xl font-bold text-white drop-shadow-lg">
-                      {{ portfolioStore.personalInfo.firstName.charAt(0) }}{{ portfolioStore.personalInfo.lastName.charAt(0) }}
+                      {{ portfolioStore.personalInfo.firstName.charAt(0)
+                      }}{{ portfolioStore.personalInfo.lastName.charAt(0) }}
                     </span>
                   </div>
-                  <p class="text-white/90 text-sm font-medium drop-shadow-md">Photo professionnelle</p>
+                  <p class="text-white/90 text-sm font-medium drop-shadow-md">
+                    Photo professionnelle
+                  </p>
                 </div>
               </div>
             </div>
@@ -140,13 +202,33 @@ const skillCategories: SkillCategory[] = [
 
           <!-- Quick Stats -->
           <div class="grid grid-cols-2 gap-md">
-            <div class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group">
-              <p class="text-3xl font-bold text-primary-blue group-hover:scale-110 transition-transform duration-300 origin-left">3+</p>
-              <p class="text-text-tertiary text-sm mt-sm group-hover:text-text-secondary transition-colors">Années d'Exp.</p>
+            <div
+              class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group"
+            >
+              <p
+                class="text-3xl font-bold text-primary-blue group-hover:scale-110 transition-transform duration-300 origin-left"
+              >
+                3+
+              </p>
+              <p
+                class="text-text-tertiary text-sm mt-sm group-hover:text-text-secondary transition-colors"
+              >
+                Années d'Exp.
+              </p>
             </div>
-            <div class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-orange transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group">
-              <p class="text-3xl font-bold text-primary-orange group-hover:scale-110 transition-transform duration-300 origin-left">20+</p>
-              <p class="text-text-tertiary text-sm mt-sm group-hover:text-text-secondary transition-colors">Projets Réalisés</p>
+            <div
+              class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-orange transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group"
+            >
+              <p
+                class="text-3xl font-bold text-primary-orange group-hover:scale-110 transition-transform duration-300 origin-left"
+              >
+                20+
+              </p>
+              <p
+                class="text-text-tertiary text-sm mt-sm group-hover:text-text-secondary transition-colors"
+              >
+                Projets Réalisés
+              </p>
             </div>
           </div>
         </div>
@@ -155,7 +237,7 @@ const skillCategories: SkillCategory[] = [
 
     <!-- EXPERIENCE SECTION -->
     <section id="experience" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Expérience
           <span class="text-primary-orange">Professionnelle</span>
@@ -167,22 +249,22 @@ const skillCategories: SkillCategory[] = [
 
       <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
         <div class="space-y-lg">
-          <div
-            v-for="(exp, index) in portfolioStore.experiences"
-            :key="exp.id"
-            class="relative"
-          >
+          <div v-for="(exp, index) in portfolioStore.experiences" :key="exp.id" class="relative">
             <!-- Timeline line -->
             <div
               v-if="index !== portfolioStore.experiences.length - 1"
               class="absolute left-[1.375rem] top-20 w-1.5 h-48 bg-gradient-to-b from-primary-blue via-primary-blue via-40% to-primary-blue/10 shadow-lg"
             ></div>
             <!-- Timeline circle -->
-            <div class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <div
+              class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            >
               <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
             </div>
 
-            <div class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue transition-all duration-300 hover:shadow-card">
+            <div
+              class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue transition-all duration-300 hover:shadow-card"
+            >
               <!-- Header with gradient -->
               <div class="bg-gradient-to-r from-primary-blue to-primary-blue/80 p-2xl">
                 <h3 class="text-2xl font-bold text-white mb-sm">{{ exp.role }}</h3>
@@ -223,7 +305,9 @@ const skillCategories: SkillCategory[] = [
 
                 <!-- Client -->
                 <div v-if="exp.client" class="border-t border-bg-tertiary pt-lg">
-                  <p class="text-xs font-bold text-primary-orange uppercase tracking-wide mb-sm">Client</p>
+                  <p class="text-xs font-bold text-primary-orange uppercase tracking-wide mb-sm">
+                    Client
+                  </p>
                   <p class="text-text-primary font-semibold">{{ exp.client }}</p>
                 </div>
 
@@ -234,10 +318,17 @@ const skillCategories: SkillCategory[] = [
                 </div>
 
                 <!-- Missions -->
-                <div v-if="exp.missions && exp.missions.length" class="border-t border-bg-tertiary pt-lg">
+                <div
+                  v-if="exp.missions && exp.missions.length"
+                  class="border-t border-bg-tertiary pt-lg"
+                >
                   <p class="text-sm font-bold text-text-primary mb-md">Missions</p>
                   <ul class="space-y-sm">
-                    <li v-for="(mission, idx) in exp.missions" :key="idx" class="flex gap-md text-text-secondary text-sm leading-relaxed">
+                    <li
+                      v-for="(mission, idx) in exp.missions"
+                      :key="idx"
+                      class="flex gap-md text-text-secondary text-sm leading-relaxed"
+                    >
                       <span class="text-primary-blue font-bold mt-0.5 flex-shrink-0">→</span>
                       <span>{{ mission }}</span>
                     </li>
@@ -249,7 +340,11 @@ const skillCategories: SkillCategory[] = [
                   <p class="text-sm font-bold text-text-primary mb-lg">Environnement Technique</p>
                   <div class="space-y-md">
                     <div v-for="(techs, category) in exp.technicalStack" :key="category">
-                      <p class="text-xs font-bold text-primary-orange uppercase tracking-wide mb-sm">{{ category }}</p>
+                      <p
+                        class="text-xs font-bold text-primary-orange uppercase tracking-wide mb-sm"
+                      >
+                        {{ category }}
+                      </p>
                       <div class="flex flex-wrap gap-sm">
                         <span
                           v-for="tech in techs"
@@ -271,7 +366,7 @@ const skillCategories: SkillCategory[] = [
 
     <!-- EDUCATION SECTION -->
     <section id="education" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Formation
           <span class="text-primary-orange">Académique</span>
@@ -283,64 +378,60 @@ const skillCategories: SkillCategory[] = [
 
       <div class="max-w-6xl mx-auto px-lg md:px-2xl pb-20">
         <div class="space-y-lg">
-          <div
-            v-for="(edu, index) in portfolioStore.education"
-            :key="edu.id"
-            class="relative"
-          >
+          <div v-for="(edu, index) in portfolioStore.education" :key="edu.id" class="relative">
             <!-- Timeline line -->
             <div
               v-if="index !== portfolioStore.education.length - 1"
               class="absolute left-[1.375rem] top-20 w-1.5 h-48 bg-gradient-to-b from-primary-orange via-primary-orange via-40% to-primary-orange/10 shadow-lg"
             ></div>
             <!-- Timeline circle -->
-            <div class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
+            <div
+              class="absolute left-0 top-8 w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-full flex items-center justify-center border-4 border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            >
               <span class="text-white text-sm font-bold">{{ index + 1 }}</span>
             </div>
 
-            <div class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card"
-          >
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
-              <div>
-                <div class="flex items-center gap-sm mb-md">
-                  <Trophy
-                    v-if="index === 0"
-                    class="w-6 h-6 text-primary-orange"
-                  />
-                  <h3 class="text-2xl font-bold text-text-primary">
-                    {{ edu.degree }}
-                  </h3>
+            <div
+              class="ml-20 bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-2xl hover:border-primary-blue transition-all duration-300 hover:shadow-card"
+            >
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-lg mb-lg">
+                <div>
+                  <div class="flex items-center gap-sm mb-md">
+                    <Trophy v-if="index === 0" class="w-6 h-6 text-primary-orange" />
+                    <h3 class="text-2xl font-bold text-text-primary">
+                      {{ edu.degree }}
+                    </h3>
+                  </div>
+                  <p class="text-sm font-semibold text-primary-blue uppercase tracking-wide mb-sm">
+                    {{ edu.institution }}
+                  </p>
+                  <p class="text-text-secondary">
+                    {{ edu.field }}
+                  </p>
                 </div>
-                <p class="text-sm font-semibold text-primary-blue uppercase tracking-wide mb-sm">
-                  {{ edu.institution }}
-                </p>
-                <p class="text-text-secondary">
-                  {{ edu.field }}
-                </p>
               </div>
-            </div>
 
-            <div class="flex flex-col sm:flex-row gap-2xl mb-lg text-text-secondary text-sm">
-              <div class="flex items-center gap-sm">
-                <Calendar class="w-4 h-4 text-primary-blue" />
-                {{ edu.startDate }} - {{ edu.endDate }}
+              <div class="flex flex-col sm:flex-row gap-2xl mb-lg text-text-secondary text-sm">
+                <div class="flex items-center gap-sm">
+                  <Calendar class="w-4 h-4 text-primary-blue" />
+                  {{ edu.startDate }} - {{ edu.endDate }}
+                </div>
+                <div class="flex items-center gap-sm">
+                  <MapPin class="w-4 h-4 text-primary-blue" />
+                  {{ edu.location }}
+                </div>
               </div>
-              <div class="flex items-center gap-sm">
-                <MapPin class="w-4 h-4 text-primary-blue" />
-                {{ edu.location }}
-              </div>
-            </div>
 
-            <div v-if="edu.highlights && edu.highlights.length" class="space-y-sm">
-              <div
-                v-for="(highlight, idx) in edu.highlights"
-                :key="idx"
-                class="flex gap-md items-start"
-              >
-                <Award class="w-5 h-5 text-primary-orange mt-sm flex-shrink-0" />
-                <span class="text-text-secondary">{{ highlight }}</span>
+              <div v-if="edu.highlights && edu.highlights.length" class="space-y-sm">
+                <div
+                  v-for="(highlight, idx) in edu.highlights"
+                  :key="idx"
+                  class="flex gap-md items-start"
+                >
+                  <Award class="w-5 h-5 text-primary-orange mt-sm flex-shrink-0" />
+                  <span class="text-text-secondary">{{ highlight }}</span>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
@@ -384,7 +475,7 @@ const skillCategories: SkillCategory[] = [
 
     <!-- SKILLS SECTION -->
     <section id="skills" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Compétences
           <span class="text-primary-orange">Techniques</span>
@@ -402,7 +493,9 @@ const skillCategories: SkillCategory[] = [
             class="relative group bg-bg-secondary rounded-xl overflow-hidden border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
             <!-- Header with colored left border -->
-            <div :class="`bg-bg-tertiary border-l-4 ${category.color} p-lg flex items-center gap-md`">
+            <div
+              :class="`bg-bg-tertiary border-l-4 ${category.color} p-lg flex items-center gap-md`"
+            >
               <component :is="category.icon" class="w-6 h-6 text-text-primary flex-shrink-0" />
               <h3 class="text-lg font-bold text-text-primary">{{ category.title }}</h3>
             </div>
@@ -422,7 +515,8 @@ const skillCategories: SkillCategory[] = [
               <!-- Skill count indicator -->
               <div class="mt-lg pt-lg border-t border-bg-tertiary">
                 <p class="text-xs text-text-tertiary font-semibold uppercase tracking-widest">
-                  <span class="text-primary-blue font-bold">{{ category.skills.length }}</span> compétences
+                  <span class="text-primary-blue font-bold">{{ category.skills.length }}</span>
+                  compétences
                 </p>
               </div>
             </div>
@@ -430,13 +524,12 @@ const skillCategories: SkillCategory[] = [
         </div>
 
         <!-- Summary Stats -->
-        </div>
+      </div>
     </section>
-
 
     <!-- CERTIFICATIONS SECTION -->
     <section id="certifications" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Certifications
           <span class="text-primary-orange">Professionnelles</span>
@@ -470,7 +563,7 @@ const skillCategories: SkillCategory[] = [
 
     <!-- ENSEIGNEMENT SECTION -->
     <section id="enseignement" class="bg-bg-primary">
-      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-16">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
           Enseignement
           <span class="text-primary-orange">& Formation</span>
@@ -495,13 +588,19 @@ const skillCategories: SkillCategory[] = [
                   <p class="text-primary-orange font-semibold mt-sm">{{ teach.position }}</p>
                 </div>
               </div>
-              <span class="text-sm text-text-secondary font-medium whitespace-nowrap">Depuis {{ teach.startDate }}</span>
+              <span class="text-sm text-text-secondary font-medium whitespace-nowrap"
+                >Depuis {{ teach.startDate }}</span
+              >
             </div>
 
             <div>
               <p class="text-sm font-semibold text-text-primary mb-md">Cours enseignés :</p>
               <ul class="space-y-sm">
-                <li v-for="course in teach.courses" :key="course" class="flex gap-md text-text-secondary text-sm">
+                <li
+                  v-for="course in teach.courses"
+                  :key="course"
+                  class="flex gap-md text-text-secondary text-sm"
+                >
                   <span class="text-primary-blue font-bold flex-shrink-0">→</span>
                   <span>{{ course }}</span>
                 </li>
@@ -513,7 +612,7 @@ const skillCategories: SkillCategory[] = [
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-bg-primary py-20 md:py-24">
+    <section id="contact" class="bg-bg-primary py-20 md:py-8">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
         <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-16">
           Contactez
@@ -524,66 +623,98 @@ const skillCategories: SkillCategory[] = [
           <!-- Left: Contact Info -->
           <div class="space-y-lg">
             <!-- Nom -->
-            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all">
+            <div
+              class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all"
+            >
               <div class="flex items-center gap-lg mb-md">
-                <div class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
                   <Briefcase class="w-6 h-6 text-primary-blue" />
                 </div>
                 <div>
                   <p class="text-sm text-text-tertiary font-semibold uppercase">Nom</p>
-                  <p class="text-lg font-bold text-text-primary">{{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }}</p>
+                  <p class="text-lg font-bold text-text-primary">
+                    {{ portfolioStore.personalInfo.firstName }}
+                    {{ portfolioStore.personalInfo.lastName }}
+                  </p>
                 </div>
               </div>
             </div>
 
             <!-- Position -->
-            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-orange transition-all">
+            <div
+              class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-orange transition-all"
+            >
               <div class="flex items-center gap-lg mb-md">
-                <div class="w-12 h-12 bg-primary-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-orange/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
                   <Trophy class="w-6 h-6 text-primary-orange" />
                 </div>
                 <div>
                   <p class="text-sm text-text-tertiary font-semibold uppercase">Poste</p>
-                  <p class="text-lg font-bold text-text-primary">{{ portfolioStore.personalInfo.title }}</p>
+                  <p class="text-lg font-bold text-text-primary">
+                    {{ portfolioStore.personalInfo.title }}
+                  </p>
                 </div>
               </div>
             </div>
 
             <!-- Company -->
-            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all">
+            <div
+              class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all"
+            >
               <div class="flex items-center gap-lg mb-md">
-                <div class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
                   <Building class="w-6 h-6 text-primary-blue" />
                 </div>
                 <div>
-                  <p class="text-sm text-text-tertiary font-semibold uppercase">Entreprise actuelle</p>
+                  <p class="text-sm text-text-tertiary font-semibold uppercase">
+                    Entreprise actuelle
+                  </p>
                   <p class="text-lg font-bold text-text-primary">Lo IT Consulting</p>
                 </div>
               </div>
             </div>
 
             <!-- Location -->
-            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all">
+            <div
+              class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-blue transition-all"
+            >
               <div class="flex items-center gap-lg mb-md">
-                <div class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-blue/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
                   <MapPin class="w-6 h-6 text-primary-blue" />
                 </div>
                 <div>
                   <p class="text-sm text-text-tertiary font-semibold uppercase">Adresse</p>
-                  <p class="text-lg font-bold text-text-primary">{{ portfolioStore.personalInfo.location }}</p>
+                  <p class="text-lg font-bold text-text-primary">
+                    {{ portfolioStore.personalInfo.location }}
+                  </p>
                 </div>
               </div>
             </div>
 
             <!-- Email -->
-            <div class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-orange transition-all">
+            <div
+              class="bg-bg-secondary rounded-xl p-2xl border-2 border-bg-tertiary hover:border-primary-orange transition-all"
+            >
               <div class="flex items-center gap-lg mb-md">
-                <div class="w-12 h-12 bg-primary-orange/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-12 h-12 bg-primary-orange/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
                   <Mail class="w-6 h-6 text-primary-orange" />
                 </div>
                 <div>
                   <p class="text-sm text-text-tertiary font-semibold uppercase">Email</p>
-                  <a :href="`mailto:${portfolioStore.personalInfo.email}`" class="text-lg font-bold text-primary-blue hover:text-primary-orange no-underline">
+                  <a
+                    :href="`mailto:${portfolioStore.personalInfo.email}`"
+                    class="text-lg font-bold text-primary-blue hover:text-primary-orange no-underline"
+                  >
                     {{ portfolioStore.personalInfo.email }}
                   </a>
                 </div>
@@ -663,7 +794,10 @@ const skillCategories: SkillCategory[] = [
             <div class="space-y-sm text-sm text-text-secondary">
               <div class="flex items-center gap-sm">
                 <Mail class="w-4 h-4 text-primary-orange flex-shrink-0" />
-                <a :href="`mailto:${portfolioStore.personalInfo.email}`" class="hover:text-primary-blue no-underline">
+                <a
+                  :href="`mailto:${portfolioStore.personalInfo.email}`"
+                  class="hover:text-primary-blue no-underline"
+                >
                   {{ portfolioStore.personalInfo.email }}
                 </a>
               </div>
@@ -678,68 +812,11 @@ const skillCategories: SkillCategory[] = [
             </div>
           </div>
 
-          <!-- Column 2: Quick Links -->
-          <div>
-            <h3 class="text-xl font-bold text-primary-orange mb-lg">Liens rapides</h3>
-            <nav class="space-y-md">
-              <a href="#hero" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <Home class="w-4 h-4 flex-shrink-0" />
-                <span>Accueil</span>
-              </a>
-              <a href="#experience" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <Briefcase class="w-4 h-4 flex-shrink-0" />
-                <span>Expériences</span>
-              </a>
-              <a href="#skills" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <Wrench class="w-4 h-4 flex-shrink-0" />
-                <span>Compétences</span>
-              </a>
-              <a href="#education" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <GraduationCap class="w-4 h-4 flex-shrink-0" />
-                <span>Formations</span>
-              </a>
-              <a href="#certifications" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <Trophy class="w-4 h-4 flex-shrink-0" />
-                <span>Certifications</span>
-              </a>
-              <a href="#enseignement" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <BookOpenIcon class="w-4 h-4 flex-shrink-0" />
-                <span>Enseignement</span>
-              </a>
-              <a href="#contact" class="flex items-center gap-sm text-text-secondary hover:text-primary-blue transition-colors no-underline">
-                <Mail class="w-4 h-4 flex-shrink-0" />
-                <span>Contact</span>
-              </a>
-            </nav>
-          </div>
-
           <!-- Column 3: Follow & Certifications -->
           <div>
             <div class="mb-2xl">
               <h3 class="text-xl font-bold text-primary-orange mb-lg">Me suivre</h3>
               <SocialLinks />
-            </div>
-
-            <div>
-              <h3 class="text-xl font-bold text-primary-orange mb-lg">Certifications</h3>
-              <div class="grid grid-cols-2 gap-md">
-                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
-                  <Cloud class="w-6 h-6 mx-auto mb-sm text-primary-blue" />
-                  <p class="text-xs font-semibold text-text-primary">AWS</p>
-                </div>
-                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
-                  <Zap class="w-6 h-6 mx-auto mb-sm text-primary-orange" />
-                  <p class="text-xs font-semibold text-text-primary">Azure</p>
-                </div>
-                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
-                  <Server class="w-6 h-6 mx-auto mb-sm text-primary-blue" />
-                  <p class="text-xs font-semibold text-text-primary">Linux</p>
-                </div>
-                <div class="bg-bg-secondary rounded-lg p-md border-2 border-bg-tertiary hover:border-primary-blue transition-all text-center">
-                  <Rocket class="w-6 h-6 mx-auto mb-sm text-primary-orange" />
-                  <p class="text-xs font-semibold text-text-primary">DevOps</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -751,7 +828,8 @@ const skillCategories: SkillCategory[] = [
             <Heart class="w-4 h-4 text-primary-orange fill-primary-orange" />
           </p>
           <p class="text-text-tertiary text-xs">
-            © 2025 {{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }} - Tous droits réservés
+            © 2025 {{ portfolioStore.personalInfo.firstName }}
+            {{ portfolioStore.personalInfo.lastName }} - Tous droits réservés
           </p>
         </div>
       </div>
