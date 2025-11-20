@@ -46,17 +46,21 @@ const handleCVDownload = async () => {
     isGenerating.value = false
   }
 }
-
 </script>
 
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/95 dark:bg-bg-secondary/80 backdrop-blur-md border-b border-border-color shadow-soft transition-colors duration-300">
+  <nav
+    class="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/95 backdrop-blur-2xl border-b border-border-color shadow-lg transition-colors duration-300"
+  >
     <ScrollProgress />
     <div class="w-full px-lg md:px-2xl">
       <div class="flex items-center justify-between h-20">
         <!-- Logo -->
         <a href="#" class="flex items-center gap-md no-underline">
-          <span class="font-bold text-lg text-text-primary transition-colors duration-300">{{ portfolioStore.personalInfo.firstName }} {{ portfolioStore.personalInfo.lastName }}</span>
+          <span class="font-bold text-lg text-text-primary transition-colors duration-300"
+            >{{ portfolioStore.personalInfo.firstName }}
+            {{ portfolioStore.personalInfo.lastName }}</span
+          >
         </a>
 
         <!-- Desktop Menu -->
@@ -67,7 +71,7 @@ const handleCVDownload = async () => {
             :href="item.href"
             :class="[
               'px-lg py-sm rounded-lg transition-all duration-300 no-underline font-medium text-sm hover:text-primary-blue hover:bg-bg-tertiary/50',
-              'text-text-secondary'
+              'text-text-secondary',
             ]"
           >
             {{ item.name }}
@@ -112,14 +116,14 @@ const handleCVDownload = async () => {
       <transition name="slide">
         <div
           v-if="menuOpen"
-          class="md:hidden pb-lg border-t border-bg-tertiary space-y-sm"
+          class="md:hidden pb-lg border-t border-bg-tertiary space-y-sm bg-bg-secondary/98 backdrop-blur-lg shadow-lg"
         >
           <a
             v-for="item in navItems"
             :key="item.name"
             :href="item.href"
             :class="[
-              'block px-lg py-md rounded-lg transition-all duration-300 no-underline font-medium text-text-secondary hover:text-primary-blue hover:bg-bg-tertiary/50',
+              'block px-lg py-md rounded-lg transition-all duration-300 no-underline font-medium text-text-primary hover:text-primary-blue hover:bg-bg-tertiary',
             ]"
             @click="menuOpen = false"
           >
@@ -128,7 +132,7 @@ const handleCVDownload = async () => {
           <button
             @click="handleCVDownload"
             :disabled="isGenerating"
-            class="w-full flex items-center justify-center gap-sm px-lg py-md bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 disabled:opacity-50"
+            class="w-full flex items-center justify-center gap-sm px-lg py-md bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 disabled:opacity-50 shadow-soft"
           >
             <Download class="w-4 h-4" :class="{ 'animate-bounce': isGenerating }" />
             {{ isGenerating ? 'Génération...' : 'Télécharger Mon CV' }}
