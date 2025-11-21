@@ -17,6 +17,7 @@ const navItems = [
   { name: 'Compétences', href: '#skills' },
   { name: 'Certifications', href: '#certifications' },
   { name: 'Enseignement', href: '#enseignement' },
+  { name: 'Podcast', href: '#podcast' },
   { name: 'Contact', href: '#contact' },
 ]
 
