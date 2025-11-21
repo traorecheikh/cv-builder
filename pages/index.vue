@@ -284,7 +284,7 @@ const skillCategories: SkillCategory[] = [
           Expérience
           <span class="text-primary-orange">Professionnelle</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
+        <p class="text-lg text-text-secondary max-w-2xl text-left">
           Un parcours diversifié dans le développement backend, DevOps et l'intégration logicielle.
         </p>
       </div>
@@ -409,7 +409,7 @@ const skillCategories: SkillCategory[] = [
           Formation
           <span class="text-primary-orange">Académique</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
+        <p class="text-lg text-text-secondary max-w-2xl text-left">
           Licence en Génie Logiciel et formation scientifique solide.
         </p>
       </div>
@@ -514,7 +514,7 @@ const skillCategories: SkillCategory[] = [
           Compétences
           <span class="text-primary-orange">Techniques</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
+        <p class="text-lg text-text-secondary max-w-2xl text-left">
           Expertise couvrant 6 domaines clés pour délivrer des solutions robustes et scalables.
         </p>
       </div>
@@ -568,7 +568,7 @@ const skillCategories: SkillCategory[] = [
           Certifications
           <span class="text-primary-orange">Professionnelles</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
+        <p class="text-lg text-text-secondary max-w-2xl text-left">
           Certifications reconnues internationalement validant mon expertise technique.
         </p>
       </div>
@@ -602,7 +602,7 @@ const skillCategories: SkillCategory[] = [
           Enseignement
           <span class="text-primary-orange">& Formation</span>
         </h1>
-        <p class="text-lg text-text-secondary max-w-2xl mx-auto md:mx-0">
+        <p class="text-lg text-text-secondary max-w-2xl text-left">
           Partage de expertise à travers l'enseignement dans des institutions reconnues.
         </p>
       </div>
