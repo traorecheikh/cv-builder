@@ -9,7 +9,7 @@ export default defineConfig({
         vueDevTools(),
     ],
     server: {
-        allowedHosts: true,
+        allowedHosts: ['0235846ed48c.ngrok-free.app'],
     },
     resolve: {
         alias: {
