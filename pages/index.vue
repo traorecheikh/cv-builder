@@ -840,55 +840,44 @@ const skillCategories: SkillCategory[] = [
     </section>
 
     <!-- Footer -->
-    <footer class="border-t-4 border-primary-orange bg-bg-primary py-3 md:py-4">
+    <footer class="border-t-4 border-primary-orange bg-bg-primary py-4">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
-        <!-- Main Footer Content -->
-        <div
-          class="flex flex-col md:flex-row items-start justify-between gap-md md:gap-2xl mb-xs pb-xs border-b border-bg-tertiary"
-        >
-          <!-- Column 1: About -->
-          <div class="flex-1 w-full md:w-auto">
-            <h3 class="text-lg font-bold text-primary-orange mb-md">À propos</h3>
-            <p class="text-text-secondary text-sm leading-snug mb-md">
-              {{ portfolioStore.personalInfo.bio }}
-            </p>
-            <div class="space-y-xs text-xs text-text-secondary">
-              <div class="flex items-center gap-sm">
-                <Mail class="w-3.5 h-3.5 text-primary-orange flex-shrink-0" />
-                <a
-                  :href="`mailto:${portfolioStore.personalInfo.email}`"
-                  class="hover:text-primary-blue no-underline"
-                >
-                  {{ portfolioStore.personalInfo.email }}
-                </a>
-              </div>
-              <div class="flex items-center gap-sm">
-                <MapPin class="w-3.5 h-3.5 text-primary-orange flex-shrink-0" />
-                <span>{{ portfolioStore.personalInfo.location }}</span>
-              </div>
-              <div class="flex items-center gap-sm">
-                <Building class="w-3.5 h-3.5 text-primary-orange flex-shrink-0" />
-                <span>Lo IT Consulting</span>
-              </div>
+        <!-- Main Footer Row -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-lg mb-md">
+          <!-- Left: Contact Info -->
+          <div class="flex flex-col md:flex-row md:items-center gap-md md:gap-2xl">
+            <div class="flex items-center gap-sm">
+              <Mail class="w-4 h-4 text-primary-orange flex-shrink-0" />
+              <a
+                :href="`mailto:${portfolioStore.personalInfo.email}`"
+                class="text-text-secondary hover:text-primary-blue no-underline text-sm"
+              >
+                {{ portfolioStore.personalInfo.email }}
+              </a>
+            </div>
+            <div class="flex items-center gap-sm">
+              <MapPin class="w-4 h-4 text-primary-orange flex-shrink-0" />
+              <span class="text-text-secondary text-sm">{{ portfolioStore.personalInfo.location }}</span>
+            </div>
+            <div class="flex items-center gap-sm">
+              <Building class="w-4 h-4 text-primary-orange flex-shrink-0" />
+              <span class="text-text-secondary text-sm">Lo IT Consulting</span>
             </div>
           </div>
 
-          <!-- Column 2: Follow -->
-          <div class="w-full md:w-auto md:flex md:items-start md:justify-end">
-            <div>
-              <h3 class="text-lg font-bold text-primary-orange mb-md">Me suivre</h3>
-              <SocialLinks />
-            </div>
+          <!-- Right: Social Links -->
+          <div>
+            <SocialLinks />
           </div>
         </div>
 
         <!-- Bottom: Copyright -->
-        <div class="py-xs flex flex-col md:flex-row items-center justify-center md:justify-between gap-xs text-center md:text-left">
-          <p class="text-text-secondary text-xs flex items-center gap-sm">
+        <div class="pt-md border-t border-bg-tertiary flex flex-col md:flex-row items-center justify-between gap-sm text-center md:text-left">
+          <p class="text-text-secondary text-sm flex items-center gap-sm">
             Développé par <span class="font-bold text-primary-orange">Lo IT Consulting</span>
-            <Heart class="w-3.5 h-3.5 text-primary-orange fill-primary-orange" />
+            <Heart class="w-4 h-4 text-primary-orange fill-primary-orange" />
           </p>
-          <p class="text-text-tertiary text-xs">
+          <p class="text-text-tertiary text-sm">
             © 2025 {{ portfolioStore.personalInfo.firstName }}
             {{ portfolioStore.personalInfo.lastName }} - Tous droits réservés
           </p>
