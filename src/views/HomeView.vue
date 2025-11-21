@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { usePortfolioStore } from '../stores/portfolio'
 import { useImageLoad } from '../composables/useImageLoad'
 import {
@@ -13,14 +14,10 @@ import {
   Award,
   BookOpen as BookOpenIcon,
   Mail,
-  Home,
   Briefcase,
   Wrench,
-  GraduationCap,
   Heart,
   Cloud,
-  Zap,
-  Server,
   Rocket,
   Building,
 } from 'lucide-vue-next'
@@ -29,6 +26,20 @@ import AvailabilityBadge from '../components/ui/AvailabilityBadge.vue'
 
 const portfolioStore = usePortfolioStore()
 const { isLoaded, hasError, handleLoad, handleError } = useImageLoad()
+
+const formName = ref('')
+const formEmail = ref('')
+const formSubject = ref('')
+const formMessage = ref('')
+
+const sendEmail = () => {
+  const recipient = portfolioStore.personalInfo.email
+  const subject = encodeURIComponent(formSubject.value)
+  const body = encodeURIComponent(
+    `Nom: ${formName.value}\nEmail: ${formEmail.value}\n\nMessage:\n${formMessage.value}`
+  )
+  window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`
+}
 
 interface SkillCategory {
   title: string
@@ -718,13 +729,14 @@ const skillCategories: SkillCategory[] = [
           <div class="bg-bg-secondary rounded-xl p-2xl md:p-3xl border-2 border-bg-tertiary">
             <h3 class="text-2xl font-bold text-text-primary mb-2xl">Envoyez-moi un message</h3>
 
-            <form class="space-y-lg" @submit.prevent="">
+            <form class="space-y-lg" @submit.prevent="sendEmail">
               <!-- Name -->
               <div>
                 <label class="block text-sm font-semibold text-text-primary mb-md">Nom</label>
                 <input
                   type="text"
                   placeholder="Votre nom"
+                  v-model="formName"
                   class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all"
                 />
               </div>
@@ -735,6 +747,7 @@ const skillCategories: SkillCategory[] = [
                 <input
                   type="email"
                   placeholder="Votre email"
+                  v-model="formEmail"
                   class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all"
                 />
               </div>
@@ -745,6 +758,7 @@ const skillCategories: SkillCategory[] = [
                 <input
                   type="text"
                   placeholder="Sujet de votre message"
+                  v-model="formSubject"
                   class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all"
                 />
               </div>
@@ -755,6 +769,7 @@ const skillCategories: SkillCategory[] = [
                 <textarea
                   placeholder="Votre message"
                   rows="5"
+                  v-model="formMessage"
                   class="w-full px-lg py-md bg-bg-primary border-2 border-bg-tertiary rounded-lg text-text-primary placeholder-text-tertiary focus:border-primary-blue focus:outline-none transition-all resize-none"
                 ></textarea>
               </div>
