@@ -847,21 +847,21 @@ const skillCategories: SkillCategory[] = [
           <!-- Left: Contact Info -->
           <div class="flex flex-col md:flex-row md:items-center gap-md md:gap-2xl">
             <div class="flex items-center gap-sm">
-              <Mail class="w-4 h-4 text-primary-orange flex-shrink-0" />
+              <Mail class="w-5 h-5 text-primary-orange flex-shrink-0" />
               <a
                 :href="`mailto:${portfolioStore.personalInfo.email}`"
-                class="text-text-secondary hover:text-primary-blue no-underline text-sm"
+                class="text-text-secondary hover:text-primary-blue no-underline text-base"
               >
                 {{ portfolioStore.personalInfo.email }}
               </a>
             </div>
             <div class="flex items-center gap-sm">
-              <MapPin class="w-4 h-4 text-primary-orange flex-shrink-0" />
-              <span class="text-text-secondary text-sm">{{ portfolioStore.personalInfo.location }}</span>
+              <MapPin class="w-5 h-5 text-primary-orange flex-shrink-0" />
+              <span class="text-text-secondary text-base">{{ portfolioStore.personalInfo.location }}</span>
             </div>
             <div class="flex items-center gap-sm">
-              <Building class="w-4 h-4 text-primary-orange flex-shrink-0" />
-              <span class="text-text-secondary text-sm">Lo IT Consulting</span>
+              <Building class="w-5 h-5 text-primary-orange flex-shrink-0" />
+              <span class="text-text-secondary text-base">Lo IT Consulting</span>
             </div>
           </div>
 
@@ -873,11 +873,11 @@ const skillCategories: SkillCategory[] = [
 
         <!-- Bottom: Copyright -->
         <div class="pt-md border-t border-bg-tertiary flex flex-col md:flex-row items-center justify-between gap-sm text-center md:text-left">
-          <p class="text-text-secondary text-sm flex items-center gap-sm">
+          <p class="text-text-secondary text-base flex items-center gap-sm">
             Développé par <span class="font-bold text-primary-orange">Lo IT Consulting</span>
-            <Heart class="w-4 h-4 text-primary-orange fill-primary-orange" />
+            <Heart class="w-5 h-5 text-primary-orange fill-primary-orange" />
           </p>
-          <p class="text-text-tertiary text-sm">
+          <p class="text-text-tertiary text-base">
             © 2025 {{ portfolioStore.personalInfo.firstName }}
             {{ portfolioStore.personalInfo.lastName }} - Tous droits réservés
           </p>
