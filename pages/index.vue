@@ -844,10 +844,10 @@ const skillCategories: SkillCategory[] = [
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
         <!-- Main Footer Content -->
         <div
-          class="flex flex-row items-start justify-between flex-wrap gap-lg mb-sm pb-sm border-b border-bg-tertiary"
+          class="flex flex-col md:flex-row items-start justify-between gap-lg mb-sm pb-sm border-b border-bg-tertiary"
         >
           <!-- Column 1: About -->
-          <div class="flex-1 min-w-0">
+          <div class="flex-1 w-full md:w-auto">
             <h3 class="text-xl font-bold text-primary-orange mb-lg">À propos</h3>
             <p class="text-text-secondary leading-relaxed mb-lg">
               {{ portfolioStore.personalInfo.bio }}
@@ -873,9 +873,9 @@ const skillCategories: SkillCategory[] = [
             </div>
           </div>
 
-          <!-- Column 3: Follow & Certifications -->
-          <div class="flex-1 flex items-center justify-end min-w-0">
-            <div class="mb-0">
+          <!-- Column 2: Follow -->
+          <div class="flex-1 w-full md:w-auto md:flex md:items-center md:justify-end">
+            <div>
               <h3 class="text-xl font-bold text-primary-orange mb-lg">Me suivre</h3>
               <SocialLinks />
             </div>
@@ -883,7 +883,7 @@ const skillCategories: SkillCategory[] = [
         </div>
 
         <!-- Bottom: Copyright -->
-        <div class="py-sm flex items-center justify-between gap-sm">
+        <div class="py-sm flex flex-col md:flex-row items-center justify-center md:justify-between gap-sm text-center md:text-left">
           <p class="text-text-secondary text-sm flex items-center gap-sm">
             Développé par <span class="font-bold text-primary-orange">Lo IT Consulting</span>
             <Heart class="w-4 h-4 text-primary-orange fill-primary-orange" />
