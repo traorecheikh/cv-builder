@@ -163,7 +163,7 @@ const skillCategories: SkillCategory[] = [
             <p class="text-primary-blue font-semibold text-sm md:text-base tracking-wide uppercase">
               Développeur Backend & DevOps
             </p>
-            <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight">
+            <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight text-center md:text-left">
               {{ portfolioStore.personalInfo.firstName }}
               <span class="text-primary-orange block mt-sm">{{
                 portfolioStore.personalInfo.lastName
