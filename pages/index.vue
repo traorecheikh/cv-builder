@@ -209,21 +209,18 @@ const skillCategories: SkillCategory[] = [
             <div
               class="relative w-full h-full rounded-3xl bg-bg-secondary shadow-card group-hover:shadow-lg overflow-hidden transition-all duration-300 hover:scale-105"
             >
-              <!-- Photo if loaded -->
+              <!-- Photo -->
               <img
-                v-if="!hasError"
                 src="/profile.png"
                 alt="Profile photo"
-                class="w-full h-full object-cover transition-opacity duration-300"
-                :style="{ opacity: isLoaded ? 1 : 0 }"
-                @load="handleLoad"
+                class="w-full h-full object-cover"
                 @error="handleError"
               />
 
-              <!-- Fallback initials -->
+              <!-- Fallback initials (only on error) -->
               <div
-                v-if="hasError || !isLoaded"
-                class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange transition-opacity duration-300"
+                v-if="hasError"
+                class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange"
               >
                 <div class="text-center">
                   <div
