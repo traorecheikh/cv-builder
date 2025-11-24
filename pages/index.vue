@@ -155,15 +155,14 @@ const skillCategories: SkillCategory[] = [
         class="absolute bottom-10 left-10 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl -z-10"
       ></div>
 
-      <div class="grid md:grid-cols-2 gap-2xl items-center">
-        <div class="space-y-lg order-2 md:order-1">
-          <AvailabilityBadge />
+      <div class="grid md:grid-cols-2 gap-2xl items-stretch mb-2xl">
+        <div class="flex flex-col justify-between h-full order-2 md:order-2 items-center gap-lg">
 
-          <div class="space-y-sm">
+          <div class="space-y-sm text-center">
             <p class="text-primary-blue font-semibold text-sm md:text-base tracking-wide uppercase">
               Développeur Backend & DevOps
             </p>
-            <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight text-center md:text-left">
+            <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight text-center">
               {{ portfolioStore.personalInfo.firstName }}
               <span class="text-primary-orange block mt-sm">{{
                 portfolioStore.personalInfo.lastName
@@ -171,33 +170,17 @@ const skillCategories: SkillCategory[] = [
             </h1>
           </div>
 
-          <p class="text-lg text-text-secondary leading-relaxed max-w-lg">
+          <p class="text-lg text-text-secondary leading-relaxed max-w-lg text-center">
             {{ portfolioStore.personalInfo.bio }}
           </p>
 
-          <SocialLinks />
-
-          <div class="flex flex-col sm:flex-row gap-lg pt-lg">
-            <a
-              href="#experience"
-              class="inline-flex items-center justify-center gap-sm px-2xl py-lg bg-primary-orange text-white font-semibold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 group"
-            >
-              Voir Mon Parcours
-              <ArrowRight
-                class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-              />
-            </a>
-            <a
-              :href="`mailto:${portfolioStore.personalInfo.email}`"
-              class="inline-flex items-center justify-center gap-sm px-2xl py-lg border-2 border-primary-blue text-primary-blue font-semibold rounded-lg hover:bg-bg-tertiary active:scale-95 transition-all duration-300 group"
-            >
-              <span>Me Contacter</span>
-            </a>
+          <div class="flex justify-center">
+            <SocialLinks />
           </div>
         </div>
 
         <!-- Profile Photo Placeholder & Stats -->
-        <div class="order-1 md:order-2 space-y-lg">
+        <div class="flex flex-col justify-between h-full order-1 md:order-1 gap-lg">
           <!-- Profile Photo -->
           <div class="relative w-64 h-64 mx-auto md:w-80 md:h-80 group">
             <!-- Animated gradient border -->
@@ -272,12 +255,31 @@ const skillCategories: SkillCategory[] = [
           </div>
         </div>
       </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-lg justify-center items-center py-2xl">
+        <a
+          href="#experience"
+          class="inline-flex items-center justify-center gap-sm px-2xl py-lg bg-primary-orange text-white font-semibold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 group"
+        >
+          Voir Mon Parcours
+          <ArrowRight
+            class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+          />
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center gap-sm px-2xl py-lg border-2 border-primary-blue text-primary-blue font-semibold rounded-lg hover:bg-bg-tertiary active:scale-95 transition-all duration-300 group"
+        >
+          <span>Me Contacter</span>
+        </a>
+      </div>
     </section>
 
     <!-- EXPERIENCE SECTION -->
     <section id="experience" class="bg-bg-primary">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg text-center">
           Expérience
           <span class="text-primary-orange">Professionnelle</span>
         </h1>
@@ -402,7 +404,7 @@ const skillCategories: SkillCategory[] = [
     <!-- EDUCATION SECTION -->
     <section id="education" class="bg-bg-primary">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg text-center">
           Formation
           <span class="text-primary-orange">Académique</span>
         </h1>
@@ -507,7 +509,7 @@ const skillCategories: SkillCategory[] = [
     <!-- SKILLS SECTION -->
     <section id="skills" class="bg-bg-primary">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg text-center">
           Compétences
           <span class="text-primary-orange">Techniques</span>
         </h1>
@@ -561,7 +563,7 @@ const skillCategories: SkillCategory[] = [
     <!-- CERTIFICATIONS SECTION -->
     <section id="certifications" class="bg-bg-primary">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg text-center">
           Certifications
           <span class="text-primary-orange">Professionnelles</span>
         </h1>
@@ -595,7 +597,7 @@ const skillCategories: SkillCategory[] = [
     <!-- ENSEIGNEMENT SECTION -->
     <section id="enseignement" class="bg-bg-primary">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl py-8 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg text-center">
           Enseignement
           <span class="text-primary-orange">& Formation</span>
         </h1>
@@ -645,7 +647,7 @@ const skillCategories: SkillCategory[] = [
     <!-- Contact Section -->
     <section id="contact" class="bg-bg-primary py-20 md:py-8">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-lg text-center">
           Contactez
           <span class="text-primary-orange">Moi</span>
         </h1>
@@ -839,44 +841,9 @@ const skillCategories: SkillCategory[] = [
     <!-- Footer -->
     <footer class="border-t-4 border-primary-orange bg-bg-primary py-4">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
-        <!-- Main Footer Row -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-lg mb-md">
-          <!-- Left: Contact Info -->
-          <div class="flex flex-col md:flex-row md:items-center gap-md md:gap-2xl">
-            <div class="flex items-center gap-sm">
-              <Mail class="w-5 h-5 text-primary-orange flex-shrink-0" />
-              <a
-                :href="`mailto:${portfolioStore.personalInfo.email}`"
-                class="text-text-secondary hover:text-primary-blue no-underline text-base"
-              >
-                {{ portfolioStore.personalInfo.email }}
-              </a>
-            </div>
-            <div class="flex items-center gap-sm">
-              <MapPin class="w-5 h-5 text-primary-orange flex-shrink-0" />
-              <span class="text-text-secondary text-base">{{ portfolioStore.personalInfo.location }}</span>
-            </div>
-            <div class="flex items-center gap-sm">
-              <Building class="w-5 h-5 text-primary-orange flex-shrink-0" />
-              <span class="text-text-secondary text-base">Lo IT Consulting</span>
-            </div>
-          </div>
-
-          <!-- Right: Social Links -->
-          <div>
-            <SocialLinks />
-          </div>
-        </div>
-
-        <!-- Bottom: Copyright -->
-        <div class="pt-md border-t border-bg-tertiary flex flex-col md:flex-row items-center justify-between gap-sm text-center md:text-left">
-          <p class="text-text-secondary text-base flex items-center gap-sm">
-            Développé par <span class="font-bold text-primary-orange">Lo IT Consulting</span>
-            <Heart class="w-5 h-5 text-primary-orange fill-primary-orange" />
-          </p>
-          <p class="text-text-tertiary text-base">
-            © 2025 {{ portfolioStore.personalInfo.firstName }}
-            {{ portfolioStore.personalInfo.lastName }} - Tous droits réservés
+        <div class="flex items-center justify-center">
+          <p class="text-text-tertiary text-base text-center">
+            © 2025 Lo IT Consulting - Tous droits réservés
           </p>
         </div>
       </div>
