@@ -18,7 +18,6 @@ const navItems = [
   { name: 'Certifications', href: '#certifications' },
   { name: 'Enseignement', href: '#enseignement' },
   { name: 'Podcast', href: '#podcast' },
-  { name: 'Contact', href: '#contact' },
 ]
 
 const handleCVDownload = async () => {
