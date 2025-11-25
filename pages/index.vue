@@ -20,8 +20,10 @@ import {
   Cloud,
   Rocket,
   Building,
+  Linkedin,
+  Github,
+  Phone,
 } from 'lucide-vue-next'
-import SocialLinks from '../components/ui/SocialLinks.vue'
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.vue'
 
 const portfolioStore = usePortfolioStore()
@@ -157,32 +159,24 @@ const skillCategories: SkillCategory[] = [
 
       <div class="grid md:grid-cols-2 gap-2xl items-stretch mb-2xl">
         <div class="flex flex-col justify-between h-full order-2 md:order-2 items-center gap-lg">
-
-          <div class="space-y-sm text-center">
-            <p class="text-primary-blue font-semibold text-sm md:text-base tracking-wide uppercase">
-              Développeur Backend & DevOps
-            </p>
-            <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight text-center">
-              {{ portfolioStore.personalInfo.firstName }}
-              <span class="text-primary-orange block mt-sm">{{
-                portfolioStore.personalInfo.lastName
-              }}</span>
-            </h1>
-          </div>
-
+          <p class="text-primary-blue font-semibold text-sm md:text-base tracking-wide uppercase text-center">
+            Développeur Backend & DevOps
+          </p>
+          <h1 class="text-5xl md:text-6xl font-bold text-text-primary leading-tight text-center">
+            {{ portfolioStore.personalInfo.firstName }}
+            <span class="text-primary-orange block mt-sm">{{
+              portfolioStore.personalInfo.lastName
+            }}</span>
+          </h1>
           <p class="text-lg text-text-secondary leading-relaxed max-w-lg text-center">
             {{ portfolioStore.personalInfo.bio }}
           </p>
-
-          <div class="flex justify-center">
-            <SocialLinks />
-          </div>
         </div>
 
         <!-- Profile Photo Placeholder & Stats -->
         <div class="flex flex-col justify-between h-full order-1 md:order-1 gap-lg">
           <!-- Profile Photo -->
-          <div class="relative w-64 h-64 mx-auto md:w-80 md:h-80 group">
+          <div class="relative w-56 h-56 mx-auto md:w-64 md:h-64 group">
             <!-- Animated gradient border -->
             <div
               class="absolute inset-0 bg-gradient-to-br from-primary-blue to-primary-orange rounded-3xl p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
@@ -228,29 +222,70 @@ const skillCategories: SkillCategory[] = [
               class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group"
             >
               <p
-                class="text-3xl font-bold text-primary-blue group-hover:scale-110 transition-transform duration-300 origin-left"
+                class="text-3xl md:text-4xl font-bold text-primary-blue group-hover:scale-110 transition-transform duration-300 origin-left"
               >
                 3+
               </p>
               <p
-                class="text-text-tertiary text-sm mt-sm group-hover:text-text-secondary transition-colors"
+                class="text-text-tertiary text-base mt-sm group-hover:text-text-secondary transition-colors"
               >
                 Années d'Exp.
               </p>
             </div>
             <div
-              class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-orange transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group"
+              class="bg-bg-secondary rounded-xl p-lg border-2 border-bg-tertiary hover:border-primary-orange transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 group"
             >
-              <p
-                class="text-3xl font-bold text-primary-orange group-hover:scale-110 transition-transform duration-300 origin-left"
-              >
-                20+
-              </p>
-              <p
-                class="text-text-tertiary text-sm mt-sm group-hover:text-text-secondary transition-colors"
-              >
-                Projets Réalisés
-              </p>
+              <div class="flex items-start justify-between gap-md h-full">
+                <!-- Left: Numbers and Text -->
+                <div class="flex flex-col">
+                  <p
+                    class="text-3xl md:text-4xl font-bold text-primary-orange group-hover:scale-110 transition-transform duration-300 origin-left"
+                  >
+                    20+
+                  </p>
+                  <p
+                    class="text-text-tertiary text-base mt-sm group-hover:text-text-secondary transition-colors"
+                  >
+                    Projets Réalisés
+                  </p>
+                </div>
+
+                <!-- Right: Social Icons in Bento-Style 2x2 Grid -->
+                <div class="grid grid-cols-2 gap-xs">
+                  <a
+                    href="https://linkedin.com/in/cheikh-traore"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-9 h-9 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin class="w-5 h-5 text-primary-blue" />
+                  </a>
+                  <a
+                    href="https://github.com/traorecheikh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-9 h-9 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                    aria-label="GitHub"
+                  >
+                    <Github class="w-5 h-5 text-primary-blue" />
+                  </a>
+                  <a
+                    href="mailto:atidiane741@gmail.com"
+                    class="w-9 h-9 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                    aria-label="Email"
+                  >
+                    <Mail class="w-5 h-5 text-primary-blue" />
+                  </a>
+                  <a
+                    href="tel:+221781706184"
+                    class="w-9 h-9 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 flex items-center justify-center transition-all duration-200 hover:scale-110"
+                    aria-label="Phone"
+                  >
+                    <Phone class="w-5 h-5 text-primary-blue" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
