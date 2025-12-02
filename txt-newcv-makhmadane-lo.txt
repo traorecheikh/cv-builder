@@ -1,0 +1,381 @@
+CURRICULUM VITAE
+Makhmadane LO
+Senior Software Developer - DevOps | Cloud / IT trainer
+Nationalité : Sénégalaise
+État civil : Marié
+Contact : 77 302 21 50 / 78 434 71 42
+Email : dl7781775@gmail.com
+Permis de conduire : catégorie B
+LinkedIn : https://www.linkedin.com/in/makhmadane-lo-bb557a169
+Présentation :
+Ingénieur en Génie Logiciel avec plus de 7 ans d’expérience en développement web, mobile et DevOps. Spécialisé
+en architectures microservices, cloud (AWS), CI/CD, et développement full-stack (Java/Spring, Angular/React,
+Flutter/Laravel). Expérience confirmée en gestion de projets, encadrement technique et formation IT.
+Au cours de mon parcours, j’ai eu l’opportunité d’évoluer au sein de plusieurs structures de référence telles que AXA
+ASSURANCE Afrique de l’Ouest, Orange/Sonatel, ATOS SENEGAL, SONAC Assurance, Soumari et
+Octasen,
+Formation
+ Master 2 Professionnelle en Génie Logiciel, Institut Supérieur Informatique
+ Licence Professionnelle en Génie Logiciel, Institut Supérieur Informatique
+ BTS – Informatique, Institut Supérieur Informatique
+ DTS – Génie Logiciel, Institut Supérieur Informatique
+ DTS - Réseaux Informatique, Institut Supérieur Informatique
+Interne
+1 Interne Baccalauréat Série S2, GROUPE SCOLAIRE EDUCAZUR
+Certification :
+•Spring -boot / Microservice: https://www.udemy.com/certificate/UC-1c794007-209b-40a0-b221-9051262526e3/
+•AWS developer : https://www.linkedin.com/in/makhmadane-
+lobb557a169/details/certifications/1730132032739/single-media-
+viewer/?profileId=ACoAACghDTkBRTBlQxVakDgLi5YQ5NUemDhY1L0
+•DevOps Certifited :
+https://www.linkedin.com/in/makhmadanelobb557a169/details/certifications/1730131951056/single-media-
+viewer/?profileId=ACoAACghDTkBRTBlQxVakDgLi5YQ5NUemDhY1L0
+Poste actuel :
+ Lead développeur FULL-STACK / DEVOPS au sein de AXA Afrique de l’OUEST.
+ Responsable / Formateur dans le département informatique à ISI (Institut Supérieur Informatique)
+KEUR MASSAR
+ Consultant Développeur dans divers projets
+Connaissances linguistiques : 
+Français (Courant)
+ Anglais (Niveau Moyen)
+  Wolof (Courant)
+Affiliation à une organisation professionnelle :
+Interne
+2 Interne GALSEN DEV (Technologies et Services de l‘information Dakar)
+ ASKAN-Entrepreneuriat
+Autres compétences (ex. informatiques, etc.) :
+ Entrepreneur
+Qualifications principales :
+
+
+
+
+
+
+
+
+Architect Logiciel en formation
+Développeur web et mobile
+Intégrateur web
+DevOps / AWS
+Analyste/Concepteur Programmeur
+Coach/Formateur en Informatique
+Présentateur de séminaire Informatique
+Gestion de projet
+Expérience Professionnelle
+Interne
+3 InterneDe – à
+(date)
+Lieu
+Société
+Position
+Description
+Lead Développeur React JS /Spring Boot /AWS Projets
+Plateforme OPENINSUR :
+24-04-2023-
+Aujourd’hui
+Mise en place une plateforme pour la vente
+d’assurance dans la zone CIMA(SENEGAL-GABON-
+COTE IVOIRE-CAMEROUN)
+DAKAR
+AXA
+ASSURANCE
+POLE : AFRIQUE DE
+OUEST
+PLACE DE
+L’indépendance
+Technologies : Microservices, Spring Boot, Spring Data,
+Liquibase, Kafka, RabbitMQ, JHipster, Angular, Auth0
+React JS,Angular, Java 17-11-7, PostgreSQL, UML, GIT,
+GitHub, Pattern SAGA
+Docker, Jenkins, Rest API, Outils AWS (EC2- Cloud-Watch-
+RDS – Cloud-formation …)
+ Méthode Agile : SCRUM
+ Rôles :
+Implémentation des interfaces de l’application web avec react-
+redux
+Implémentation des micro-services backend
+Implémentation des test unitaires/intégrations
+Implémentation des tests de composant
+Implémentation des déploiements AWS/ OPENSHIFT
+Interne
+4 InterneLead Développeur Angular /Spring Boot
+Projet Plateforme SENRE :
+Mise en place une plateforme pour les ré-assureurs
+d’Afrique
+01-10-2022-
+01-12-2024
+DAKAR
+SONAC
+ASSURANCE
+PLACE DE
+L’indépendance
+
+
+Technologies : Spring Boot, Spring Data, Liquibase,
+KEYCLOCK
+Angular 12, Java 17, PostgreSQL, UML, GIT,
+GitHub, Docker, Jenkins, Rest API , tomcat Apache
+Méthode Agile : SCRUM
+Rôles :
+Implémentation des interfaces de l’application web
+avec angular
+Implémentation des micro services backend
+Implémentation des test unitaires/intégrations
+Implémentation des tests unitaires
+Implémentation des tests composants angular
+Interne
+5 InterneConsultant Développeur web/mobile
+Projets Plateforme SOUMARI :
+Mise en place une plateforme de e-commerce
+web/mobile pour l’entreprise SOUMARI
+01-09-2022-
+Aujourd’hui
+DAKAR
+SOUMARI SN
+Avenue
+Lamine Gueye
+Technologies: Flutter, Dart, Laravel
+, Liquibase, Angular 12, Java 17, PostgreSQL,
+UML, GIT, GitHub, Docker, Rest Api
+ Méthode Agile : SCRUM
+ Rôles :
+Implémentation des interfaces de l’application mobile
+avec fluter/dart
+Implémentation des interfaces de l’application web
+avec angular
+Implémentation des micro-services backend
+Implémentation des test unitaires/intégrations
+Implémentation des tests unitaires
+Implémentation des tests composants angular
+Interne
+6 InterneDéveloppeur FULLSTACK (Web)
+Projets Plateforme SENCARTOUR :
+Mise en place une plateforme de e-commerce pour
+l’entreprise de SENCARTOUR
+06-07-2022-
+06-09-2022
+DAKAR
+NLDSOFTWARE
+(Consultant
+Développeur)
+LIBERTE 6
+Technologies : Laravel, UML, PostgreSQL,
+MYSQL, GIT, GitHub
+Méthode Agile : SCRUM
+Rôles :
+Implémentation des interfaces de l’application web
+Implémentation des API coté front
+Implémentation des API coté back
+Implémentation de API de PAYDUNYA
+Implémentation de l’api email
+Création de la base de données
+CI/CD
+Lien : https://www.senecartours.sn/
+Interne
+7 InterneDéveloppeur FULLSTACK (Web) Projets VISITE
+TECHNIQUE :
+11-03-2022-
+06-07-2022
+DAKAR
+NLDSOFTWAR
+E
+(Consultant
+Développeur)
+LIBERTE 6
+Mise en place une plateforme pour réserver une
+visite technique sans se déplacer du lieu de travaille
+ Technologies: Angular, Spring boot, UML, PostgreSQL,
+MYSQL, GIT, GitHub
+ Méthode Agile : SCRUM
+ Rôles : Implémentation des interfaces de l’application web
+avec angular
+Implémentation des API coté front
+CI/CD
+Lien : https://www.visitetechnique.com/
+Interne
+8 InterneDéveloppeur FULLSTACK (Web / Mobile) Projets
+KAABU MOBILE :
+06-09-2021-
+06-05-2022
+DAKAR
+SONATEL(SABLUX)
+SACRE
+COEUR
+Interne
+Mise en place d’une application de gestion web et
+mobile pour les vendeurs terrains de la Sonatel
+sénégal.
+-Identification des puces
+-Changement des puces
+-Création Compte OM
+-Swap Sim
+
+Technologies : Angular, Spring boot, UML, Flutter
+, MYSQL, GIT, GitHub, Git flow, Kibana, Elasticsearch…
+Méthode Agile : SCRUM, JIRA, BITBUCKET
+Rôles :
+9 InterneImplémentions des interfaces de la partie back office
+avec angular
+Gestion des imports/exports de donnée avec les
+fichiers Excel
+Gestion des générations des factures avec PDF ou
+csv
+Implémentions des interfaces de la partie mobile
+office avec flutter
+Implémentation des api partie mobile
+Gestion des workers partie mobile
+Création de la BD avec PostgreSQL
+Implantation de l’api sms de la Sonatel
+Implémentation des différentes micro services
+Développeur FULLSTACK (Web)
+Projets Plateforme Taxis à Nantes :
+Mise en place d'une application web et mobile pour la gestion
+d'une compagnie de Taxis à Nantes (Réalisé avec Ionic & Laravel)
+01-04-2021-
+06-07-2022
+DAKAR
+NLDSOFTWAR
+E
+(Consultant
+Développeur)
+LIBERTE 6
+Technologies : Laravel, Ionic, UML, PostgreSQL, MYSQL,
+GIT, GitHub
+ Méthode Agile : SCRUM
+ Rôles :
+Implémentation des interfaces de l’application web
+Implémentation des API coté front
+CI/CD
+Lien : https://www.taxis-nantes.com/
+Interne
+10Interne01-02-2021-
+30-06-2021
+DAKAR
+NLDSOFTWAR
+E
+(Consultant
+Développeur)
+SACRE-
+COEUR
+INGENIEUR DEVOPS
+ Projets:
+Gestion des transactions de la Douane
+ Technologies : GIT, GITHUB, JENKINS, DOCKER,
+KUBERNETES, SONAR, JIRAR, ASP.net
+ Methode Agile : SCRUM
+Trello, Slack
+Interne
+11 InterneDéveloppeur FULLSTACK (web/mobile/DevOps)
+Projets :
+ Mise en place d’une application de gestion et suivi des livraisons
+01/10/2019-
+30/12/2020
+Dakar
+via Google Maps (YESCOLA)
+OCTASEN
+FASSMEDINA
+ Mise en place d’une application de gestion école (JARDIN-
+PRIMAIRE-SECONDAIRE-LYCEE)
+ Mise en place d’une application d’une entreprise de Lavage
+Technologies : Angular, Flutter, Laravel, Spring Boot, UML,
+PostgreSQL, MySQL, GIT, GitHub, Bootstrap
+ Méthode Agile : SCRUM Trello, Slack
+ OUTILS OPS : JENKINS – SONAR- DOCKER- AWS
+ Rôles :
+Implémentions des interfaces de la partie back office
+avec angular
+Interne
+12InterneGestion des imports/exports de donnée avec les
+fichiers Excel
+Gestion des générations des factures avec PDF ou
+csv
+Implémentation de l’api de géolocalisation de
+Google Maps
+Implémentation de l’api de payement de paydunya
+Implémentions des interfaces de la partie mobile
+office avec flutter
+Création de la BD avec PostgreSQL Implémentation
+des différentes micro services
+Développeur FULLSTACK (web/mobile)
+Projets :
+01/07/2019-
+30/09/2019
+DAKAR
+Institut Supérieur
+Informatique
+MEDINA
+• Gestion d’une application d’archivage des documents
+électroniques pour ISI.
+Technologies : React, Nodejs Express, UML, Mongo DB, GIT,
+GitHub Rôles :
+Implémentation des interfaces de l’application web
+Implémentation des API avec la partie back end
+Export/Import des documents scolaires
+Implémentation des API coté front
+Création de la BD avec Mongo DB
+Interne
+13InterneDéveloppeur FULLSTACK (web/mobile)
+Projets :
+•
+01/12/2018-
+30/12/2019
+Dakar
+ATOS
+•
+Keur Gorgui
+Gestion des collaborateurs d’Atos
+MYARM (Application portail d’Atos)
+Technologies : Angular, Ionic, JSF Servlet, Spring Boot,
+UML, PostgreSQL, Hipster, GIT, GitHub
+
+Méthode Agile : SCRUM
+Trello, Slack
+
+
+Rôles :
+Implémentation des interfaces de l’application web
+Implémentation des API sur la partie back end
+Implémentation des API coté front
+Création de la BD avec PostgreSQL
+Implémentation des API pour l’envoi de sms ou email
+à partie du back end
+Interne
+14InterneFormateur en (Analyste, Concepteur et Développeur d’application) à
+ISI
+2019-
+Aujourd’hui
+DAKAR
+Institut Supérieur
+Informatique (ISI)
+-
+Sup Info Dakar
+-
+ISM DAKAR
+-
+IIBS DAKAR
+--
+IPP DAKAR
+Médina
+Et
+Place de
+l’indépendance
+Matières :
+-Algorithme (Base et avancé)
+- Langage C/C++ (Base/QT …)
+-Java (Java FX -Java/SE – JSP/Servlet- ORM- JSP-Spring –Spring
+Boot …)
+-PHP (Base-Webservice (Json-Soap) - MVC -ORM - Laravel –
+Symfony …)
+-JavaScript (Base-JQuery-Ajax-Angular -React JS …)
+-C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE )
+-CMS (Wordpress– Drupal …)
+-Analyse (UML/MERISE/SGBD/SQL…)
+-Bureautique (Word-Excel-Power Point)
+-Design Pattern
+Autres informations pertinentes :
+Je suis un développeur enthousiaste et doté des solides connaissances techniques dans le domaine du
+développement d'application web, mobile et desktop.
+Très déterminé à la recherche de nouvelle connaissance et un amour du travail d'équipe.
+Interne
+15Interne

@@ -151,14 +151,14 @@ const skillCategories: SkillCategory[] = [
       <div class="absolute top-20 right-10 w-64 h-64 bg-accent-gold/5 rounded-full blur-3xl -z-10"></div>
       <div class="absolute bottom-10 left-10 w-80 h-80 bg-accent-gold/5 rounded-full blur-3xl -z-10"></div>
 
-      <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch max-w-4xl mx-auto w-full mb-10">
+      <div class="grid md:grid-cols-[40%_60%] gap-8 lg:gap-12 items-stretch max-w-6xl mx-auto w-full mb-10">
 
-        <div class="order-1 flex flex-col gap-4 w-full max-w-[320px] mx-auto md:mx-0">
-          <div class="relative w-full aspect-square group">
+        <div class="order-1 flex flex-col gap-4 w-full max-w-[320px] mx-auto md:ml-auto md:mr-0">
+          <div class="relative w-full h-80 group">
             <div class="absolute inset-0 bg-gradient-to-br from-primary-blue to-primary-orange rounded-3xl p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
             <div class="relative w-full h-full rounded-3xl bg-bg-secondary shadow-card group-hover:shadow-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]">
-              <img src="/profile.png" alt="Profile photo" class="w-full h-full object-cover" @error="handleError" />
-              <div v-if="hasError" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange">
+              <img src="/profile.jpg" alt="Profile photo" class="w-full h-full object-cover object-top" @error="handleError" />
+              <div v-if="hasError" class="absolute inset -0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange">
                 <span class="text-6xl font-bold text-white drop-shadow-lg">
                    {{ portfolioStore.personalInfo.firstName.charAt(0) }}{{ portfolioStore.personalInfo.lastName.charAt(0) }}
                 </span>
@@ -183,19 +183,26 @@ const skillCategories: SkillCategory[] = [
           <div class="flex flex-col justify-start">
             <p class="text-primary-blue font-bold text-xs tracking-widest uppercase mb-2">Développeur Backend & DevOps</p>
             <h1 class="text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
-              {{ portfolioStore.personalInfo.firstName }}
-              <span class="text-primary-orange block mt-1">{{ portfolioStore.personalInfo.lastName }}</span>
+              {{ portfolioStore.personalInfo.firstName }} <span class="text-primary-orange">{{ portfolioStore.personalInfo.lastName }}</span>
             </h1>
-            <p class="text-base text-text-secondary leading-relaxed mt-4 max-w-md mx-auto md:mx-0">{{ portfolioStore.personalInfo.bio }}</p>
+            <p class="text-lg text-text-secondary leading-relaxed mt-4 max-w-md mx-auto md:mx-0">{{ portfolioStore.personalInfo.bio }}</p>
           </div>
 
-          <div class="w-full h-24 bg-bg-secondary rounded-xl px-6 border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card flex items-center justify-between">
+          <div class="w-full max-w-md mt-4 bg-bg-secondary rounded-xl px-4 py-3 border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card flex items-center justify-between mx-auto md:mx-0">
             <span class="text-xs font-bold text-text-tertiary uppercase tracking-wider hidden md:block">Me Retrouver</span>
             <div class="flex justify-center gap-2 w-full md:w-auto">
-              <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Linkedin class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
-              <a href="#" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Github class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
-              <a href="mailto:dl7781775@gmail.com" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Mail class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
-              <a href="tel:+221773022150" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Phone class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
+              <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="LinkedIn">
+                <Linkedin class="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </a>
+              <a href="#" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="GitHub">
+                <Github class="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </a>
+              <a href="mailto:dl7781775@gmail.com" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="Email">
+                <Mail class="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </a>
+              <a href="tel:+221773022150" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="Phone">
+                <Phone class="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </a>
             </div>
           </div>
         </div>
