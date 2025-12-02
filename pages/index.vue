@@ -86,55 +86,54 @@ const skillCategories: SkillCategory[] = [
     title: 'Backend',
     icon: Rocket,
     color: 'border-primary-blue',
-    skills: ['SpringBoot', 'Quarkus', 'Node.js', 'Flask', 'FastApi', 'Jakarta', 'CDI'],
+    skills: ['Spring Boot', 'Java', 'Laravel', 'PHP', 'Node.js', 'Express', 'ASP.net', 'C#', '.NET Core', 'JSF', 'Symfony'],
   },
   {
-    title: 'Frontend',
+    title: 'Frontend & Mobile',
     icon: Code2,
     color: 'border-primary-orange',
-    skills: ['Vue', 'Angular', 'JavaScript', 'TypeScript'],
+    skills: ['Angular', 'React JS', 'Flutter', 'Dart', 'Ionic', 'TypeScript', 'JavaScript', 'Bootstrap', 'Java FX', 'WPF'],
   },
   {
     title: 'DevOps & Cloud',
     icon: Cloud,
     color: 'border-cyan-500',
     skills: [
+      'AWS',
       'Docker',
-      'Terraform',
       'Kubernetes',
       'Jenkins',
       'CI/CD',
-      'DigitalOcean',
-      'Azure',
-      'AWS',
+      'OpenShift',
+      'Sonar',
+      'EC2',
+      'RDS',
     ],
   },
   {
     title: 'Databases',
     icon: Trello,
     color: 'border-purple-500',
-    skills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Cassandra', 'DynamoDB'],
+    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Elasticsearch'],
   },
   {
-    title: 'Security & Monitoring',
+    title: 'Architecture & Security',
     icon: Lock,
     color: 'border-red-500',
     skills: [
-      'Microsoft Entra',
-      'Prometheus',
-      'Grafana',
-      'ELK',
-      'Nmap',
-      'Wireshark',
-      'System Hardening',
-      'SSO',
+      'Microservices',
+      'Keycloak',
+      'Auth0',
+      'UML',
+      'Merise',
+      'Design Patterns',
     ],
   },
   {
     title: 'Tools & Methodology',
     icon: Wrench,
     color: 'border-yellow-500',
-    skills: ['Jira', 'Confluence', 'Microsoft Teams', 'Scrum', 'Kanban', 'Trello', 'Slack'],
+    skills: ['Git', 'GitHub', 'Bitbucket', 'Jira', 'Trello', 'Slack', 'Scrum', 'Agile'],
   },
 ]
 </script>
@@ -193,10 +192,10 @@ const skillCategories: SkillCategory[] = [
           <div class="w-full h-24 bg-bg-secondary rounded-xl px-6 border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card flex items-center justify-between">
             <span class="text-xs font-bold text-text-tertiary uppercase tracking-wider hidden md:block">Me Retrouver</span>
             <div class="flex justify-center gap-2 w-full md:w-auto">
-              <a href="https://linkedin.com/in/cheikh-traore" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Linkedin class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
-              <a href="https://github.com/traorecheikh" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Github class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
-              <a href="mailto:atidiane741@gmail.com" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Mail class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
-              <a href="tel:+221781706184" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Phone class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
+              <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Linkedin class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
+              <a href="#" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Github class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
+              <a href="mailto:dl7781775@gmail.com" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Mail class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
+              <a href="tel:+221773022150" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group"><Phone class="w-5 h-5 group-hover:scale-110 transition-transform" /></a>
             </div>
           </div>
         </div>
@@ -483,9 +482,9 @@ const skillCategories: SkillCategory[] = [
             </div>
 
             <div class="mt-8 pt-6 border-t border-bg-tertiary flex gap-3 justify-center">
-                 <a href="https://linkedin.com/in/cheikh-traore" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Linkedin class="w-5 h-5" /></a>
-                 <a href="https://github.com/traorecheikh" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Github class="w-5 h-5" /></a>
-                 <a href="tel:+221781706184" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Phone class="w-5 h-5" /></a>
+                 <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Linkedin class="w-5 h-5" /></a>
+                 <a href="#" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Github class="w-5 h-5" /></a>
+                 <a href="tel:+221773022150" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Phone class="w-5 h-5" /></a>
             </div>
           </div>
 

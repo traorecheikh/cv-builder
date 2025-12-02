@@ -4,9 +4,10 @@ import { Menu, X, Download, Moon, Sun } from 'lucide-vue-next'
 import { usePortfolioStore } from '../stores/portfolio'
 import { useTheme } from '../composables/useTheme'
 import ScrollProgress from './ui/ScrollProgress.vue'
+import CVDownloadModal from './CVDownloadModal.vue'
 
 const menuOpen = ref(false)
-const isGenerating = ref(false)
+const showCVModal = ref(false)
 const portfolioStore = usePortfolioStore()
 const { isDark, toggleTheme } = useTheme()
 
@@ -17,34 +18,12 @@ const navItems = [
   { name: 'Compétences', href: '#skills' },
   { name: 'Certifications', href: '#certifications' },
   { name: 'Enseignement', href: '#enseignement' },
-  { name: 'Podcast', href: '#podcast' },
+  { name: 'Contact', href: '#contact' },
 ]
 
-const handleCVDownload = async () => {
-  if (isGenerating.value) return
-
-  isGenerating.value = true
+const handleCVClick = () => {
+  showCVModal.value = true
   menuOpen.value = false
-
-  try {
-    const response = await fetch('/cv.pdf')
-    if (!response.ok) throw new Error('CV file not found')
-
-    const blob = await response.blob()
-    const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `${portfolioStore.personalInfo.firstName}_${portfolioStore.personalInfo.lastName}_CV.pdf`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    window.URL.revokeObjectURL(url)
-  } catch (error) {
-    console.error('Error downloading CV:', error)
-    alert('Erreur lors du téléchargement du CV')
-  } finally {
-    isGenerating.value = false
-  }
 }
 </script>
 
@@ -92,12 +71,11 @@ const handleCVDownload = async () => {
           </button>
 
           <button
-            @click="handleCVDownload"
-            :disabled="isGenerating"
-            class="hidden sm:flex items-center gap-sm px-xl py-sm bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-soft hover:shadow-card disabled:opacity-50 disabled:cursor-not-allowed"
+            @click="handleCVClick"
+            class="hidden sm:flex items-center gap-sm px-xl py-sm bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-soft hover:shadow-card"
           >
-            <Download class="w-4 h-4" :class="{ 'animate-bounce': isGenerating }" />
-            <span>{{ isGenerating ? 'Génération...' : 'Mon CV' }}</span>
+            <Download class="w-4 h-4" />
+            <span>Mon CV</span>
           </button>
 
           <!-- Mobile Menu Button -->
@@ -130,16 +108,19 @@ const handleCVDownload = async () => {
             {{ item.name }}
           </a>
           <button
-            @click="handleCVDownload"
-            :disabled="isGenerating"
-            class="w-full flex items-center justify-center gap-sm px-lg py-md bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 disabled:opacity-50 shadow-soft"
+            @click="handleCVClick"
+            class="w-full flex items-center justify-center gap-sm px-lg py-md bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-soft"
           >
-            <Download class="w-4 h-4" :class="{ 'animate-bounce': isGenerating }" />
-            {{ isGenerating ? 'Génération...' : 'Télécharger Mon CV' }}
+            <Download class="w-4 h-4" />
+            Télécharger Mon CV
           </button>
         </div>
       </transition>
     </div>
+
+    <Teleport to="body">
+      <CVDownloadModal v-if="showCVModal" @close="showCVModal = false" />
+    </Teleport>
   </nav>
 </template>
 

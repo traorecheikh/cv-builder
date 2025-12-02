@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Portfolio - Développeur Backend & DevOps',
+      title: 'Portfolio - Makhmadane LO',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
