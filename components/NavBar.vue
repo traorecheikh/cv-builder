@@ -19,7 +19,6 @@ const navItems = [
   { name: 'Certifications', href: '/#certifications' },
   { name: 'Enseignement', href: '/#enseignement' },
   { name: 'Articles', href: '/articles' },
-  { name: 'Contact', href: '/#contact' },
 ]
 
 const handleCVClick = () => {
