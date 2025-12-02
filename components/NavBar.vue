@@ -13,12 +13,13 @@ const { isDark, toggleTheme } = useTheme()
 
 const navItems = [
   { name: 'Accueil', href: '/#' },
-  { name: 'Expérience', href: '#experience' },
-  { name: 'Éducation', href: '#education' },
-  { name: 'Compétences', href: '#skills' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Enseignement', href: '#enseignement' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Expérience', href: '/#experience' },
+  { name: 'Éducation', href: '/#education' },
+  { name: 'Compétences', href: '/#skills' },
+  { name: 'Certifications', href: '/#certifications' },
+  { name: 'Enseignement', href: '/#enseignement' },
+  { name: 'Articles', href: '/articles' },
+  { name: 'Contact', href: '/#contact' },
 ]
 
 const handleCVClick = () => {
