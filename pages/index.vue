@@ -159,7 +159,7 @@ const skillCategories: SkillCategory[] = [
           <div class="relative w-full h-80 group">
             <div class="absolute inset-0 bg-gradient-to-br from-primary-blue to-primary-orange rounded-3xl p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
             <div class="relative w-full h-full rounded-3xl bg-bg-secondary shadow-card group-hover:shadow-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]">
-              <img src="/profile.jpg" alt="Profile photo" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" @error="handleError" />
+              <img src="/profile.jpg" alt="Profile photo" class="w-full h-full object-cover object-top" loading="eager" decoding="async" fetchpriority="high" @error="handleError" />
               <div v-if="hasError" class="absolute inset -0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange">
                 <span class="text-6xl font-bold text-white drop-shadow-lg">
                    {{ portfolioStore.personalInfo.firstName.charAt(0) }}{{ portfolioStore.personalInfo.lastName.charAt(0) }}

@@ -41,6 +41,8 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         // Preload critical fonts
         { rel: 'preload', as: 'font', href: '/fonts/Montserrat/Montserrat-VariableFont_wght.ttf', type: 'font/ttf', crossorigin: 'anonymous' },
+        // Preload LCP image
+        { rel: 'preload', as: 'image', href: '/profile.jpg', imagesrcset: '/profile.jpg' },
         // DNS prefetch
         { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
         // Preconnect to API
