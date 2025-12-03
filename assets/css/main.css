@@ -1,11 +1,11 @@
-@import url('https://rsms.me/inter/inter.css');
-
-/* Import Montserrat Variable Fonts */
+/* Use system fonts for optimal performance - no CDN calls needed */
+/* Montserrat local fonts with swap display strategy */
 @font-face {
   font-family: 'Montserrat';
   src: url('/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype-variations');
   font-weight: 1 999;
   font-display: swap;
+  size-adjust: 100%;
 }
 
 @font-face {
@@ -14,6 +14,7 @@
   font-weight: 1 999;
   font-style: italic;
   font-display: swap;
+  size-adjust: 100%;
 }
 
 @tailwind base;
@@ -29,17 +30,23 @@
   --text-secondary: #D1D5DB;
   --text-tertiary: #9CA3AF;
   --border-color: #2d3748;
+  --primary-blue: #1171B8;
+  --primary-orange: #C2410C;
+  color-scheme: dark;
 }
 
-html:not(.dark) {
-  /* Light mode */
-  --bg-primary: #F5F5F5;
-  --bg-secondary: #EEEEEE;
-  --bg-tertiary: #E8E8E8;
-  --text-primary: #1A1A1E;
-  --text-secondary: #4A4A4A;
-  --text-tertiary: #6B6B6B;
-  --border-color: #D5D5D5;
+@media (prefers-color-scheme: light) {
+  html:not(.dark) {
+    /* Light mode */
+    --bg-primary: #F5F5F5;
+    --bg-secondary: #EEEEEE;
+    --bg-tertiary: #E8E8E8;
+    --text-primary: #1A1A1E;
+    --text-secondary: #4A4A4A;
+    --text-tertiary: #6B6B6B;
+    --border-color: #D5D5D5;
+    color-scheme: light;
+  }
 }
 
 * {
@@ -90,6 +97,26 @@ button, [role="button"] {
   @apply transition-all duration-300;
 }
 
+/* Prevent layout shift and improve rendering performance */
+img {
+  height: auto;
+  display: block;
+}
+
+/* Contain layout calculations for cards and sections */
+.bg-bg-secondary {
+  contain: layout style paint;
+}
+
+section {
+  contain: layout style;
+}
+
+/* Prevent CLS on images with proper aspect ratio */
+img[alt] {
+  aspect-ratio: auto;
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -109,25 +136,27 @@ button, [role="button"] {
   background: #2D8FDB;
 }
 
-/* Scroll Animations */
+/* Scroll Animations - GPU accelerated */
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
+  will-change: transform, opacity;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate3d(0, 30px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .scroll-animate {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translate3d(0, 30px, 0);
+  will-change: transform, opacity;
 }
 
 .stagger-1 {

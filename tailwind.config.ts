@@ -13,7 +13,7 @@ export default {
       colors: {
         // Enterprise brand colors (stay consistent)
         'primary-blue': '#1171B8',
-        'primary-orange': '#E64922',
+        'primary-orange': '#C2410C',
         // Dynamic colors using CSS variables
         'bg-primary': 'var(--bg-primary)',
         'bg-secondary': 'var(--bg-secondary)',

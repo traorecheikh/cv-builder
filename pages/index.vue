@@ -14,9 +14,7 @@ import {
   Award,
   BookOpen as BookOpenIcon,
   Mail,
-  Briefcase,
   Wrench,
-  Heart,
   Cloud,
   Rocket,
   Building,
@@ -35,6 +33,10 @@ const formSubject = ref('')
 const formMessage = ref('')
 const isSubmitting = ref(false)
 const submitStatus = ref<'idle' | 'success' | 'error'>('idle')
+
+const showAllExperiences = ref(false)
+const showAllEducation = ref(false)
+const showAllTeaching = ref(false)
 
 const sendEmail = async () => {
   if (isSubmitting.value) return
@@ -157,7 +159,7 @@ const skillCategories: SkillCategory[] = [
           <div class="relative w-full h-80 group">
             <div class="absolute inset-0 bg-gradient-to-br from-primary-blue to-primary-orange rounded-3xl p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
             <div class="relative w-full h-full rounded-3xl bg-bg-secondary shadow-card group-hover:shadow-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]">
-              <img src="/profile.jpg" alt="Profile photo" class="w-full h-full object-cover object-top" @error="handleError" />
+              <img src="/profile.jpg" alt="Profile photo" class="w-full h-full object-cover object-top" loading="lazy" decoding="async" @error="handleError" />
               <div v-if="hasError" class="absolute inset -0 flex items-center justify-center bg-gradient-to-br from-primary-blue to-primary-orange">
                 <span class="text-6xl font-bold text-white drop-shadow-lg">
                    {{ portfolioStore.personalInfo.firstName.charAt(0) }}{{ portfolioStore.personalInfo.lastName.charAt(0) }}
@@ -217,17 +219,17 @@ const skillCategories: SkillCategory[] = [
 
     <section id="experience" class="bg-bg-primary py-12">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl mb-16 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
           Expérience <span class="text-primary-orange">Professionnelle</span>
-        </h1>
-        <p class="text-lg text-text-secondary max-w-2xl text-left mx-auto md:mx-0">
+        </h2>
+        <p class="text-lg text-text-secondary w-full text-left">
           Un parcours diversifié dans le développement backend, DevOps et l'intégration logicielle.
         </p>
       </div>
 
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
         <div class="space-y-8">
-          <div v-for="(exp, index) in portfolioStore.experiences" :key="exp.id" class="relative">
+          <div v-for="(exp, index) in (showAllExperiences ? portfolioStore.experiences : portfolioStore.experiences.slice(0, 3))" :key="exp.id" class="relative">
              <div class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl overflow-hidden hover:border-primary-blue transition-all duration-300 hover:shadow-card">
               <div class="bg-gradient-to-r from-primary-blue to-primary-blue/80 p-8">
                 <div class="flex items-center gap-4 mb-2">
@@ -277,22 +279,30 @@ const skillCategories: SkillCategory[] = [
             </div>
           </div>
         </div>
+        <div v-if="portfolioStore.experiences.length > 3" class="flex justify-center mt-12">
+          <button
+            @click="showAllExperiences = !showAllExperiences"
+            class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg"
+          >
+            {{ showAllExperiences ? 'Voir moins' : 'Voir plus' }}
+          </button>
+        </div>
       </div>
     </section>
 
 
     <section id="education" class="bg-bg-primary py-12">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl mb-16 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
           Formation <span class="text-primary-orange">Académique</span>
-        </h1>
-        <p class="text-lg text-text-secondary max-w-2xl text-left mx-auto md:mx-0">
+        </h2>
+        <p class="text-lg text-text-secondary w-full text-left">
           Licence en Génie Logiciel et formation scientifique solide.
         </p>
       </div>
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
          <div class="space-y-8">
-           <div v-for="(edu, index) in portfolioStore.education" :key="edu.id" class="relative">
+           <div v-for="(edu, index) in (showAllEducation ? portfolioStore.education : portfolioStore.education.slice(0, 3))" :key="edu.id" class="relative">
              <div class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-8 hover:border-primary-blue transition-all duration-300 hover:shadow-card">
                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-8">
                  <div class="flex-1">
@@ -322,12 +332,25 @@ const skillCategories: SkillCategory[] = [
              </div>
            </div>
          </div>
+         <div v-if="portfolioStore.education.length > 3" class="flex justify-center mt-12">
+           <button
+             @click="showAllEducation = !showAllEducation"
+             class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg"
+           >
+             {{ showAllEducation ? 'Voir moins' : 'Voir plus' }}
+           </button>
+         </div>
+      </div>
+    </section>
 
 
-         <div class="mt-24 text-center md:text-left">
-           <h2 class="text-3xl font-bold text-text-primary mb-16">
-             Compétences <span class="text-primary-orange">Linguistiques</span>
-           </h2>
+    <section id="languages" class="bg-bg-primary py-12">
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl mb-16 text-center md:text-left">
+        <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+          Compétences <span class="text-primary-orange">Linguistiques</span>
+        </h2>
+      </div>
+      <div class="max-w-6xl mx-auto px-lg md:px-2xl">
            <div class="grid md:grid-cols-3 gap-8">
              <div v-for="lang in portfolioStore.languages" :key="lang.language" class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-8 hover:border-primary-blue transition-all duration-300">
                <h3 class="text-xl font-bold text-text-primary mb-8">
@@ -346,17 +369,16 @@ const skillCategories: SkillCategory[] = [
                </div>
              </div>
            </div>
-         </div>
       </div>
     </section>
 
 
     <section id="skills" class="bg-bg-primary py-12">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl mb-16 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
           Compétences <span class="text-primary-orange">Techniques</span>
-        </h1>
-        <p class="text-lg text-text-secondary max-w-2xl text-left mx-auto md:mx-0">
+        </h2>
+        <p class="text-lg text-text-secondary w-full text-left">
           Expertise couvrant 6 domaines clés pour délivrer des solutions robustes et scalables.
         </p>
       </div>
@@ -383,10 +405,10 @@ const skillCategories: SkillCategory[] = [
 
     <section id="certifications" class="bg-bg-primary py-12">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl mb-16 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
           Certifications <span class="text-primary-orange">Professionnelles</span>
-        </h1>
-        <p class="text-lg text-text-secondary max-w-2xl text-left mx-auto md:mx-0">
+        </h2>
+        <p class="text-lg text-text-secondary w-full text-left">
           Certifications reconnues internationalement validant mon expertise technique.
         </p>
       </div>
@@ -409,16 +431,16 @@ const skillCategories: SkillCategory[] = [
 
     <section id="enseignement" class="bg-bg-primary py-12">
       <div class="max-w-6xl mx-auto px-lg md:px-2xl mb-16 text-center md:text-left">
-        <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
           Enseignement <span class="text-primary-orange">& Formation</span>
-        </h1>
-        <p class="text-lg text-text-secondary max-w-2xl text-left mx-auto md:mx-0">
+        </h2>
+        <p class="text-lg text-text-secondary w-full text-left">
           Partage de expertise à travers l'enseignement dans des institutions reconnues.
         </p>
       </div>
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
         <div class="space-y-8">
-          <div v-for="teach in portfolioStore.teaching" :key="teach.id" class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-8 hover:border-primary-orange transition-all duration-300 hover:shadow-card">
+          <div v-for="teach in (showAllTeaching ? portfolioStore.teaching : portfolioStore.teaching.slice(0, 3))" :key="teach.id" class="bg-bg-secondary border-2 border-bg-tertiary rounded-xl p-8 hover:border-primary-orange transition-all duration-300 hover:shadow-card">
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-8">
               <div class="flex items-start gap-8 flex-1">
                 <BookOpenIcon class="w-6 h-6 text-primary-blue flex-shrink-0 mt-1" />
@@ -439,6 +461,14 @@ const skillCategories: SkillCategory[] = [
             </div>
           </div>
         </div>
+        <div v-if="portfolioStore.teaching.length > 3" class="flex justify-center mt-12">
+          <button
+            @click="showAllTeaching = !showAllTeaching"
+            class="px-8 py-3 bg-bg-secondary border-2 border-primary-orange text-primary-orange font-bold rounded-xl hover:bg-primary-orange hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg"
+          >
+            {{ showAllTeaching ? 'Voir moins' : 'Voir plus' }}
+          </button>
+        </div>
       </div>
     </section>
 
@@ -449,10 +479,10 @@ const skillCategories: SkillCategory[] = [
 
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center md:text-left mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
+          <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
             Contactez <span class="text-primary-orange">Moi</span>
-          </h1>
-          <p class="text-text-secondary text-lg max-w-xl text-left mx-auto md:mx-0">
+          </h2>
+          <p class="text-text-secondary text-lg w-full text-left">
             Discutons de votre prochain projet.
           </p>
         </div>
@@ -489,9 +519,9 @@ const skillCategories: SkillCategory[] = [
             </div>
 
             <div class="mt-8 pt-6 border-t border-bg-tertiary flex gap-3 justify-center">
-                 <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Linkedin class="w-5 h-5" /></a>
-                 <a href="#" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Github class="w-5 h-5" /></a>
-                 <a href="tel:+221773022150" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all"><Phone class="w-5 h-5" /></a>
+                 <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all" aria-label="LinkedIn"><Linkedin class="w-5 h-5" /></a>
+                 <a href="#" target="_blank" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all" aria-label="GitHub"><Github class="w-5 h-5" /></a>
+                 <a href="tel:+221773022150" class="w-10 h-10 rounded-lg bg-bg-primary border border-bg-tertiary flex items-center justify-center hover:border-primary-blue text-text-secondary hover:text-primary-blue transition-all" aria-label="Téléphone"><Phone class="w-5 h-5" /></a>
             </div>
           </div>
 
