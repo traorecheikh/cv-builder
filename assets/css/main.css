@@ -35,18 +35,17 @@
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: light) {
-  html:not(.dark) {
-    /* Light mode */
-    --bg-primary: #F5F5F5;
-    --bg-secondary: #EEEEEE;
-    --bg-tertiary: #E8E8E8;
-    --text-primary: #1A1A1E;
-    --text-secondary: #4A4A4A;
-    --text-tertiary: #6B6B6B;
-    --border-color: #D5D5D5;
-    color-scheme: light;
-  }
+/* Light mode - apply when .dark class is NOT present */
+html:not(.dark) {
+  /* Light mode */
+  --bg-primary: #F5F5F5;
+  --bg-secondary: #EEEEEE;
+  --bg-tertiary: #E8E8E8;
+  --text-primary: #1A1A1E;
+  --text-secondary: #4A4A4A;
+  --text-tertiary: #6B6B6B;
+  --border-color: #D5D5D5;
+  color-scheme: light;
 }
 
 * {
@@ -95,6 +94,8 @@ a {
 /* Smooth Transitions */
 button, [role="button"] {
   @apply transition-all duration-300;
+  touch-action: manipulation;
+  cursor: pointer;
 }
 
 /* Prevent layout shift and improve rendering performance */

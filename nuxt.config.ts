@@ -57,16 +57,6 @@ export default defineNuxtConfig({
   // Build optimizations
   build: {
     transpile: [],
-    minify: 'terser',
-    terser: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-      format: {
-        comments: false,
-      },
-    },
     rollupOptions: {
       output: {
         manualChunks: {

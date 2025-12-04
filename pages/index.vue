@@ -284,8 +284,9 @@ const skillCategories: SkillCategory[] = [
         </div>
         <div v-if="portfolioStore.experiences.length > 3" class="flex justify-center mt-12">
           <button
+            type="button"
             @click="showAllExperiences = !showAllExperiences"
-            class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg"
+            class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
           >
             {{ showAllExperiences ? 'Voir moins' : 'Voir plus' }}
           </button>
@@ -337,8 +338,9 @@ const skillCategories: SkillCategory[] = [
          </div>
          <div v-if="portfolioStore.education.length > 3" class="flex justify-center mt-12">
            <button
+             type="button"
              @click="showAllEducation = !showAllEducation"
-             class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg"
+             class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
            >
              {{ showAllEducation ? 'Voir moins' : 'Voir plus' }}
            </button>
@@ -352,6 +354,9 @@ const skillCategories: SkillCategory[] = [
         <h2 class="text-4xl md:text-5xl font-bold text-text-primary mb-4 text-center">
           Compétences <span class="text-primary-orange">Linguistiques</span>
         </h2>
+        <p class="text-lg text-text-secondary w-full text-left">
+          Maîtrise de plusieurs langues pour collaborer efficacement dans un contexte international.
+        </p>
       </div>
       <div class="max-w-6xl mx-auto px-lg md:px-2xl">
            <div class="grid md:grid-cols-3 gap-8">
@@ -466,8 +471,9 @@ const skillCategories: SkillCategory[] = [
         </div>
         <div v-if="portfolioStore.teaching.length > 3" class="flex justify-center mt-12">
           <button
+            type="button"
             @click="showAllTeaching = !showAllTeaching"
-            class="px-8 py-3 bg-bg-secondary border-2 border-primary-orange text-primary-orange font-bold rounded-xl hover:bg-primary-orange hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg"
+            class="px-8 py-3 bg-bg-secondary border-2 border-primary-orange text-primary-orange font-bold rounded-xl hover:bg-primary-orange hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
           >
             {{ showAllTeaching ? 'Voir moins' : 'Voir plus' }}
           </button>

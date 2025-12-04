@@ -53,8 +53,9 @@ const navItems = [
         <div class="flex items-center gap-md">
           <!-- Theme Toggle -->
           <button
+            type="button"
             @click="toggleTheme"
-            class="p-sm text-text-secondary hover:bg-bg-tertiary rounded-lg transition-all duration-300 hover:text-primary-blue"
+            class="p-sm text-text-secondary hover:bg-bg-tertiary rounded-lg transition-all duration-300 hover:text-primary-blue cursor-pointer"
             aria-label="Toggle theme"
             title="Basculer le thème"
           >
@@ -68,13 +69,14 @@ const navItems = [
             class="hidden sm:flex items-center gap-sm px-xl py-sm bg-primary-orange text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-soft hover:shadow-card no-underline"
           >
             <Download class="w-4 h-4" />
-            <span>Mon CV</span>
+            <span>Télécharger CV</span>
           </a>
 
           <!-- Mobile Menu Button -->
           <button
+            type="button"
             @click="menuOpen = !menuOpen"
-            class="md:hidden p-sm text-text-secondary hover:bg-bg-tertiary rounded-lg transition-colors duration-300"
+            class="md:hidden p-sm text-text-secondary hover:bg-bg-tertiary rounded-lg transition-colors duration-300 cursor-pointer active:scale-95"
             aria-label="Toggle menu"
           >
             <Menu v-if="!menuOpen" class="w-6 h-6" />
@@ -107,7 +109,7 @@ const navItems = [
             @click="menuOpen = false"
           >
             <Download class="w-4 h-4" />
-            Télécharger Mon CV
+            Télécharger CV
           </a>
         </div>
       </transition>
