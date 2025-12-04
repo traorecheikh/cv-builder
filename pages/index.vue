@@ -193,29 +193,28 @@ const skillCategories: SkillCategory[] = [
             <p class="text-lg text-text-secondary leading-relaxed mt-4 max-w-md mx-auto md:mx-0">{{ portfolioStore.personalInfo.bio }}</p>
           </div>
 
-          <div class="w-full max-w-md mt-4 bg-bg-secondary rounded-xl px-4 py-3 border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card flex items-center justify-between mx-auto md:mx-0">
-            <span class="text-xs font-bold text-text-tertiary uppercase tracking-wider hidden md:block">Me Retrouver</span>
-            <div class="flex justify-center gap-2 w-full md:w-auto">
-              <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="LinkedIn">
-                <Linkedin class="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </a>
-              <a href="#" target="_blank" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="GitHub">
-                <Github class="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </a>
-              <a href="mailto:dl7781775@gmail.com" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="Email">
-                <Mail class="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </a>
-              <a href="tel:+221773022150" class="p-2.5 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group" aria-label="Phone">
-                <Phone class="w-5 h-5 group-hover:scale-110 transition-transform" />
-              </a>
+          <div class="w-24 h-24 mx-auto md:mx-0 bg-bg-secondary rounded-xl p-2 border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer flex items-center justify-center">
+            <div class="grid grid-cols-2 gap-1.5">
+                <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="LinkedIn">
+                  <Linkedin class="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </a>
+                <a href="#" target="_blank" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="GitHub">
+                  <Github class="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </a>
+                <a href="mailto:dl7781775@gmail.com" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="Email">
+                  <Mail class="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </a>
+                <a href="tel:+221773022150" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="Phone">
+                  <Phone class="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </a>
+              </div>
             </div>
-          </div>
         </div>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="#experience" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 min-w-[200px]">Voir Parcours <ArrowRight class="w-5 h-5" /></a>
-        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-primary-blue text-primary-blue text-base font-bold rounded-xl hover:bg-primary-blue/5 active:scale-95 transition-all duration-300 min-w-[200px]">Me Contacter</a>
+        <a href="#experience" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[200px]">Voir Parcours <ArrowRight class="w-5 h-5" /></a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-primary-blue text-primary-blue text-base font-bold rounded-xl hover:bg-primary-blue/5 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-lg min-w-[200px]">Me Contacter</a>
       </div>
     </section>
 
@@ -473,7 +472,7 @@ const skillCategories: SkillCategory[] = [
           <button
             type="button"
             @click="showAllTeaching = !showAllTeaching"
-            class="px-8 py-3 bg-bg-secondary border-2 border-primary-orange text-primary-orange font-bold rounded-xl hover:bg-primary-orange hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
+            class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
           >
             {{ showAllTeaching ? 'Voir moins' : 'Voir plus' }}
           </button>
@@ -565,7 +564,7 @@ const skillCategories: SkillCategory[] = [
               </div>
 
               <div class="flex justify-center pt-2">
-                <button type="submit" :disabled="isSubmitting" class="px-8 py-4 bg-primary-orange text-white font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+                <button type="submit" :disabled="isSubmitting" class="px-8 py-3 bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
                   {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
                 </button>
               </div>

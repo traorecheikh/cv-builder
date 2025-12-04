@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: false }, // Disable in production to reduce bundle
+  devtools: { enabled: false },
   ssr: true,
 
   modules: ['@pinia/nuxt'],
@@ -46,10 +46,6 @@ export default defineNuxtConfig({
         { rel: 'preload', as: 'image', href: '/profile.jpg', type: 'image/jpeg' },
         // DNS prefetch
         { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
-        // Preconnect to API
-        { rel: 'preconnect', href: '/api' },
-        // Preload critical CSS
-        { rel: 'preload', as: 'style', href: '/fonts/Montserrat/Montserrat-VariableFont_wght.ttf' },
       ]
     }
   },
@@ -63,6 +59,15 @@ export default defineNuxtConfig({
           'vendor': ['vue', 'pinia'],
         },
       },
+    },
+  },
+
+  vite: {
+    build: {
+      cssCodeSplit: true,
+    },
+    optimization: {
+      minimize: true,
     },
   },
 
@@ -84,43 +89,16 @@ export default defineNuxtConfig({
       'Referrer-Policy': 'strict-origin-when-cross-origin',
     },
     routeRules: {
-      // Aggressive caching for static assets
-      '/**/*.{js,css,woff,woff2,ttf,eot,svg,png,jpg,jpeg,gif,webp}': {
+      // Cache CSS and image files only (not JS)
+      '/**/*.{css,woff,woff2,ttf,eot,svg,png,jpg,jpeg,gif,webp}': {
         cache: {
           maxAge: 60 * 60 * 24 * 365, // 1 year
-        },
-      },
-      // Moderate caching for pages
-      '/**': {
-        cache: {
-          maxAge: 60 * 60, // 1 hour
         },
       },
       // No cache for API routes
       '/api/**': {
         cache: false,
       },
-    },
-  },
-
-  // Route rules for caching
-  routeRules: {
-    '/api/**': { cache: false },
-  },
-
-  vite: {
-    build: {
-      cssCodeSplit: true,
-      rollupOptions: {
-        output: {
-          entryFileNames: '[name].[hash].js',
-          chunkFileNames: '[name].[hash].js',
-          assetFileNames: '[name].[hash].[ext]',
-        },
-      },
-    },
-    optimization: {
-      minimize: true,
     },
   },
 })
