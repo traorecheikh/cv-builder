@@ -564,9 +564,11 @@ const skillCategories: SkillCategory[] = [
                 Erreur lors de l'envoi. Veuillez réessayer.
               </div>
 
-              <button type="submit" :disabled="isSubmitting" class="w-fit mx-auto px-8 py-4 bg-primary-orange text-white font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
-                {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
-              </button>
+              <div class="flex justify-center pt-2">
+                <button type="submit" :disabled="isSubmitting" class="px-8 py-4 bg-primary-orange text-white font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+                  {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
+                </button>
+              </div>
             </form>
           </div>
         </div>
