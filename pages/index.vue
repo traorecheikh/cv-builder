@@ -201,8 +201,8 @@ const skillCategories: SkillCategory[] = [
       </div>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="#experience" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl min-w-[200px]">Voir Parcours <ArrowRight class="w-5 h-5" /></a>
-        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-primary-blue text-primary-blue text-base font-bold rounded-xl hover:bg-primary-blue/5 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-lg min-w-[200px]">Me Contacter</a>
+        <a href="#experience" class="inline-flex items-center justify-center gap-2 w-[220px] h-[52px] bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl">Voir Parcours <ArrowRight class="w-5 h-5" /></a>
+        <a href="#contact" class="inline-flex items-center justify-center gap-2 w-[220px] h-[52px] border-2 border-primary-blue text-primary-blue text-base font-bold rounded-xl hover:bg-primary-blue/5 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-soft hover:shadow-lg">Me Contacter</a>
       </div>
     </section>
 
@@ -273,7 +273,7 @@ const skillCategories: SkillCategory[] = [
           <button
             type="button"
             @click="showAllExperiences = !showAllExperiences"
-            class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
+            class="w-[220px] h-[52px] bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95 flex items-center justify-center"
           >
             {{ showAllExperiences ? 'Voir moins' : 'Voir plus' }}
           </button>
@@ -324,14 +324,13 @@ const skillCategories: SkillCategory[] = [
            </div>
          </div>
          <div v-if="portfolioStore.education.length > 3" class="flex justify-center mt-12">
-           <button
-             type="button"
-             @click="showAllEducation = !showAllEducation"
-             class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
-           >
-             {{ showAllEducation ? 'Voir moins' : 'Voir plus' }}
-           </button>
-         </div>
+                     <button
+                       type="button"
+                       @click="showAllEducation = !showAllEducation"
+                       class="w-[220px] h-[52px] bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95 flex items-center justify-center"
+                     >
+                       {{ showAllEducation ? 'Voir moins' : 'Voir plus' }}
+                     </button>         </div>
       </div>
     </section>
 
@@ -460,7 +459,7 @@ const skillCategories: SkillCategory[] = [
           <button
             type="button"
             @click="showAllTeaching = !showAllTeaching"
-            class="px-8 py-3 bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95"
+            class="w-[220px] h-[52px] bg-bg-secondary border-2 border-primary-blue text-primary-blue font-bold rounded-xl hover:bg-primary-blue hover:text-white transition-all duration-300 shadow-soft hover:shadow-lg cursor-pointer active:scale-95 flex items-center justify-center"
           >
             {{ showAllTeaching ? 'Voir moins' : 'Voir plus' }}
           </button>
@@ -552,7 +551,7 @@ const skillCategories: SkillCategory[] = [
               </div>
 
               <div class="flex justify-center pt-2">
-                <button type="submit" :disabled="isSubmitting" class="px-8 py-3 bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+                <button type="submit" :disabled="isSubmitting" class="w-[220px] h-[52px] bg-primary-orange text-white text-base font-bold rounded-xl hover:opacity-90 hover:-translate-y-1 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center">
                   {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
                 </button>
               </div>
