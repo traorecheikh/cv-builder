@@ -4,25 +4,25 @@ import { Linkedin, Github, Mail, Phone } from 'lucide-vue-next'
 const socialLinks = [
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/cheikh-traore',
+    url: 'https://www.linkedin.com/in/makhmadane-lo-bb557a169',
     icon: Linkedin,
     color: '#0077B5',
   },
   {
     name: 'GitHub',
-    url: 'https://github.com/traorecheikh',
+    url: '#',
     icon: Github,
     color: '#333',
   },
   {
     name: 'Email',
-    url: 'mailto:atidiane741@gmail.com',
+    url: 'mailto:dl7781775@gmail.com',
     icon: Mail,
     color: '#E64922',
   },
   {
     name: 'Phone',
-    url: 'tel:+221781706184',
+    url: 'tel:+221773022150',
     icon: Phone,
     color: '#1171B8',
   },

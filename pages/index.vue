@@ -23,6 +23,7 @@ import {
   Phone,
 } from 'lucide-vue-next'
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.vue'
+import SocialLinks from '../components/ui/SocialLinks.vue'
 
 const portfolioStore = usePortfolioStore()
 const { isLoaded, hasError, handleLoad, handleError } = useImageLoad()
@@ -193,22 +194,9 @@ const skillCategories: SkillCategory[] = [
             <p class="text-lg text-text-secondary leading-relaxed mt-4 max-w-md mx-auto md:mx-0">{{ portfolioStore.personalInfo.bio }}</p>
           </div>
 
-          <div class="w-24 h-24 mx-auto md:mx-0 bg-bg-secondary rounded-xl p-2 border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer flex items-center justify-center">
-            <div class="grid grid-cols-2 gap-1.5">
-                <a href="https://www.linkedin.com/in/makhmadane-lo-bb557a169" target="_blank" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="LinkedIn">
-                  <Linkedin class="w-4 h-4 group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="#" target="_blank" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="GitHub">
-                  <Github class="w-4 h-4 group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="mailto:dl7781775@gmail.com" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="Email">
-                  <Mail class="w-4 h-4 group-hover:scale-110 transition-transform" />
-                </a>
-                <a href="tel:+221773022150" class="p-2 rounded-lg bg-primary-blue/10 hover:bg-primary-blue/20 text-primary-blue transition-all hover:scale-110 group flex items-center justify-center" aria-label="Phone">
-                  <Phone class="w-4 h-4 group-hover:scale-110 transition-transform" />
-                </a>
-              </div>
-            </div>
+          <div class="w-full mt-6 pb-6 border-b border-bg-tertiary flex justify-center md:justify-start">
+            <SocialLinks />
+          </div>
         </div>
       </div>
 
