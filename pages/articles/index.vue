@@ -11,7 +11,7 @@ const config = useRuntimeConfig()
 const { data: articlesResponse, pending, error } = await useAsyncData('articles-list', () => find('articles', {
   populate: 'coverImage',
   sort: 'publishedAt:desc'
-}))
+} as any))
 
 // Debugging: Log any errors immediately
 import { watch } from 'vue'
