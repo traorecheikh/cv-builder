@@ -13,6 +13,19 @@ const { data: articlesResponse, pending, error } = await useAsyncData('articles-
   sort: 'publishedAt:desc'
 }))
 
+// Debugging: Log any errors immediately
+import { watch } from 'vue'
+watch(error, (newErr) => {
+  if (newErr) {
+    console.error('❌ STRAPI FETCH ERROR:', newErr)
+    console.error('Full Error Object:', JSON.stringify(newErr, null, 2))
+    
+    // Log the URL we are trying to hit
+    const runtimeConfig = useRuntimeConfig()
+    console.log('🔧 Configured Strapi URL:', runtimeConfig.public.strapi?.url || 'FALLBACK: http://localhost:1337')
+  }
+}, { immediate: true })
+
 const articles = computed(() => {
   const data = articlesResponse.value?.data || []
   console.log('Fetched articles:', data) // Debugging
