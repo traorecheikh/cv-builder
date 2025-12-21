@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - core-js
+  - cwebp-bin
+  - esbuild
+  - mozjpeg
+  - vue-demi

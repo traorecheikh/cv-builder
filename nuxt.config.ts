@@ -4,7 +4,15 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
 
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxtjs/strapi'],
+
+  strapi: {
+    url: process.env.STRAPI_URL || 'http://localhost:1337',
+    prefix: '/api',
+    version: 'v4',
+    cookie: {},
+    cookieName: 'strapi_jwt'
+  },
 
   css: ['~/assets/css/main.css'],
 
@@ -52,7 +60,7 @@ export default defineNuxtConfig({
 
   // Build optimizations
   build: {
-    transpile: [],
+    transpile: ['qs'],
     rollupOptions: {
       output: {
         manualChunks: {
@@ -66,8 +74,8 @@ export default defineNuxtConfig({
     build: {
       cssCodeSplit: true,
     },
-    optimization: {
-      minimize: true,
+    optimizeDeps: {
+      include: ['qs'],
     },
   },
 
