@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxtjs/strapi'],
 
   strapi: {
-    url: process.env.STRAPI_URL || 'http://localhost:1337',
+    url: process.env.STRAPI_URL || 'https://lic-strapi.onrender.com',
     prefix: '/api',
     version: 'v4',
     cookie: {},
@@ -82,7 +82,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: false,
-      routes: ['/', '/articles'],
+      routes: ['/'],
     },
     minify: true,
     compressPublicAssets: {
