@@ -20,7 +20,10 @@ export default defineComponent({
       populate: 'coverImage',
       sort: 'publishedAt:desc',
       locale: 'all'
-    } as any))
+    } as any), {
+      server: false,
+      lazy: true
+    })
 
     // Debugging: Log any errors immediately
     watch(error, (newErr) => {
