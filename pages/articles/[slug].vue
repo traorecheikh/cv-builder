@@ -67,7 +67,9 @@ const getImageUrl = (image: any) => {
   const url = image.url || image?.attributes?.url
   if (!url) return null
   if (url.startsWith('http')) return url
-  return `${strapiUrl}${url}`
+  const fullUrl = `${strapiUrl}${url}`
+  console.log('🖼️ Resolved Banner URL:', fullUrl) // Debugging
+  return fullUrl
 }
 
 // Format date

@@ -1,57 +1,77 @@
-<script setup lang="ts">
-import { computed } from 'vue'
+<script lang="ts">
+import { computed, watch, defineComponent } from 'vue'
 import { Calendar, Clock, ArrowRight, AlertCircle } from 'lucide-vue-next'
 import { useImageLoad } from '../../composables/useImageLoad'
 
-const { hasError, handleError } = useImageLoad()
-const { find } = useStrapi()
-const config = useRuntimeConfig()
+export default defineComponent({
+  components: {
+    Calendar,
+    Clock,
+    ArrowRight,
+    AlertCircle
+  },
+  async setup() {
+    const { hasError, handleError } = useImageLoad()
+    const { find } = useStrapi()
+    const config = useRuntimeConfig()
 
-// Fetch articles from Strapi
-const { data: articlesResponse, pending, error } = await useAsyncData('articles-list', () => find('articles', {
-  populate: 'coverImage',
-  sort: 'publishedAt:desc'
-} as any))
+    // Fetch articles from Strapi
+    const { data: articlesResponse, pending, error } = await useAsyncData('articles-list', () => find('articles', {
+      populate: 'coverImage',
+      sort: 'publishedAt:desc',
+      locale: 'all'
+    } as any))
 
-// Debugging: Log any errors immediately
-import { watch } from 'vue'
-watch(error, (newErr) => {
-  if (newErr) {
-    console.error('❌ STRAPI FETCH ERROR:', newErr)
-    console.error('Full Error Object:', JSON.stringify(newErr, null, 2))
-    
-    // Log the URL we are trying to hit
-    const runtimeConfig = useRuntimeConfig()
-    console.log('🔧 Configured Strapi URL:', runtimeConfig.public.strapi?.url || 'FALLBACK: http://localhost:1337')
+    // Debugging: Log any errors immediately
+    watch(error, (newErr) => {
+      if (newErr) {
+        console.error('❌ STRAPI FETCH ERROR:', newErr)
+        console.error('Full Error Object:', JSON.stringify(newErr, null, 2))
+        
+        // Log the URL we are trying to hit
+        const runtimeConfig = useRuntimeConfig()
+        console.log('🔧 Configured Strapi URL:', runtimeConfig.public.strapi?.url || 'FALLBACK: http://localhost:1337')
+      }
+    }, { immediate: true })
+
+    const articles = computed(() => {
+      const data = articlesResponse.value?.data || []
+      console.log('Fetched articles:', data) // Debugging
+      return data
+    })
+
+    // Helper to resolve media URL
+    const getImageUrl = (image: any) => {
+      if (!image) return null
+      const url = image.url || image?.attributes?.url
+      if (!url) return null
+      
+      if (url.startsWith('http')) return url
+      const strapiUrl = config.public.strapi?.url || 'http://localhost:1337'
+      return `${strapiUrl}${url}`
+    }
+
+    // Format date
+    const formatDate = (dateString: string) => {
+      if (!dateString) return ''
+      return new Date(dateString).toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })
+    }
+
+    return {
+      pending,
+      error,
+      articles,
+      getImageUrl,
+      handleError,
+      formatDate,
+      hasError
+    }
   }
-}, { immediate: true })
-
-const articles = computed(() => {
-  const data = articlesResponse.value?.data || []
-  console.log('Fetched articles:', data) // Debugging
-  return data
 })
-
-// Helper to resolve media URL
-const getImageUrl = (image: any) => {
-  if (!image) return null
-  const url = image.url || image?.attributes?.url
-  if (!url) return null
-  
-  if (url.startsWith('http')) return url
-  const strapiUrl = config.public.strapi?.url || 'http://localhost:1337'
-  return `${strapiUrl}${url}`
-}
-
-// Format date
-const formatDate = (dateString: string) => {
-  if (!dateString) return ''
-  return new Date(dateString).toLocaleDateString('fr-FR', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  })
-}
 </script>
 
 <template>
