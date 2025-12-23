@@ -18,8 +18,8 @@ export default defineComponent({
     // Fetch articles from Strapi
     const { data: articlesResponse, pending, error } = await useAsyncData('articles-list', () => find('articles', {
       populate: 'coverImage',
+
       sort: 'publishedAt:desc',
-      locale: 'all'
     } as any), {
       server: false,
       lazy: true
