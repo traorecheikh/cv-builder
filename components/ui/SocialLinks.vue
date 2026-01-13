@@ -10,7 +10,7 @@ const socialLinks = [
   },
   {
     name: 'GitHub',
-    url: '#',
+    url: 'https://github.com/makhmadane',
     icon: Github,
     color: '#333',
   },

@@ -5,6 +5,13 @@ export interface TechStack {
   [category: string]: string[]
 }
 
+export interface SubProject {
+  title: string
+  description: string
+  missions?: string[]
+  technicalStack?: TechStack
+}
+
 export interface Experience {
   id: string
   company: string
@@ -15,6 +22,7 @@ export interface Experience {
   current?: boolean
   client?: string
   projectDescription?: string
+  projects?: SubProject[]
   missions?: string[]
   technicalStack?: TechStack
   description?: string[]
@@ -82,7 +90,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     email: 'dl7781775@gmail.com',
     phone: '77 302 21 50 / 78 434 71 42',
     location: 'Dakar, Sénégal',
-    bio: 'Ingénieur en Génie Logiciel avec plus de 7 ans d’expérience en développement web, mobile et DevOps. Spécialisé en architectures microservices, cloud (AWS), CI/CD, et développement full-stack (Java/Spring, Angular/React, Flutter/Laravel). Expérience confirmée en gestion de projets, encadrement technique et formation IT.',
+    bio: 'Ingénieur Senior en Génie Logiciel avec 7+ ans d\'expertise en conception et déploiement de solutions scalables. Expert en architectures distribuées (microservices, cloud-native AWS) et automatisation DevOps/CI-CD. Spécialiste full-stack polyvalent (Java/Spring, Angular/React, Flutter/Laravel) avec un leadership technique avéré : pilotage de projets stratégiques, mentoring d\'équipes et optimisation des processus de développement. Formateur universitaire en Génie Logiciel, DevOps et Cloud Computing, alliant expertise terrain et transmission des connaissances',
     id: '1',
     birthDate: '',
     nationality: 'Sénégalaise',
@@ -93,36 +101,102 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     {
       id: '1',
       company: 'AXA ASSURANCE',
-      role: 'Lead développeur FULL-STACK / DEVOPS',
-      location: 'Dakar, Sénégal',
+      role: 'Lead Développeur / Cloud',
+      location: 'Place de l\'indépendance, Dakar, Sénégal',
       startDate: '24-04-2023',
       endDate: 'Présent',
       current: true,
       client: 'POLE : AFRIQUE DE OUEST',
-      projectDescription: 'Plateforme OPENINSUR : Mise en place une plateforme pour la vente d’assurance dans la zone CIMA (SENEGAL-GABON-COTE IVOIRE-CAMEROUN)',
-      missions: [
-        'Implémentation des interfaces de l’application web avec react-redux',
-        'Implémentation des micro-services backend',
-        'Implémentation des test unitaires/intégrations',
-        'Implémentation des tests de composant',
-        'Implémentation des déploiements AWS/ OPENSHIFT',
+      projects: [
+        {
+          title: 'PLATEFORME OPENINSUR',
+          description: 'Mise en place une plateforme pour la vente d\'assurance dans la zone CIMA (SENEGAL-GABON-COTE IVOIRE-CAMEROUN)',
+          missions: [
+            'Implémentation des interfaces de l\'application web avec react-redux',
+            'Implémentation des micro-services backend',
+            'Implémentation des test unitaires/intégrations',
+            'Implémentation des tests de composant',
+            'Implémentation des déploiements AWS/ OPENSHIFT',
+            'Implementation : WAVE /OM pour différente pays (SENEGAL-GABON-COTE IVOIRE-CAMEROUN)',
+          ],
+          technicalStack: {
+            'Frontend': ['React 17', 'React Native', 'Redux', 'Redux-Saga', 'React Router', 'Styled-Components', 'React Hook Form', 'Yup', 'Auth0', 'Chart.js', 'ApexCharts', 'jsPDF', 'Workbox (PWA)', 'Axios', 'Webpack 5', 'Firebase'],
+            'Backend': ['Java 17/11/8', 'Spring Boot', 'Spring Data', 'Microservices', 'PostgreSQL', 'Liquibase', 'Flyway', 'Kafka', 'RabbitMQ', 'Auth0 (OAuth2/JWT)', 'Pattern SAGA', 'REST API', 'Express'],
+            'DevOps & Infrastructure': ['Docker', 'Jenkins', 'Git/GitHub', 'AWS (EC2, CloudWatch, RDS, CloudFormation)'],
+            'Méthodologie': ['UML', 'Scrum'],
+          },
+        },
+        {
+          title: 'PLATEFORME DIGITFLEET',
+          description: 'Mise en place une plateforme pour la vente des grandes flottes assurances pour le Sénégal',
+          missions: [
+            'Implémentation des interfaces de l\'application web avec Angular',
+            'Implémentation des micro-services backend',
+            'Implémentation des test unitaires/intégrations',
+            'Implémentation des tests de composant',
+          ],
+          technicalStack: {
+            'Frontend': ['Angular 17'],
+            'Backend': ['Java 17/11/8', 'Spring Boot', 'Spring Data', 'Microservices', 'PostgreSQL', 'Liquibase', 'Kafka', 'RabbitMQ', 'JHipster', 'Auth0 (OAuth2/JWT)', 'Pattern SAGA', 'REST API'],
+            'DevOps & Infrastructure': ['Docker', 'Jenkins', 'Git/GitHub', 'AWS (EC2, CloudWatch, RDS, CloudFormation)'],
+            'Méthodologie': ['UML', 'Scrum'],
+          },
+        },
+        {
+          title: 'API AXA - INTOUCH',
+          description: 'Mise en place des apis pour la vente assurance auto pour intégrer dans le système de intouch',
+          missions: [
+            'Implémentation des micro-services backend',
+            'Implémentation des test unitaires/intégrations',
+            'Implémentation de l\'intégration avec le système Intouch',
+          ],
+          technicalStack: {
+            'Backend': ['Java 17', 'Spring Boot', 'Spring Cloud', 'Spring Data', 'Microservices', 'OpenFeign', 'PostgreSQL', 'Liquibase', 'Flyway', 'Kafka', 'Redis', 'Auth0 (OAuth2/JWT)', 'Pattern SAGA', 'REST API', 'Lombok', 'MapStruct', 'SpringDoc OpenAPI'],
+            'DevOps & Infrastructure': ['Docker', 'Jenkins', 'Git/GitHub', 'AWS (Lambda, EC2, CloudWatch, RDS, CloudFormation, Secrets Manager)', 'Postman API'],
+            'Méthodologie': ['UML', 'Scrum'],
+          },
+        },
+        {
+          title: 'API AXA – ORANGE MONEY (MAX IT)',
+          description: 'Mise en place des apis pour la vente assurance sur la plateforme de orange money cote ivoire (assurance santé)',
+          missions: [
+            'Implémentation des micro-services backend',
+            'Implémentation des test unitaires/intégrations',
+            'Implémentation de l\'intégration avec Orange Money',
+          ],
+          technicalStack: {
+            'Backend': ['Java 17', 'Spring Boot', 'Spring Cloud', 'Spring Data', 'Microservices', 'OpenFeign', 'PostgreSQL', 'Liquibase', 'Flyway', 'Kafka', 'Auth0 (OAuth2/JWT)', 'Pattern SAGA', 'REST API', 'Lombok', 'MapStruct'],
+            'DevOps & Infrastructure': ['Docker', 'Jenkins', 'Git/GitHub', 'AWS (EC2, CloudWatch, RDS, CloudFormation)'],
+            'Méthodologie': ['UML', 'Scrum'],
+          },
+        },
+        {
+          title: 'PROJET LEGACY AXA CIMA',
+          description: 'Mise en place des API SOAP pour communiquer avec les legacy système d\'Axa avec des bases de données ISOPAC IBM (AS400) via Mulesoft (SOA)',
+          missions: [
+            'Implémentation des API SOAP',
+            'Intégration avec les systèmes legacy AS400',
+            'Implémentation de l\'architecture SOA avec Mulesoft',
+          ],
+          technicalStack: {
+            'Backend': ['Java 17/11/8', 'Spring Boot', 'SOAP', 'REST API'],
+            'Legacy & Integration': ['Mulesoft IBM', 'SQL Server', 'ISOPAC IBM (AS400)', 'SOA'],
+            'DevOps & Infrastructure': ['Docker', 'Jenkins', 'Git/GitHub'],
+            'Méthodologie': ['UML', 'Scrum'],
+          },
+        },
       ],
-      technicalStack: {
-        'Technologies': ['Microservices', 'Spring Boot', 'Spring Data', 'Liquibase', 'Kafka', 'RabbitMQ', 'JHipster', 'Angular', 'Auth0', 'React JS', 'Java 17-11-7', 'PostgreSQL'],
-        'DevOps': ['Docker', 'Jenkins', 'AWS (EC2, CloudWatch, RDS, CloudFormation)'],
-        'Méthode': ['Scrum', 'Pattern SAGA', 'UML', 'GIT', 'GitHub'],
-      },
     },
     {
       id: '2',
       company: 'SONAC ASSURANCE',
       role: 'Lead Développeur Angular /Spring Boot',
-      location: 'Dakar, Sénégal',
+      location: 'Place de l\'indépendance, Dakar, Sénégal',
       startDate: '01-10-2022',
       endDate: '01-12-2024',
-      projectDescription: 'Projet Plateforme SENRE : Mise en place une plateforme pour les ré-assureurs d’Afrique',
+      projectDescription: 'Projet Plateforme SENRE : Mise en place une plateforme pour les ré-assureurs d\'Afrique',
       missions: [
-        'Implémentation des interfaces de l’application web avec angular',
+        'Implémentation des interfaces de l\'application web avec angular',
         'Implémentation des micro services backend',
         'Implémentation des test unitaires/intégrations',
         'Implémentation des tests unitaires',
@@ -131,50 +205,53 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       technicalStack: {
          'Technologies': ['Spring Boot', 'Spring Data', 'Liquibase', 'KEYCLOCK', 'Angular 12', 'Java 17', 'PostgreSQL'],
          'Outils': ['Docker', 'Jenkins', 'Rest API', 'Tomcat Apache', 'UML', 'GIT', 'GitHub'],
+         'Méthode': ['Scrum'],
       },
     },
     {
       id: '3',
       company: 'SOUMARI SN',
       role: 'Consultant Développeur web/mobile',
-      location: 'Dakar, Sénégal',
+      location: 'Avenue Lamine Gueye, Dakar, Sénégal',
       startDate: '01-09-2022',
-      endDate: 'Présent',
+      endDate: 'Aujourd\'hui',
       current: true,
-      projectDescription: 'Projets Plateforme SOUMARI : Mise en place une plateforme de e-commerce web/mobile pour l’entreprise SOUMARI',
+      projectDescription: 'Projets Plateforme SOUMARI : Mise en place une plateforme de e-commerce web/mobile pour l\'entreprise SOUMARI',
       missions: [
-        'Implémentation des interfaces de l’application mobile avec fluter/dart',
-        'Implémentation des interfaces de l’application web avec angular',
+        'Implémentation des interfaces de l\'application mobile avec fluter/dart',
+        'Implémentation des interfaces de l\'application web avec angular',
         'Implémentation des micro-services backend',
-        'Implémentation des test unitaire/intégrations',
+        'Implémentation des test unitaires/intégrations',
         'Implémentation des tests unitaires',
         'Implémentation des tests composants angular',
       ],
       technicalStack: {
         'Technologies': ['Flutter', 'Dart', 'Laravel', 'Liquibase', 'Angular 12', 'Java 17', 'PostgreSQL'],
         'Outils': ['Docker', 'Rest Api', 'UML', 'GIT', 'GitHub'],
+        'Méthode': ['Scrum'],
       },
     },
     {
       id: '4',
       company: 'NLDSOFTWARE',
       role: 'Développeur FULLSTACK (Web)',
-      location: 'Dakar, Sénégal',
+      location: 'Liberté 6, Dakar, Sénégal',
       startDate: '06-07-2022',
       endDate: '06-09-2022',
-      projectDescription: 'Projets Plateforme SENCARTOUR : Mise en place une plateforme de e-commerce pour l’entreprise de SENCARTOUR',
+      projectDescription: 'Projets Plateforme SENCARTOUR : Mise en place une plateforme de e-commerce pour l\'entreprise de SENCARTOUR',
       missions: [
-        'Implémentation des interfaces de l’application web',
+        'Implémentation des interfaces de l\'application web',
         'Implémentation des API coté front',
         'Implémentation des API coté back',
         'Implémentation de API de PAYDUNYA',
-        'Implémentation de l’api email',
+        'Implémentation de l\'api email',
         'Création de la base de données',
         'CI/CD',
       ],
       technicalStack: {
         'Technologies': ['Laravel', 'PostgreSQL', 'MYSQL'],
         'Outils': ['UML', 'GIT', 'GitHub'],
+        'Méthode': ['Scrum'],
       },
       website: 'https://www.senecartours.sn/',
     },
@@ -182,18 +259,19 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       id: '5',
       company: 'NLDSOFTWARE',
       role: 'Développeur FULLSTACK (Web)',
-      location: 'Dakar, Sénégal',
+      location: 'Liberté 6, Dakar, Sénégal',
       startDate: '11-03-2022',
       endDate: '06-07-2022',
       projectDescription: 'Projets VISITE TECHNIQUE : Mise en place une plateforme pour réserver une visite technique sans se déplacer du lieu de travaille',
       missions: [
-        'Implémentation des interfaces de l’application web avec angular',
+        'Implémentation des interfaces de l\'application web avec angular',
         'Implémentation des API coté front',
         'CI/CD',
       ],
       technicalStack: {
         'Technologies': ['Angular', 'Spring boot', 'PostgreSQL', 'MYSQL'],
         'Outils': ['UML', 'GIT', 'GitHub'],
+        'Méthode': ['Scrum'],
       },
       website: 'https://www.visitetechnique.com/',
     },
@@ -201,10 +279,10 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       id: '6',
       company: 'SONATEL(SABLUX)',
       role: 'Développeur FULLSTACK (Web / Mobile)',
-      location: 'Dakar, Sénégal',
+      location: 'Sacré Coeur, Dakar, Sénégal',
       startDate: '06-09-2021',
       endDate: '06-05-2022',
-      projectDescription: 'Projets KAABU MOBILE : Mise en place d’une application de gestion web et mobile pour les vendeurs terrains de la Sonatel sénégal (Identification, Changement des puces, Compte OM, Swap Sim).',
+      projectDescription: 'Projets KAABU MOBILE : Mise en place d\'une application de gestion web et mobile pour les vendeurs terrains de la Sonatel sénégal.\n-Identification des puces\n-Changement des puces\n-Création Compte OM\n-Swap Sim',
       missions: [
         'Implémentions des interfaces de la partie back office avec angular',
         'Gestion des imports/exports de donnée avec les fichiers Excel',
@@ -213,38 +291,40 @@ export const usePortfolioStore = defineStore('portfolio', () => {
         'Implémentation des api partie mobile',
         'Gestion des workers partie mobile',
         'Création de la BD avec PostgreSQL',
-        'Implantation de l’api sms de la Sonatel',
+        'Implantation de l\'api sms de la Sonatel',
         'Implémentation des différentes micro services',
       ],
       technicalStack: {
         'Technologies': ['Angular', 'Spring boot', 'Flutter', 'MYSQL', 'Kibana', 'Elasticsearch'],
-        'Outils': ['GIT', 'GitHub', 'Git flow', 'JIRA', 'BITBUCKET'],
+        'Outils': ['UML', 'GIT', 'GitHub', 'Git flow', 'JIRA', 'BITBUCKET'],
+        'Méthode': ['Scrum'],
       },
     },
     {
       id: '7',
       company: 'NLDSOFTWARE',
       role: 'Développeur FULLSTACK (Web)',
-      location: 'Dakar, Sénégal',
+      location: 'Liberté 6, Dakar, Sénégal',
       startDate: '01-04-2021',
       endDate: '06-07-2022',
-      projectDescription: 'Projets Plateforme Taxis à Nantes : Mise en place d\'une application web et mobile pour la gestion d\'une compagnie de Taxis à Nantes',
+      projectDescription: 'Projets Plateforme Taxis à Nantes : Mise en place d\'une application web et mobile pour la gestion d\'une compagnie de Taxis à Nantes (Réalisé avec Ionic & Laravel)',
       missions: [
-        'Implémentation des interfaces de l’application web',
+        'Implémentation des interfaces de l\'application web',
         'Implémentation des API coté front',
         'CI/CD',
       ],
       technicalStack: {
         'Technologies': ['Laravel', 'Ionic', 'PostgreSQL', 'MYSQL'],
         'Outils': ['UML', 'GIT', 'GitHub'],
+        'Méthode': ['Scrum'],
       },
       website: 'https://www.taxis-nantes.com/',
     },
     {
       id: '8',
       company: 'NLDSOFTWARE',
-      role: 'INGENIEUR DEVOPS',
-      location: 'Dakar, Sénégal',
+      role: 'INGENIEURIE DEVOPS',
+      location: 'Sacré-Coeur, Dakar, Sénégal',
       startDate: '01-02-2021',
       endDate: '30-06-2021',
       projectDescription: 'Gestion des transactions de la Douane',
@@ -257,41 +337,43 @@ export const usePortfolioStore = defineStore('portfolio', () => {
         'Technologies': ['ASP.net'],
         'DevOps': ['JENKINS', 'DOCKER', 'KUBERNETES', 'SONAR'],
         'Outils': ['GIT', 'GITHUB', 'JIRA', 'Trello', 'Slack'],
+        'Méthode': ['Scrum'],
       },
     },
     {
       id: '9',
       company: 'OCTASEN',
       role: 'Développeur FULLSTACK (web/mobile/DevOps)',
-      location: 'Dakar, Sénégal',
+      location: 'Fass Medina, Dakar, Sénégal',
       startDate: '01-10-2019',
       endDate: '30-12-2020',
-      projectDescription: 'Projets : YESCOLA (livraison), Gestion école, Entreprise de Lavage',
+      projectDescription: 'Projets :\n• Mise en place d\'une application de gestion et suivi des livraisons via Google Maps (YESCOLA)\n• Mise en place d\'une application de gestion école (JARDIN-PRIMAIRE-SECONDAIRE-LYCEE)\n• Mise en place d\'une application d\'une entreprise de Lavage',
       missions: [
         'Implémentions des interfaces de la partie back office avec angular',
         'Gestion des imports/exports de donnée avec les fichiers Excel',
         'Gestion des générations des factures avec PDF ou csv',
-        'Implémentation de l’api de géolocalisation de Google Maps',
-        'Implémentation de l’api de payement de paydunya',
+        'Implémentation de l\'api de géolocalisation de Google Maps',
+        'Implémentation de l\'api de payement de paydunya',
         'Implémentions des interfaces de la partie mobile office avec flutter',
         'Création de la BD avec PostgreSQL Implémentation des différentes micro services',
       ],
       technicalStack: {
         'Technologies': ['Angular', 'Flutter', 'Laravel', 'Spring Boot', 'PostgreSQL', 'MySQL', 'Bootstrap'],
         'DevOps': ['JENKINS', 'SONAR', 'DOCKER', 'AWS'],
-        'Outils': ['GIT', 'GitHub', 'UML', 'Trello', 'Slack'],
+        'Outils': ['UML', 'GIT', 'GitHub', 'Trello', 'Slack'],
+        'Méthode': ['Scrum'],
       },
     },
     {
       id: '10',
       company: 'Institut Supérieur Informatique (ISI)',
       role: 'Développeur FULLSTACK (web/mobile)',
-      location: 'Dakar, Sénégal',
+      location: 'Médina, Dakar, Sénégal',
       startDate: '01-07-2019',
       endDate: '30-09-2019',
-      projectDescription: 'Gestion d’une application d’archivage des documents électroniques pour ISI.',
+      projectDescription: 'Projets :\n• Gestion d\'une application d\'archivage des documents électroniques pour ISI.',
       missions: [
-        'Implémentation des interfaces de l’application web',
+        'Implémentation des interfaces de l\'application web',
         'Implémentation des API avec la partie back end',
         'Export/Import des documents scolaires',
         'Implémentation des API coté front',
@@ -306,20 +388,21 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       id: '11',
       company: 'ATOS',
       role: 'Développeur FULLSTACK (web/mobile)',
-      location: 'Dakar, Sénégal',
+      location: 'Keur Gorgui, Dakar, Sénégal',
       startDate: '01-12-2018',
       endDate: '30-12-2019',
-      projectDescription: 'Gestion des collaborateurs d’Atos, MYARM (Application portail d’Atos)',
+      projectDescription: 'Projets :\n• Gestion des collaborateurs d\'Atos\n• MYARM (Application portail d\'Atos)',
       missions: [
-        'Implémentation des interfaces de l’application web',
+        'Implémentation des interfaces de l\'application web',
         'Implémentation des API sur la partie back end',
         'Implémentation des API coté front',
         'Création de la BD avec PostgreSQL',
-        'Implémentation des API pour l’envoi de sms ou email à partie du back end',
+        'Implémentation des API pour l\'envoi de sms ou email à partie du back end',
       ],
       technicalStack: {
         'Technologies': ['Angular', 'Ionic', 'JSF Servlet', 'Spring Boot', 'PostgreSQL', 'Hipster'],
         'Outils': ['UML', 'GIT', 'GitHub', 'Trello', 'Slack'],
+        'Méthode': ['Scrum'],
       },
     },
   ])
@@ -328,7 +411,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     {
       id: '1',
       institution: 'Institut Supérieur Informatique (ISI)',
-      degree: 'Master 2 Professionnelle en Génie Logiciel',
+      degree: 'Master en Ingénierie Génie Logiciel (Bac+5)',
       field: 'Génie Logiciel',
       location: 'Dakar, Sénégal',
       startDate: '',
@@ -337,7 +420,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     {
       id: '2',
       institution: 'Institut Supérieur Informatique (ISI)',
-      degree: 'Licence Professionnelle en Génie Logiciel',
+      degree: 'Licence Ingénierie Génie Logiciel (Bac+3)',
       field: 'Génie Logiciel',
       location: 'Dakar, Sénégal',
       startDate: '',
@@ -346,7 +429,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     {
       id: '3',
       institution: 'Institut Supérieur Informatique (ISI)',
-      degree: 'BTS – Informatique',
+      degree: 'BTS en Informatique de gestion (Bac+2)',
       field: 'Informatique',
       location: 'Dakar, Sénégal',
       startDate: '',
@@ -355,7 +438,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     {
       id: '4',
       institution: 'Institut Supérieur Informatique (ISI)',
-      degree: 'DTS – Génie Logiciel',
+      degree: 'DTS – Génie Logiciel (Bac+2)',
       field: 'Génie Logiciel',
       location: 'Dakar, Sénégal',
       startDate: '',
@@ -364,7 +447,7 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     {
       id: '5',
       institution: 'Institut Supérieur Informatique (ISI)',
-      degree: 'DTS - Réseaux Informatique',
+      degree: 'DTS - Réseaux Informatique (Bac+2)',
       field: 'Réseaux Informatique',
       location: 'Dakar, Sénégal',
       startDate: '',
@@ -413,12 +496,10 @@ export const usePortfolioStore = defineStore('portfolio', () => {
 
   const skills = ref({
     applicativeDevelopment: [
-      'Java', 'Spring Boot', 'Angular', 'React JS', 'Flutter', 'Laravel',
-      'Nodejs Express', 'JSF Servlet', 'Ionic', 'Dart', 'Python',
-      'PostgreSQL', 'MySQL', 'MongoDB',
+      'Microservice', 'SOA', 'Java', 'Spring Boot', 'Jakarta/JEE','Angular', 'React JS', 'Flutter', 'Laravel', 'Nodejs Express', 'Flutter/Dart', 'Python', 'PostgreSQL', 'MySQL', 'MongoDB',
     ],
     securityCloud: [
-      'AWS', 'EC2', 'CloudWatch', 'RDS', 'CloudFormation', 'OpenShift',
+      'AWS', 'EC2', 'CloudWatch', 'RDS','Cloud Front', 'CloudFormation','CodePipeline','OpenShift',
       'Keycloak', 'Auth0',
     ],
     devOps: [
@@ -426,14 +507,13 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       'Bitbucket', 'Git flow', 'CI/CD',
     ],
     methodology: [
-      'Agile', 'Scrum', 'UML', 'Merise', 'Jira', 'Trello', 'Slack',
+      'Agile', 'Scrum', 'UML', 'Jira', 'Trello', 'Slack',
     ],
   })
 
   const languages = ref([
-    { language: 'Français', mother: false, comprehension: 'Courant', speaking: 'Courant', writing: 'Courant' },
-    { language: 'Wolof', mother: true, comprehension: 'Courant', speaking: 'Courant', writing: 'Courant' },
-    { language: 'Anglais', comprehension: 'Niveau Moyen', speaking: 'Niveau Moyen', writing: 'Niveau Moyen' },
+    { language: 'Français', comprehension: 'Courant', speaking: 'Courant', writing: 'Courant' },
+    { language: 'Anglais', comprehension: 'Courant', speaking: 'Moyen', writing: 'Moyen' },
   ])
 
   const certifications = ref<Certification[]>([
@@ -446,13 +526,6 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     },
     {
       id: '2',
-      name: 'AWS developer',
-      issuer: 'AWS',
-      issueDate: '',
-      credentialUrl: 'https://www.linkedin.com/in/makhmadane-lobb557a169/details/certifications/1730132032739/single-media-viewer/?profileId=ACoAACghDTkBRTBlQxVakDgLi5YQ5NUemDhY1L0',
-    },
-    {
-      id: '3',
       name: 'DevOps Certified',
       issuer: 'Unknown',
       issueDate: '',
@@ -471,18 +544,18 @@ export const usePortfolioStore = defineStore('portfolio', () => {
         'Java (Java FX -Java/SE – JSP/Servlet- ORM- JSP-Spring –Spring Boot …)',
         'PHP (Base-Webservice (Json-Soap) - MVC -ORM - Laravel – Symfony …)',
         'JavaScript (Base-JQuery-Ajax-Angular -React JS …)',
-        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE )',
+        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE)',
         'CMS (Wordpress– Drupal …)',
         'Analyse (UML/MERISE/SGBD/SQL…)',
         'Bureautique (Word-Excel-Power Point)',
-        'Design Pattern',
+        'Design Pattern - Architecture des SI',
       ],
       startDate: '2019',
       endDate: 'Aujourd\'hui',
     },
     {
       id: '2',
-      institution: 'Sup Info Dakar',
+      institution: 'Sup Info ',
       position: 'Formateur en (Analyste, Concepteur et Développeur d’application)',
       courses: [
         'Algorithme (Base et avancé)',
@@ -490,18 +563,18 @@ export const usePortfolioStore = defineStore('portfolio', () => {
         'Java (Java FX -Java/SE – JSP/Servlet- ORM- JSP-Spring –Spring Boot …)',
         'PHP (Base-Webservice (Json-Soap) - MVC -ORM - Laravel – Symfony …)',
         'JavaScript (Base-JQuery-Ajax-Angular -React JS …)',
-        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE )',
+        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE)',
         'CMS (Wordpress– Drupal …)',
         'Analyse (UML/MERISE/SGBD/SQL…)',
         'Bureautique (Word-Excel-Power Point)',
-        'Design Pattern',
+        'Design Pattern - Architecture des SI',
       ],
       startDate: '2019',
       endDate: 'Aujourd\'hui',
     },
     {
       id: '3',
-      institution: 'ISM DAKAR',
+      institution: 'ISM (Institut Supérieur de Management) ',
       position: 'Formateur en (Analyste, Concepteur et Développeur d’application)',
       courses: [
         'Algorithme (Base et avancé)',
@@ -509,18 +582,18 @@ export const usePortfolioStore = defineStore('portfolio', () => {
         'Java (Java FX -Java/SE – JSP/Servlet- ORM- JSP-Spring –Spring Boot …)',
         'PHP (Base-Webservice (Json-Soap) - MVC -ORM - Laravel – Symfony …)',
         'JavaScript (Base-JQuery-Ajax-Angular -React JS …)',
-        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE )',
+        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE)',
         'CMS (Wordpress– Drupal …)',
         'Analyse (UML/MERISE/SGBD/SQL…)',
         'Bureautique (Word-Excel-Power Point)',
-        'Design Pattern',
+        'Design Pattern - Architecture des SI',
       ],
       startDate: '2019',
       endDate: 'Aujourd\'hui',
     },
     {
       id: '4',
-      institution: 'IIBS DAKAR',
+      institution: 'IIBS (Institut Informatique Business School)',
       position: 'Formateur en (Analyste, Concepteur et Développeur d’application)',
       courses: [
         'Algorithme (Base et avancé)',
@@ -528,34 +601,16 @@ export const usePortfolioStore = defineStore('portfolio', () => {
         'Java (Java FX -Java/SE – JSP/Servlet- ORM- JSP-Spring –Spring Boot …)',
         'PHP (Base-Webservice (Json-Soap) - MVC -ORM - Laravel – Symfony …)',
         'JavaScript (Base-JQuery-Ajax-Angular -React JS …)',
-        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE )',
+        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE)',
         'CMS (Wordpress– Drupal …)',
         'Analyse (UML/MERISE/SGBD/SQL…)',
         'Bureautique (Word-Excel-Power Point)',
-        'Design Pattern',
+        'Design Pattern - Architecture des SI',
       ],
       startDate: '2019',
       endDate: 'Aujourd\'hui',
     },
-    {
-      id: '5',
-      institution: 'IPP DAKAR',
-      position: 'Formateur en (Analyste, Concepteur et Développeur d’application)',
-      courses: [
-        'Algorithme (Base et avancé)',
-        'Langage C/C++ (Base/QT …)',
-        'Java (Java FX -Java/SE – JSP/Servlet- ORM- JSP-Spring –Spring Boot …)',
-        'PHP (Base-Webservice (Json-Soap) - MVC -ORM - Laravel – Symfony …)',
-        'JavaScript (Base-JQuery-Ajax-Angular -React JS …)',
-        'C# (WPF -CRYSTAL REPORT – WEB API - .NET CORE )',
-        'CMS (Wordpress– Drupal …)',
-        'Analyse (UML/MERISE/SGBD/SQL…)',
-        'Bureautique (Word-Excel-Power Point)',
-        'Design Pattern',
-      ],
-      startDate: '2019',
-      endDate: 'Aujourd\'hui',
-    },
+
   ])
 
   return {
