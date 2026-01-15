@@ -77,6 +77,11 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ['qs'],
     },
+    resolve: {
+      alias: {
+        qs: 'qs/lib/index.js',
+      },
+    },
   },
 
   nitro: {

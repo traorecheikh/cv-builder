@@ -5,10 +5,7 @@ import { ArrowUp } from 'lucide-vue-next'
 const isVisible = ref(false)
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const handleScroll = () => {
@@ -16,7 +13,8 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
 })
 
 onUnmounted(() => {
@@ -25,27 +23,19 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <transition name="fade">
-    <button
-      v-if="isVisible"
-      @click="scrollToTop"
-      class="fixed bottom-8 right-8 w-14 h-14 bg-primary-orange text-white rounded-full shadow-card hover:shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center z-40 group"
-      aria-label="Retour en haut"
-    >
-      <ArrowUp class="w-6 h-6 group-hover:animate-bounce" />
-    </button>
-  </transition>
+  <button
+    @click="scrollToTop"
+    :class="[
+      'fixed bottom-8 right-8 w-14 h-14 flex items-center justify-center rounded-full text-white shadow-card hover:shadow-lg hover:scale-110 transition-all duration-300 z-50 group',
+      isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'
+    ]"
+    style="background-color: #C2410C;"
+    aria-label="Retour en haut"
+  >
+    <ArrowUp class="w-6 h-6 group-hover:animate-bounce" />
+  </button>
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: scale(0.8);
-}
+/* Scoped block to ensure proper SFC parsing */
 </style>

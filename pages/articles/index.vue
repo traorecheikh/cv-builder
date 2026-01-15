@@ -2,13 +2,15 @@
 import { computed, watch, defineComponent } from 'vue'
 import { Calendar, Clock, ArrowRight, AlertCircle } from 'lucide-vue-next'
 import { useImageLoad } from '../../composables/useImageLoad'
+import SmartLoading from '~/components/ui/SmartLoading.vue'
 
 export default defineComponent({
   components: {
     Calendar,
     Clock,
     ArrowRight,
-    AlertCircle
+    AlertCircle,
+    SmartLoading
   },
   async setup() {
     const { hasError, handleError } = useImageLoad()
@@ -93,7 +95,15 @@ export default defineComponent({
     <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Loading State -->
       <div v-if="pending" class="flex justify-center py-12">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-orange"></div>
+        <SmartLoading 
+          :messages="[
+            'Connexion au serveur Strapi...',
+            'Le serveur démarre (peut prendre 30s)...',
+            'Récupération des articles...',
+            'Organisation du contenu...',
+            'Affichage imminent...'
+          ]" 
+        />
       </div>
 
       <!-- Error State -->

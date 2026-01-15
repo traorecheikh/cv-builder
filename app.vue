@@ -2,38 +2,37 @@
 import { useTheme } from './composables/useTheme'
 import { onBeforeUnmount } from 'vue'
 
+// Manual imports to ensure component availability
+import NavBar from '~/components/NavBar.vue'
+import BackToTop from '~/components/ui/BackToTop.vue'
+import Toast from '~/components/ui/Toast.vue'
+
 useTheme()
 
-// Enable back/forward cache by avoiding unload handlers
 if (process.client) {
-  // Disable problematic unload handlers
-  const beforeUnloadHandler = (e: BeforeUnloadEvent) => {
-    // Don't prevent unload for bfcache compatibility
-    return undefined
-  }
+  const beforeUnloadHandler = (e: BeforeUnloadEvent) => undefined
 
-  // Listen for bfcache events
   if ('onpageshow' in window) {
     window.addEventListener('pageshow', (e) => {
-      if ((e as PageTransitionEvent).persisted) {
-        // Page was restored from bfcache
-        // Re-initialize components if needed
-      }
-    })
-
-    window.addEventListener('pagehide', (e) => {
-      if ((e as PageTransitionEvent).persisted) {
-        // Page will be stored in bfcache
-        // Cleanup if needed
-      }
+      if ((e as PageTransitionEvent).persisted) { /* restore if needed */ }
     })
   }
 
   onBeforeUnmount(() => {
-    // Ensure no unload handlers are left attached
     window.removeEventListener('beforeunload', beforeUnloadHandler)
   })
 }
+
+// Wake up Strapi backend on initialization (Render cold start)
+onMounted(() => {
+  const config = useRuntimeConfig()
+  const strapiUrl = config.public.strapi?.url || 'https://lic-strapi.onrender.com'
+  
+  // Fire and forget request to wake up the server
+  fetch(`${strapiUrl}/api/articles?pagination[limit]=1`)
+    .then(() => console.log('🚀 Strapi Wake-up Call Sent'))
+    .catch(err => console.log('💤 Strapi Wake-up Call Failed (Normal if CORS or network issue, server will still wake)', err))
+})
 </script>
 
 <template>
@@ -44,6 +43,7 @@ if (process.client) {
       <NuxtPage />
     </main>
 
+    <!-- Components placed directly in app shell -->
     <BackToTop />
     <Toast />
   </div>

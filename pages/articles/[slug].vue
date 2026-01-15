@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import { ArrowLeft, Calendar, Clock, Tag, User } from 'lucide-vue-next'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import SmartLoading from '~/components/ui/SmartLoading.vue'
 // Import a code highlighting theme
 import 'highlight.js/styles/atom-one-dark.css'
 
@@ -99,16 +100,16 @@ const renderedContent = computed(() => {
 <template>
   <div class="bg-bg-primary min-h-screen pt-12 pb-20 transition-colors duration-300">
     <!-- Loading State -->
-    <div v-if="pending" class="max-w-3xl mx-auto px-4 py-12">
-      <div class="animate-pulse space-y-8">
-        <div class="h-8 bg-bg-tertiary rounded w-3/4"></div>
-        <div class="h-64 bg-bg-tertiary rounded-2xl"></div>
-        <div class="space-y-4">
-          <div class="h-4 bg-bg-tertiary rounded w-full"></div>
-          <div class="h-4 bg-bg-tertiary rounded w-full"></div>
-          <div class="h-4 bg-bg-tertiary rounded w-2/3"></div>
-        </div>
-      </div>
+    <div v-if="pending" class="max-w-3xl mx-auto px-4 py-12 flex justify-center">
+      <SmartLoading 
+        :messages="[
+          'Chargement de l\'article...',
+          'Récupération du contenu Markdown...',
+          'Coloration syntaxique du code...',
+          'Optimisation des images...',
+          'Bonne lecture !'
+        ]"
+      />
     </div>
 
     <!-- Error State -->
