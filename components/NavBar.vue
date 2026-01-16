@@ -15,8 +15,8 @@ const navItems = [
   { name: 'Éducation', href: '/#education' },
   { name: 'Compétences', href: '/#skills' },
   { name: 'Certifications', href: '/#certifications' },
-  { name: 'Enseignement', href: '/#enseignement' },
-  { name: 'Articles', href: '/articles' },
+  { name: 'Enseignement', href: '/#enseignement' }
+  //{ name: 'Articles', href: '/articles' },
 ]
 </script>
 
