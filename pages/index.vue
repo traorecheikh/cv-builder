@@ -174,7 +174,7 @@ const skillCategories: SkillCategory[] = [
 
           <div class="grid grid-cols-2 gap-3 w-full h-24">
             <div class="bg-bg-secondary rounded-xl border-2 border-bg-tertiary hover:border-primary-blue transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 cursor-pointer group flex flex-col items-center justify-center text-center h-full">
-              <p class="text-3xl font-bold text-primary-blue group-hover:scale-110 transition-transform duration-300">3+</p>
+              <p class="text-3xl font-bold text-primary-blue group-hover:scale-110 transition-transform duration-300">7+</p>
               <p class="text-text-tertiary text-xs mt-1 group-hover:text-text-secondary transition-colors">Années d'Exp.</p>
             </div>
             <div class="bg-bg-secondary rounded-xl border-2 border-bg-tertiary hover:border-primary-orange transition-all duration-300 shadow-soft hover:shadow-card hover:scale-105 group flex flex-col items-center justify-center text-center h-full">
