@@ -29,9 +29,7 @@ const navItems = [
       <div class="flex items-center justify-between h-20">
         <!-- Logo -->
         <a href="#" class="flex items-center gap-md no-underline">
-          <span class="font-bold text-2xl transition-colors duration-300">
-            <span class="text-text-primary dark:text-white">H</span><span class="text-primary-orange">2</span><span class="text-text-primary dark:text-white">O</span>
-          </span>
+          <img src="/LIC.png" alt="LIC Logo" class="h-12 w-auto transition-all duration-300" />
         </a>
 
         <!-- Desktop Menu -->
