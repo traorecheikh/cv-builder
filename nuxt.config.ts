@@ -13,6 +13,14 @@ export default defineNuxtConfig({
     defaultLocale: 'fr',
   },
 
+  ogImage: {
+    compatibility: {
+      prerender: {
+        chromium: false
+      }
+    }
+  },
+
   strapi: {
     url: process.env.STRAPI_URL || 'https://lic-strapi.onrender.com',
     prefix: '/api',
@@ -95,6 +103,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: false,
       routes: ['/'],
+      failOnError: false, 
     },
     minify: true,
     compressPublicAssets: {
