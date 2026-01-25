@@ -4,7 +4,14 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
 
-  modules: ['@pinia/nuxt', '@nuxtjs/strapi'],
+  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo'],
+
+  site: {
+    url: 'https://cv.lo-consulting.com',
+    name: 'Makhmadane LO - Portfolio',
+    description: 'Professional Portfolio of Makhmadane LO',
+    defaultLocale: 'fr',
+  },
 
   strapi: {
     url: process.env.STRAPI_URL || 'https://lic-strapi.onrender.com',
@@ -46,7 +53,7 @@ export default defineNuxtConfig({
         { httpEquiv: 'x-ua-compatible', content: 'IE=edge' },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', href: '/LIC.png' },
         // Preload critical fonts
         { rel: 'preload', as: 'font', href: '/fonts/Montserrat/Montserrat-VariableFont_wght.ttf', type: 'font/ttf', crossorigin: 'anonymous' },
         // Preload LCP image (WebP preferred for modern browsers, JPEG as fallback)

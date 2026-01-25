@@ -9,6 +9,25 @@ import Toast from '~/components/ui/Toast.vue'
 
 useTheme()
 
+useSeoMeta({
+  title: 'Makhmadane LO - Portfolio',
+  ogTitle: 'Makhmadane LO - Portfolio',
+  description: 'Professional Portfolio',
+  ogDescription: 'Professional Portfolio of Makhmadane LO',
+  ogImage: '/LIC.png',
+  twitterCard: 'summary_large_image',
+})
+
+useSchemaOrg([
+  definePerson({
+    name: 'Makhmadane LO',
+    image: '/profile.jpg',
+    sameAs: [
+      'https://www.linkedin.com/in/makhmadane-lo/',
+    ]
+  })
+])
+
 if (process.client) {
   const beforeUnloadHandler = (e: BeforeUnloadEvent) => undefined
 
