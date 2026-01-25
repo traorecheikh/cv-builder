@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
 
-  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo'],
+  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', 'nuxt-schema-org'],
 
   site: {
     url: 'https://cv.lo-consulting.com',
