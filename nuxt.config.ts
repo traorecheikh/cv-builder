@@ -4,9 +4,13 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
 
-  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', '@nuxtjs/sitemap', 'nuxt-schema-org'],
+  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', '@nuxtjs/sitemap', '@nuxtjs/robots', 'nuxt-schema-org'],
 
   sitemap: {
+    enabled: true,
+  },
+
+  robots: {
     enabled: true,
   },
 
