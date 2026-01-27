@@ -16,7 +16,7 @@ export default defineEventHandler(async () => {
     }
 
     // Map Strapi entries to sitemap format
-    return response.data.map((article: any) => {
+    const dynamicRoutes = response.data.map((article: any) => {
       // Handle both flattened (Strapi v5/plugin) and nested attributes (Strapi v4)
       const attributes = article.attributes || article
       const slug = attributes.slug
@@ -33,8 +33,20 @@ export default defineEventHandler(async () => {
       }
     }).filter(Boolean) // Remove any null entries
 
+    // Add static routes explicitly
+    const staticRoutes = [
+      { loc: '/', changefreq: 'weekly', priority: 1.0 },
+      { loc: '/articles', changefreq: 'daily', priority: 0.8 },
+    ]
+
+    return [...staticRoutes, ...dynamicRoutes]
+
   } catch (e) {
     console.error('Sitemap: Error fetching articles from Strapi', e)
-    return []
+    // Fallback to static routes if Strapi fails
+    return [
+      { loc: '/', changefreq: 'weekly', priority: 1.0 },
+      { loc: '/articles', changefreq: 'daily', priority: 0.8 },
+    ]
   }
 })
