@@ -4,11 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
 
-  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', 'nuxt-schema-org'],
+  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', 'nuxt-schema-org', 'nuxt-sitemap'],
 
   sitemap: {
     enabled: true,
-    debug: true,
+    zeroRuntime: true,
   },
 
   site: {
