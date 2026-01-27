@@ -13,6 +13,9 @@ export default defineNuxtConfig({
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://makhmadane-lo-portfolio.vercel.app',
     name: 'Makhmadane LO - Portfolio',
+    description: 'Professional Portfolio of Makhmadane LO',
+    defaultLocale: 'fr',
+  },
 
   ogImage: {
     compatibility: {
