@@ -55,6 +55,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'google-site-verification', content: '4Tkm9W_O2NiUzmgdI2dHuZhqQeCVGf9mQdoK1VWuRU8' },
         { name: 'description', content: 'Professional Portfolio' },
         { name: 'theme-color', content: '#1171B8' },
         { name: 'color-scheme', content: 'dark light' },
