@@ -6,6 +6,11 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', 'nuxt-schema-org'],
 
+  sitemap: {
+    enabled: true,
+    debug: true,
+  },
+
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cv.lo-consulting.com',
     name: 'Makhmadane LO - Portfolio',
