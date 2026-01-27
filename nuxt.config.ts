@@ -8,6 +8,14 @@ export default defineNuxtConfig({
 
   sitemap: {
     enabled: true,
+    discoverImages: false, // optimize build
+    exclude: ['/admin/**'],
+    urls: async () => {
+      return [
+        { loc: '/', changefreq: 'weekly', priority: 1.0 },
+        { loc: '/articles', changefreq: 'daily', priority: 0.8 },
+      ]
+    }
   },
 
   robots: {
