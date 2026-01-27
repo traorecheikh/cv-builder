@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
 
-  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', 'nuxt-schema-org', 'nuxt-sitemap'],
+  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', '@nuxtjs/sitemap', 'nuxt-schema-org'],
 
   sitemap: {
     enabled: true,
@@ -12,11 +12,8 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cv.lo-consulting.com',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://makhmadane-lo-portfolio.vercel.app',
     name: 'Makhmadane LO - Portfolio',
-    description: 'Professional Portfolio of Makhmadane LO',
-    defaultLocale: 'fr',
-  },
 
   ogImage: {
     compatibility: {
