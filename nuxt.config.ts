@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxtjs/seo', 'nuxt-schema-org'],
 
   site: {
-    url: 'https://cv.lo-consulting.com',
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://cv.lo-consulting.com',
     name: 'Makhmadane LO - Portfolio',
     description: 'Professional Portfolio of Makhmadane LO',
     defaultLocale: 'fr',
